@@ -1,0 +1,107 @@
+
+<body>
+<div class="container">
+    <div class="x-aboutus">
+		<form name="" action="/Plant/index/act_mn/" method="post">
+        	<input type="text" value="20" name="act_id" />
+        	<input type="submit" value="提交">
+        </form>
+	</div>
+</div>
+<script>
+$(function (){
+	$('.x-choose-list div').click(function() {
+		$(this).children('ul').show();
+		$(this).siblings().children('ul').hide();
+		
+	});
+	$('.x-choose-list li').click(function(e) {
+		$(this).addClass('active').siblings().removeClass().parent().hide();
+		e.stopPropagation();
+	});
+	
+	$(document).scroll(function() {
+		$('.x-choose-list ul').hide();
+	});
+	
+	$('.x-pro-img img').height($('.x-pro-img').width()/2);
+	
+	
+	//插入购物车
+	$(".goods_add").click(function(){
+		var goodsId  = $(this).attr("data"); //商品id
+		var goodsNum = 1;
+		$.ajax({
+			type:"POST",
+			url:"/mshop/cart/cart_add",
+			data:{goods_id:goodsId, goods_sum:goodsNum},
+			async:true,
+			dataType:"json",
+			success:function(data){	
+				//alert(data);
+				if(data){
+					var cart_data = eval(data);
+					var cart_sum  = cart_data['cart_sum'];
+					var goods_sum = cart_data['goods_sum'];
+					var pay_ment  = cart_data['pay_ment'];
+					$(".prd_new_count").text(cart_sum);
+					$(".cart_num1").text(cart_sum);
+					$(".cart_num2").text(cart_sum);
+					$(".goods_sum"+goodsId).val(goods_sum);
+					$(".pay_ment").text(pay_ment);
+					if(goods_sum == 2){
+						$(".no_reduce_car"+goodsId).addClass("disable");
+						$(".goods_reduce"+goodsId).removeClass("disable");
+					}
+					
+				}else{
+					return false;
+				}
+			},
+			error:function(){						
+				return false;
+			}
+		});
+		
+	})
+	
+	//减少购物车
+	$(".goods_reduce").click(function(){
+		var goodsId = $(this).attr("data"); //商品id
+		var goodsNum = 1;
+		$.ajax({
+			type:"POST",
+			url:"/mshop/cart/cart_reduce",
+			data:{goods_id:goodsId, goods_sum:goodsNum},
+			async:true,
+			dataType:"json",
+			success:function(data){
+				if(data){
+					var cart_data = eval(data);
+					var cart_sum  = cart_data['cart_sum'];
+					var goods_sum = cart_data['goods_sum'];
+					var pay_ment  = cart_data['pay_ment'];
+					var status  = cart_data['status'];
+					$(".prd_new_count").text(cart_sum);
+					$(".cart_num1").text(cart_sum);
+					$(".cart_num2").text(cart_sum);
+					$(".goods_sum"+goodsId).val(goods_sum);
+					$(".pay_ment").text(pay_ment);
+					if(goods_sum <= 1){
+						$(".goods_reduce"+goodsId).addClass("disable");
+						$(".no_reduce_car"+goodsId).removeClass("disable");
+					}
+				}else{
+					return false;
+				}
+			},
+			error:function(){
+				return false;
+			}
+		});
+	})
+});
+</script>
+
+</body>
+</html>

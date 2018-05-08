@@ -1,0 +1,68 @@
+
+<include file="House:tablejs"/>
+<div class="row">
+    <div class="col-lg-12">
+        <!-- col-lg-12 start here -->
+        <div class="panel panel-default plain toggle panelClose panelRefresh">
+            <!-- Start .panel -->
+            <div class="panel-heading white-bg">
+                <h4 class="panel-title"><a href="/Admin/Lot/add"><i class="st-file-add">添加{$model_name}</i></a></h4>
+                
+                
+            </div>
+            <div class="panel-body">
+                <table class="table display" id="datatable1">
+                    <thead>
+                        <tr>
+                        	<th>全选</th>
+                            <th>楼盘</th>
+                            <th>折扣</th>
+                            <th>抢购价</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>是否开始</th>
+                            <th>参与人数</th>
+                            <th>评论人数</th>
+                            <th>排序</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="lot_list" id="n" >
+                        <tr class="gradeA">
+                        	<td>{$n.id}</td>
+                            <td>{$n.house_name}</td>
+                            <td>{$n.discount}</td>
+                            <td>{$n.panic_price}</td>
+                            <td>{$n.start_time}</td>
+                            <td>{$n.end_time}</td>
+                            <td>
+                            	<if condition="$n.is_start eq 0 and $n.is_start neq ''">
+                            		已经开始<br />
+                                <elseif condition="$n.is_start eq 1" />
+                                	已经过期
+                                <else />
+                                	未开始
+                                </if>
+                            </td>
+							<td>{$n.participant}</td>
+                            <td>{$n.comment}</td>
+                            <td>{$n.order}</td>
+                            <td>
+                            <if condition = "$n.is_start eq 0 and $n.is_start eq ''">
+                            	<a href="/admin/Lot/edit/id/{$n.id}">编辑</a> | <a href="/admin/Lot/rubi/id/{$n.id}">删除</a>
+                            
+                            <else />
+                            	<a href="/admin/Lot/lot_user/id/{$n.id}">参与者</a> | <a href="/admin/Lot/comment/id/{$n.id}">评论</a>
+                            	
+                            </if>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- End .panel -->
+    </div>
+</div>

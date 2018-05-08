@@ -1,0 +1,46 @@
+
+<include file="House:tablejs"/>
+<div class="row">
+    <div class="col-lg-12">
+        <!-- col-lg-12 start here -->
+        <div class="panel panel-default plain toggle panelClose panelRefresh">
+            <!-- Start .panel -->
+            <div class="panel-heading white-bg">
+                <h4 class="panel-title"><a href="/Admin/Lot/index"><i class="st-file-add">摇号列表</i></a></h4>
+                
+                
+            </div>
+            <div class="panel-body">
+                <table class="table display" id="datatable1">
+                    <thead>
+                        <tr>
+                        	<th>全选</th>
+                            <th>楼盘</th>
+                            <th>参与者姓名</th>
+                            <th>联系方式</th>
+                            <th>参与时间</th>
+                            <th>是否转发</th>
+                            <th>中奖概率</th>
+                            <th>是否抽中</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="lot_user" id="n" >
+                        <tr class="gradeA">
+                        	<td>{$n.id}</td>
+                            <td>{$house_name}</td>
+                            <td>{$n.user_name}</td>
+                            <td>{$n.user_tel}</td>
+                            <td>{$n.up_time}</td>
+                            <td>{$n.is_true}</td>
+							<td>{$n.probability}</td>
+                            <td>{$n.is_true}</td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- End .panel -->
+    </div>
+</div>

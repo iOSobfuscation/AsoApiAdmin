@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>{$SiteData['site_name']}</title>
+<meta name="keywords" content="{$SiteData['keywords']}" />
+<meta name="description" content="{$SiteData['description']}" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="shortcut icon" href="__PUBLIC__/Home/resources/images/favicon.ico" />
+<link href="__PUBLIC__/Home/resources/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Home/resources/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/resources/js/jquery.i18n.properties-1.0.9.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/Home/resources/js/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/resources/js/jquery.validate.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/resources/js/md5.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/resources/js/page_regist.js?lang=zh"></script>
+<!--[if IE]>
+  <script src="__PUBLIC__/Home/resources/js/html5.js"></script>
+<![endif]-->
+<!--[if lte IE 6]>
+	<script src="__PUBLIC__/Home/resources/js/DD_belatedPNG_0.0.8a-min.js" language="javascript"></script>
+	<script>
+	  DD_belatedPNG.fix('div,li,a,h3,span,img,.png_bg,ul,input,dd,dt');
+	</script>
+<![endif]-->
+</head>
+<body class="loginbody">
+<div class="dataEye">
+	<div class="loginbox registbox">
+		<div class="logo-a">
+			<!-- <a href="login.jsp" title="js代码网">
+				<img src="__PUBLIC__/Home/resources/images/logo-a.png">
+			</a> -->
+		</div>
+		<div class="login-content reg-content">
+			<div class="loginbox-title">
+				<h3>注册</h3>
+			</div>
+			<form id="signupForm" action="{:U('Index/register')}" method="post">
+			<div class="login-error"></div>
+			<div class="row">
+				
+				<input type="text" value="" placeholder="用户名" style="width:200px"class="input-text-user noPic input-click" name="username" id="username">&nbsp;&nbsp;&nbsp;&nbsp;<div id="usernameInfo" style="color:red;display:none">用户已注册</div>
+			</div>
+			<div class="row">
+				
+				<input type="text" value="" placeholder="手机号" style="width:200px"class="input-text-user noPic input-click" name="phone" id="phone">&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="javascript:void(0)" style="text-decoration:none" id="getCode">获取验证码</a></span>
+				<div id="phoneInfo" style="color:red;display:none">手机号已注册</div>
+			</div>
+			<div class="row">
+				
+				<input type="text" value="" placeholder="手机验证码"style="width:200px"class="input-text-password noPic input-click" name="code" id="code">
+				<div id="codeInfo" style="color:red;display:none">验证码错误</div>
+			</div>
+			<div class="row">
+				
+				<input type="password" value="" placeholder="密码" style="width:200px"class="input-text-password noPic input-click" name="password" id="password">
+				<div id="passwordInfo" style="color:red;display:none">密码为6-12位</div>
+			</div>
+			<div class="row">
+				
+				<input type="password" value="" placeholder="确认密码"style="width:200px"class="input-text-password noPic input-click" name="repassword" id="repassword">
+				<div id="repasswordInfo" style="color:red;display:none">两次密码不一样</div>
+			</div>
+			
+			
+			
+			
+			<div class="row tips">
+				<input type="checkbox" checked id="checkBox">
+				<label>
+				我已阅读并同意
+				<a href="#" target="_blank">隐私政策、服务条款</a>
+				</label>
+			</div>
+			<div class="row btnArea">
+				<input class="login-btn" type="submit"id="submit" value="注册"/>
+			</div>
+			</form>
+		</div>
+		<div class="go-regist">
+			已有帐号,请<a href="{:U('Index/login')}" class="link">登录</a>
+		</div>
+	</div>
+<!-- 	
+<div id="footer">
+	<div class="dblock">
+		<div class="inline-block"><img src="__PUBLIC__/Home/resources/images/logo-gray.png"></div>
+		<div class="inline-block copyright">
+			<p><a href="#">关于我们</a> | <a href="#">微博</a> | <a href="#">隐私政策</a> | <a href="#">人员招聘</a></p>
+			<p> Copyright © 2013 JS代码网</p>
+		</div>
+	</div>
+</div> -->
+</div>
+<!-- <div class="loading"> -->
+	<!-- <div class="mask"> -->
+		<!-- <div class="loading-img"> -->
+		<!-- <img src="__PUBLIC__/Home/resources/images/loading.gif" width="31" height="31"> -->
+		<!-- </div> -->
+	<!-- </div> -->
+<!-- </div> -->
+</body>
+<script>
+		$(function(){
+		
+		var pboor=false;
+		var uboor=false;
+		var fboor=false;
+		var rpboor=false;
+		var cboor=false;
+		
+		var u = $("input[name=username]");
+		var p = $("input[name=password]");
+		var rp = $("input[name=repassword]");
+		var f = $("input[name=phone]");
+		var c = $("input[name=code]");
+		$("#username").blur(function(){
+			$.get("{:U('Index/check')}?username="+u.val(),function(msg){
+						if(msg==2){
+						$('#usernameInfo').css('display','block');
+							uboor=false;
+						}else{
+						$('#usernameInfo').css('display','none');
+						
+							 uboor=true;
+						}
+						
+					})
+		})
+		$("#password").blur(function(){
+			if(p.val().length<6||p.val().length>12){
+				$("#passwordInfo").css('display','block');
+					
+					
+					pboor=false;
+			}else{
+				$("#passwordInfo").css('display','none');
+				pboor=true;
+			}
+		})
+		$("#repassword").blur(function(){
+			if(rp.val()!=p.val()){
+				$("#repasswordInfo").css('display','block');
+					
+					
+					rpboor=false;
+			}else{
+			$("#repasswordInfo").css('display','none');
+				rpboor=true;
+			}
+		})
+		
+		var reg = /^[0-9]+$/;
+		
+		$('#getCode').click(function(){
+			
+				$.get("{:U('Index/check')}?phone="+f.val(),function(msg){
+							if(msg==3){
+							$("#phoneInfo").css('display','block');
+							$("#phoneInfo").html('该手机号已注册');
+						fboor=false;
+							}else if(f.val().length!=11 || !reg.exec(f.val())){
+								$("#phoneInfo").css('display','block');
+								$("#phoneInfo").html('手机号格式错误');
+						
+						fboor=false;
+							}else{
+							fboor=true;
+							$("#phoneInfo").css('display','none');
+							$.post("{:U('Index/demo2')}",{phone:f.val()},function(msg){
+								if(msg.status==0){
+									$("#phoneInfo").html("验证码获取成功！请耐心等待");
+									$("#phoneInfo").css('color','blue');
+									$("#phoneInfo").css('display','block');
+								}else{
+									$("#phoneInfo").html("验证码获取失败");
+									$("#phoneInfo").css('display','block');
+									$('#getCode').html('重新获取');
+								}
+							},'json')
+							}
+							
+						})
+		
+			
+			
+		})
+
+		
+		$("#code").blur(function(){
+				
+			$.get("{:U('Index/check')}?code="+c.val(),function(msg){
+						
+						if(msg==5){
+							$("#codeInfo").css('display','block');
+							 $("#codeInfo").html("验证码输入错误");
+							cboor=false;
+						}else if(msg==4){
+							 $("#codeInfo").html("验证码已过期");
+							$("#codeInfo").css('display','block');
+							cboor=false;
+						}else{
+						$("#codeInfo").css('display','none');
+						cboor=true;
+						}
+						
+					})
+		})
+		
+		
+		$('form').submit(function(){
+					fboor=true;
+					$('#username').blur();
+					$('#password').blur();
+					$('#repassword').blur();
+					$('#code').blur();
+					if(uboor==true && pboor==true && fboor==true && rpboor==true && cboor==true){
+						return true;
+					}else{
+						return false;
+					}
+				})
+		
+		window.onload = function()
+		{
+			$(".connect p").eq(0).animate({"left":"0%"}, 600);
+			$(".connect p").eq(1).animate({"left":"0%"}, 400);
+		}
+		function is_hide(){ $(".alert").animate({"top":"-40%"}, 300) }
+		function is_show(){ $(".alert").show().animate({"top":"45%"}, 300) }
+		});
+		</script>
+</html>
+

@@ -1,0 +1,94 @@
+	<include file="Common:head"/>
+    <include file="Common:form-css"/>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>管理员设置</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal group-border hover-stripped" role="form" enctype="multipart/form-data" action="{$fun_url}" method="post">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><h3 class="m-t-none m-b">{$fun_name}上级菜单：</h3></label>
+                                <div class="col-sm-3" style="line-height:40px;">
+                                    <select class="form-control select2" name="parent_id" placeholder="上级菜单">
+                                        <option value="{$parent_id}" selected="selected">{$parent_name}</option>
+                                        <volist name="menu_list" id="l" key="k" offset="0">
+                                            <option value="{$l.id}">{$l.name}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><h3 class="m-t-none m-b">{$fun_name}名称：</h3></label>
+                                <div class="col-sm-3">
+                                	<input type="text" class="form-control" name="name" value="{$info.name}" placeholder="{$model_name}名称" autofocus>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><h3 class="m-t-none m-b">{$fun_name}编码：</h3></label>
+                                
+                                <div class="col-sm-3">
+                                	<input type="text" class="form-control" name="menu_no" value="{$info.menu_no}" placeholder="{$model_name}编码" autofocus>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><h3 class="m-t-none m-b">{$fun_name}地址：</h3></label>
+                                
+                                <div class="col-sm-3">
+                                	<input type="text" class="form-control" name="url" value="{$info.url}" placeholder="{$model_name}地址" autofocus>
+                                </div>
+                      			<span>/m/c/a/格式不要乱填</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><h3 class="m-t-none m-b">排序：</h3></label>
+                                
+                                <div class="col-sm-3">
+                                	<input type="number" class="form-control" name="order" value="{$info.order}" placeholder="排序">
+                                </div>
+                      			<span class="help-block">数字越大排名越靠前</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-3">
+                                    <button class="btn btn-primary" type="submit">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="/Admin/admin/menu_list"><div class="btn btn-primary" >返回</div></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__MANAGE__/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__MANAGE__/js/content.min.js?v=1.0.0"></script>
+    <script src="__MANAGE__/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="__MANAGE__/js/plugins/jsKnob/jquery.knob.js"></script>
+    <script src="__MANAGE__/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <script src="__MANAGE__/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="__MANAGE__/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+    <script src="__MANAGE__/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+    <script src="__MANAGE__/js/plugins/switchery/switchery.js"></script>
+    <script src="__MANAGE__/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+    <script src="__MANAGE__/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="__MANAGE__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="__MANAGE__/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="__MANAGE__/js/plugins/clockpicker/clockpicker.js"></script>
+    <script src="__MANAGE__/js/plugins/cropper/cropper.min.js"></script>
+    <script src="__MANAGE__/js/demo/form-advanced-demo.min.js"></script>
+    
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_validate.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:16 GMT -->
+</html>

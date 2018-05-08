@@ -1,0 +1,333 @@
+	<include file="Common:head"/>
+    <link href="__MANAGE__/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+	<script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+</head>
+<style>
+	tr  td{
+			text-align:center;
+			vertical-align:middle;
+			
+		}
+	tr  th{
+		text-align:center;
+		vertical-align:middle;
+		
+	}
+	.btn{
+			padding:2px 4px;
+		}
+</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="padding-bottom:50px;">
+                        <h5>
+                        	分类列表&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <small>
+                            	<present name="attrData">
+                                	<a href="{:U('shopclass/shopclass_list')}"><div class="btn btn-primary">一级分类</div></a>&nbsp;&nbsp;&nbsp;&nbsp; 
+                                    {$parent_name_list}
+                                    <a href="javascript:void(0)" id="demo{$cat_id}"><div class="btn btn-primary">添加属性</div></a>
+									<input type="hidden" id="Fattr_id" value="{$cat_id}">
+                                <else />
+                                	<!-- <a href="{:U('shopclass/class_attr_add')}?cat_id={$class_id}&attr_id={$attr_id}" id="demo{$class_id}{$attr_id}"><div class="btn btn-primary">添加属性</div></a> -->
+									<a href="javascript:void(0)" id="demo{$class_id}{$attr_id}"><div class="btn btn-primary">添加属性特性</div></a>
+									
+                                </present>
+                                
+                                
+                            </small>
+							 <present name="subAttr">
+								
+								<button class="btn btn-info"type="button"id="button1">全选</button>
+								<button class="btn btn-info"type="button"id="button2">反选</button>
+								<button class="btn btn-danger" id="button_del">点击删除选中的数据</button>
+								<a href="{:U('Shopclass/classAttr')}?id={$class_id}" class="btn btn-info">返回属性列表</a>
+								
+							<else/>
+								<a href="{:U('Shopclass/shopclass_list')}?id={$parent_id}" class="btn btn-info">返回父级列表</a>
+							</present>
+                        </h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            
+								<present name="attrData">
+								
+								<if condition="$attrData eq ''">
+								<thead>
+								<tr>
+									
+									<th>属性编号</th>
+                                    <th>属性名称</th>
+									
+                                    <th>操作</th>
+                                </tr>
+								</thead>
+								<tbody>
+									
+								</tbody>
+								<else/>
+								<thead>
+								<tr class="gradeA">
+								
+									
+									<th>属性编号</th>
+                                    <th>属性名称</th>
+									
+                                    <th>操作</th>
+                                </tr>
+								</thead>
+								<tbody>
+									<volist name="attrData" id="gcl" key="k" offset="0">
+                    	
+                                    <tr class="gradeA">
+										
+										<td>{$gcl.attr_id}</td>
+                                        <td>{$gcl.attr_name}</td>
+										
+                                        
+										<td>
+											<a class="btn btn-info" href="{:U('shopclass/subAttr')}?attr_id={$gcl['attr_id']}&class_id={$cat_id}">查看属性特性</a>
+											<a class="btn btn-danger" href="javascript:void(0)" id="del{$gcl['attr_id']}">删除</a>
+										</td>
+                                    </tr>
+                                    <script>
+                                    $("#del{$gcl['attr_id']}").click(function(){
+										var id={$gcl['attr_id']};
+										var cat_id=$('#Fattr_id').val();
+										
+										
+										$.get("{:U('Shopclass/planDel')}",{fattr_id:id},function(msg){
+											if(msg==1){
+												parent.layer.alert('该属性已有属性特性,请先删除属性特性！');
+											}else{
+												parent.layer.confirm('确定删除吗？', {
+												btn: ['确定','取消'], //按钮
+												shade: false //不显示遮罩
+												}, function(){
+													parent.layer.closeAll('dialog');
+													window.location.href="{:U('Shopclass/del')}?fattr_id={$gcl['attr_id']}&Twocat_id="+cat_id+"";
+													
+												}, function(){
+													parent.layer.closeAll('dialog');
+												});
+												
+											}
+										})
+										
+											
+										
+									})
+									</script>
+									</volist>
+								</tbody>
+								</if>
+								
+								<else/>
+							<thead>
+                                <tr>
+									<th></th>
+									<th>属性编号</th>
+                                    <th>属性名称</th>
+									<th>创建人</th>
+									<th>创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="subAttr" id="gcl" key="k" offset="0">
+                    	
+                                    <tr class="gradeA">
+										<td><input type="checkbox" name="checkbox" id="{$gcl['attr_goods_attr_id']}" value="{$gcl['attr_goods_attr_id']}"></td>
+										<td>{$gcl.attr_goods_attr_id}</td>
+                                        <td>{$gcl.attr_goods_attr_value}</td>
+										<td>{$gcl.username}</td>
+										<td>{:date('Y-m-d H:i:s',$gcl['create_time'])}</td>
+                                        
+										
+                                        
+                                        <td>
+											
+											<a class="btn btn-danger" href="javascript:void(0)" id="del{$gcl['attr_goods_attr_id']}">删除</a>
+										</td>
+                                    </tr>
+                                    
+                                    <!--tr class="gradeA">
+                                        <td colspan="5">
+                                            <table class="table display" style=" " >
+                                                <volist name="gcl['sub']" id="sub1" key="k" offset="0">
+                                                <tr class="gradeA">
+                                                    <td>{$sub1.name}</td>
+                                                    <td>{$gcl.status}</td>
+                                                    <td>{$sub1.create_user}</td>
+                                                    <td>{$sub1.up_user}</td>
+                                                    <td>{$sub1.operation}</td>
+                                                </tr>
+                                                </volist>
+                                           </table>       
+                                    </tr-->
+                                    <script>
+									$(function(){
+									$("#del{$gcl['attr_goods_attr_id']}").click(function(){
+									
+										parent.layer.confirm('确定删除吗？', {
+												btn: ['确定','取消'], //按钮
+												shade: false //不显示遮罩
+												}, function(){
+													parent.layer.closeAll('dialog');
+													window.location.href="{:U('shopclass/del')}?attr_id={$gcl['attr_goods_attr_id']}";
+													
+												}, function(){
+													parent.layer.closeAll('dialog');
+												});
+										
+										})
+									})	
+										
+									</script>
+                                </volist>
+								</present>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script src="__MANAGE__/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__MANAGE__/js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="__MANAGE__/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="__MANAGE__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="__MANAGE__/js/content.min.js?v=1.0.0"></script>
+	<script>
+	$(function(){
+		var obj=document.getElementsByName('checkbox');
+			$("#button_del").click(function(){
+			
+				var s='';
+					for(var i=0; i<obj.length; i++){
+				if(obj[i].checked){ 
+						s+=obj[i].value+','; //如果选中，将value添加到变量s中
+						} 
+						
+				}
+				if(s.length!=0){
+					parent.layer.confirm('确定删除吗？', {
+						btn: ['确定','取消'], //按钮
+						shade: false //不显示遮罩
+						}, function(){
+							parent.layer.closeAll('dialog');
+							window.location.href="{:U('Shopclass/del')}?attr_id="+s;
+							
+						}, function(){
+							parent.layer.closeAll('dialog');
+						});
+				
+				}
+				
+			})   
+			$("tr").mousemove(function(){
+				$(this).css("background","#F0F0F0");  //鼠标经过背景颜色变为灰色
+			
+			})
+			  $("tr").mouseout(function(){
+				$(this).css("background","#fff");  //离开后背景颜色回复白色
+			})  
+			
+			$("#button1").click(function(){
+				$("input[name=checkbox]").prop("checked",true);   //设置所有复选框默认勾选			
+			})
+				$("#button2").click(function(){
+				$("input[name=checkbox]").prop("checked",false);    //设置所有复选框未勾选			
+			})
+		$("#demo{$class_id}{$attr_id}").click(function(){
+			parent.layer.prompt({
+					title: '请输入属性特性',
+					formType: 2 //prompt风格，支持0-2
+				}, function(attrName){
+					if(attrName){
+						if(attrName!=null && attrName.length!=0){ 
+							var cat_id={$class_id};
+							var attr_id={$attr_id};
+							$.post("{:U('Shopclass/class_attr_add')}",{cat_id:cat_id,attr_id:attr_id,attrName:attrName},function(msg){
+								if(msg==1){
+									
+									parent.layer.alert('操作成功');
+									//$("#order{$o['oid']}").remove();
+									window.location.reload();
+								}else if(msg==3){
+									parent.layer.alert('该商品属性特性已存在!');
+								}else{
+									parent.layer.alert('操作失败');
+								}
+							})
+						
+						}else{
+							parent.layer.alert('输入有误!');
+						}
+						return false;
+					}else{
+						return false;
+					}
+				});
+		})
+		
+		})	
+	</script>
+	<script>
+		$("#demo{$cat_id}").click(function(){
+			parent.layer.prompt({
+					title: '请输入属性名称',
+					formType: 2 //prompt风格，支持0-2
+				}, function(attrName){
+					if(attrName){
+						if(attrName!=null && attrName.length!=0){ 
+							var cat_id={$cat_id};
+							
+							$.post("{:U('Shopclass/class_ShopAttr_add')}",{cat_id:cat_id,attrName:attrName},function(msg){
+								if(msg==1){
+									
+									parent.layer.alert('操作成功');
+									//$("#order{$o['oid']}").remove();
+									window.location.reload();
+								}else if(msg==3){
+									parent.layer.alert('该商品属性已存在!');
+								}else{
+									parent.layer.alert('操作失败');
+								}
+							})
+						
+						}else{
+							parent.layer.alert('输入有误!');
+						}
+						return false;
+					}else{
+						return false;
+					}
+				});
+		})
+		
+	</script>
+    <script>
+        $(document).ready(function(){
+		$(".dataTables-example").dataTable();
+		var oTable=$("#editable").dataTable();
+		oTable.$("td").editable("",{"callback":function(sValue,y){var aPos=oTable.fnGetPosition(this);oTable.fnUpdate(sValue,aPos[0],aPos[1])},"submitdata":function(value,settings){return{"row_id":this.parentNode.getAttribute("id"),"column":oTable.fnGetPosition(this)[2]}},"width":"90%","height":"100%"})});
+		function fnClickAddRow(){
+			$("#editable").dataTable().fnAddData(["Custom row","New row","New row","New row","New row"])
+		};
+			
+    </script>
+
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_data_tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+</html>

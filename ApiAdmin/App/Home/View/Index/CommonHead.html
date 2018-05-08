@@ -1,0 +1,44 @@
+<header>
+    	<div id="header_wrap">
+        	<h1 class="logo"><a href="index.html">One Piece</a></h1>
+            <nav id="smoothmenu1" class="ddsmoothmenu">
+            	<ul style="position:relative;left:150px;height:20px;width:900px">
+                	<li><a href="index.html" class="current">首页</a>
+                    	<!--<ul>                        
+                            <li class="no-border"><a href="index2.html"></a></li>
+                    	</ul>-->
+                    </li>
+					<volist name="ExamData" id="Exam">
+                    <li><a href="{:U('Index/Acclist')}?id={$Exam['exam_cat_id']}">{$Exam['exam_cat_name']}</a></li>
+					</volist>	
+                    
+                    
+                        <!-- <ul> -->
+                            <!-- <li class="no-border"><a href="work.html">Work Filterable</a></li> -->
+                            <!-- <li><a href="work2.html">Work 2 Column</a></li> -->
+                            <!-- <li><a href="work3.html">Work 3 Column</a></li> -->
+                            <!-- <li><a href="work4.html">Work 4 Column</a></li> -->
+                            <!-- <li><a href="work-sidebar.html">Work with Sidebar</a></li> -->
+                        	<!-- <li><a href="work-detail.html">Work with Detail</a></li> -->
+                    	<!-- </ul> -->
+                    </li>
+                    <!-- <li><a href="work-sidebar.html">免费试听</a></li> -->
+                    <!-- <li><a href="blog.html">关于我们</a></li> -->
+            	</ul>
+        	</nav>
+            <ul class="ready-button" style="float:right; width:440px; margin-bottom:0px;">
+				<if condition="$_SESSION['member']['member_id'] neq ''">
+					<a href="javascript:void(0)" style="position: relative;top:60px;color:white;font-size:20px;font-weight:bold;">亲爱的会员 ：{$_SESSION['member']['member_name']} 欢迎回来！</a>
+						<div style="position:relative;width:95%;left:385px">
+						<li style="margin-top:26px;"><a href="{:U('Index/order_list')}" id="" style="color:white;font-size:20px;font-weight:bold;">个人中心</a></li>
+						<li style="margin-top:26px;"><a href="javascript:void(0)" id="b2" style="color:white;font-size:20px;font-weight:bold;">修改密码</a></li>
+						<li style="margin-top:26px;"><a href="{:U('Index/offlogin')}" style="color:white;font-size:20px;font-weight:bold;">退出登录</a></li>
+						</div>
+				<else/>
+                <li><a href="#" class="openlogin">登录</a></li>
+                <li><a href="{:U('Index/register')}" class="">注册</a></li>
+				</if>
+            </ul>
+		
+        </div><!--end:header_wrapa-->
+    </header><!--end:header-->

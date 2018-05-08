@@ -1,0 +1,162 @@
+<style type="text/css">
+#index_public_main .bar {border:1px solid #999999; background:#FFFFFF; height:5px; font-size:2px; width:89%; margin:2px 0 5px 0;padding:1px;overflow: hidden;}
+#index_public_main .bar_1 {border:1px dotted #999999; background:#FFFFFF; height:5px; font-size:2px; width:89%; margin:2px 0 5px 0;padding:1px;overflow: hidden;}
+#index_public_main .barli_red{background:#ff6600; height:5px; margin:0px; padding:0;}
+#index_public_main .barli_blue{background:#0099FF; height:5px; margin:0px; padding:0;}
+#index_public_main .barli_green{background:#36b52a; height:5px; margin:0px; padding:0;}
+#index_public_main .barli_1{background:#999999; height:5px; margin:0px; padding:0;}
+#index_public_main .barli{background:#36b52a; height:5px; margin:0px; padding:0;}
+</style>
+<div id="index_public_main" class="easyui-panel" data-options="fit:true,title:'后台首页',border:false">
+	<table width="100%" cellspacing="5" border="0">
+		<tr>
+			<!-- 个人信息 -->
+			<td width="50%" valign="top">
+				<div class="panel">
+					<div class="panel-header">
+						<div class="panel-title">我的个人信息</div>
+					</div>
+					<div class="panel-body" style="padding:8px;line-height:1.8">
+						您好，{$userInfo.username}<br />
+						所属角色：{$userInfo.rolename} <br />
+						最后登录时间：<if condition="$userInfo['lastlogintime'] gt 0">{$userInfo.lastlogintime|date='Y-m-d H:i:s',###}</if><br />
+						最后登录IP：{$userInfo.lastloginip} <br />
+					</div>
+				</div>
+			</td>
+			<!-- 安全提示 -->
+			<td width="50%" valign="top">
+				<div class="panel">
+					<div class="panel-header">
+						<div class="panel-title">安全提示</div>
+					</div>
+					<div class="panel-body" style="padding:8px;line-height:1.8">
+						<if condition="is_writeable(SITE_DIR . DS . 'Libs')">建议设置Libs目录权限为<if condition="IS_WIN">只读<else/>655</if>  <br /></if>
+						<if condition="APP_DEBUG">网站上线后建议关闭DEBUG调试模式 <br /></if>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<!-- 服务器参数 -->
+			<td valign="top">
+				<div class="panel">
+					<div class="panel-header">
+						<div class="panel-title">服务器参数</div>
+					</div>
+					<div class="panel-body" style="padding:8px;line-height:1.8">
+						服务器域名/IP地址：{$_SERVER['SERVER_NAME']}(<if condition="DIRECTORY_SEPARATOR eq '/'">{$_SERVER['SERVER_ADDR']}<else/>{:@gethostbyname($_SERVER['SERVER_NAME'])}</if>) <br />
+						服务器标识：<if condition="$sysinfo['win_n'] neq ''">{$sysinfo.win_n}<else/>{:@php_uname()}</if> <br />
+						服务器操作系统：{$os.0} &nbsp;内核版本：<if condition="DIRECTORY_SEPARATOR eq '/'">{$os.2}<else/>{$os.1}</if><br />
+						服务器解译引擎：{$_SERVER['SERVER_SOFTWARE']} <br />
+						服务器语言：{:getenv("HTTP_ACCEPT_LANGUAGE")} <br />
+						服务器端口：{$_SERVER['SERVER_PORT']} <br />
+						服务器主机名：<if condition="DIRECTORY_SEPARATOR eq '/'">{$os.1}<else/>{$os.2}</if> <br />
+						管理员邮箱：{$_SERVER['SERVER_ADMIN']} <br />
+						绝对路径：{:SITE_DIR} <br />
+						上传文件最大限制（upload_max_filesize）：{:get_cfg_var('upload_max_filesize')} <br />
+					</div>
+				</div>
+			</td>
+			<!-- 服务器实时数据 -->
+			<td valign="top">
+				<div class="panel">
+					<div class="panel-header">
+						<div class="panel-title">服务器实时数据</div>
+					</div>
+					<div class="panel-body" style="padding:8px;line-height:1.8">
+						<eq name="sysinfo.sysReShow" value="show">
+						服务器当前时间：<span>{$sysinfo.stime}</span> <br />
+						服务器已运行时间：<span>{$sysinfo.uptime}</span> <br />
+						总空间：{$sysinfo.DiskTotal}&nbsp;GB &nbsp;&nbsp;&nbsp;&nbsp;<span title="显示的是网站所在的目录的可用空间，非服务器上所有磁盘之可用空间！">可用空间</span>： <font color='#CC0000'><span>{$sysinfo.freeSpace}</span></font>&nbsp;GB<br />
+						CPU型号 [{$sysinfo.cpu.num}核]：{$sysinfo.cpu.model} <br />
+						内存使用状况：物理内存：共<font color='#CC0000'>{$sysinfo.TotalMemory}</font>, 已用<font color='#CC0000'><span>{$sysinfo.UsedMemory}</span></font>, 空闲<font color='#CC0000'><span>{$sysinfo.FreeMemory}</span></font>, 使用率<span>{$sysinfo.memPercent}</span> <br />
+						<div class="bar"><div class="barli_green" style="width:{$sysinfo.memPercent}">&nbsp;</div> </div>
+						<if condition="$sysinfo['CachedMemory'] gt 0">
+							Cache化内存为 <span>{$sysinfo.CachedMemory}</span>, 使用率<span>{$sysinfo.memCachedPercent}</span> %	| Buffers缓冲为  <span>{$sysinfo.Buffers}</span>
+							<div class="bar"><div class="barli_blue" style="width:{$sysinfo.barmemCachedPercent}">&nbsp;</div></div>
+							真实内存使用 <span>{$sysinfo.memRealUsed}</span>, 真实内存空闲<span>{$sysinfo.memRealFree}</span>, 使用率<span>{$sysinfo.memRealPercent}</span> %
+							<div class="bar_1"><div class="barli_1" style="width:{$sysinfo.barmemRealPercent}">&nbsp;</div></div>
+						</if>
+						<if condition="$sysinfo['TotalSwap'] gt 0">
+							SWAP区：共{$sysinfo.TotalSwap}, 已使用<span>{$sysinfo.swapUsed}</span>, 空闲<span>{$sysinfo.swapFree}</span>, 使用率<span>{$sysinfo.swapPercent}</span> %
+							<div class="bar"><div class="barli_red" style="width:{$sysinfo.barswapPercent}">&nbsp;</div> </div>
+						</if>
+						系统平均负载：<span>{$sysinfo.loadAvg}</span>
+						<else/>
+						无法获取当前服务器实时数据
+						</eq>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<!-- 网络使用状况 -->
+			<td valign="top">
+				<div class="panel">
+					<div class="panel-header">
+						<div class="panel-title">网络使用状况</div>
+					</div>
+					<div class="panel-body" style="padding:8px;line-height:1.8">
+						<neq name="net_state" value="">
+						{$net_state}
+						<else/>
+						无法获取当前服务器网络使用信息
+						</neq>
+					</div>
+				</div>
+			</td>
+
+			<!-- 系统说明 -->
+			<td valign="top">
+				<div class="panel">
+					<div class="panel-header">
+						<div class="panel-title">系统说明</div>
+						<div class="panel-tool"></div>
+					</div>
+					<div class="panel-body" style="padding:8px;line-height:1.8">
+						版本号：{:C('SYSTEM_VERSION')} （联系QQ：531381545）<br />
+						本系统采用ThinkPHP {$Think.version} + jQuery easyUI 1.3.6 开发<br/><br/>
+					
+						二次开发参考手册：<br/>
+						http://doc.thinkphp.cn/<br/>
+						http://jeasyui.com/documentation/<br/>
+						
+					</div>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<!-- 改动日志 -->
+			<td valign="top">
+				<div class="panel">
+					<div class="panel-header">
+						<div class="panel-title">改动日志</div>
+					</div>
+					<div class="panel-body" style="padding:8px;line-height:1.8">
+						<volist name="changeList" id="change" offset="0" length="9">
+							{$change}<br/>
+						</volist>
+						<if condition="count($changeList) gt 9">......</if>
+					</div>
+				</div>
+			</td>
+			
+			<!-- 支付宝捐赠 -->
+			<td valign="top">
+				<div class="panel">
+					<div class="panel-header">
+						<div class="panel-title">支付宝捐赠</div>
+						<div class="panel-tool"></div>
+					</div>
+					<div class="panel-body" style="padding:8px;line-height:1.8">
+						<img src="__STATIC__/img/alipay.jpg"  alt="捐赠我们" height="185" /><br />
+						<b style="margin-left:24px">用手机扫描二位码支付</b><br />
+					</div>
+				</div>
+			</td>
+		</tr>
+
+	</table>
+</div>

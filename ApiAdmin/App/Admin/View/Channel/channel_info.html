@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <title>
+            X-admin v1.0
+        </title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="__PUBLIC__/x-admin/css/x-admin.css" media="all">
+        <style>
+            .layui-form-item .layui-input-inline{width:400px;}
+        </style>
+    </head>
+    
+    <body>
+        <div class="x-body" style="height:300px">
+            <form class="layui-form" action="{:U('App/app_add')}" method="post">
+                <input type="hidden" name="id" id="check_id" value="{$data['id']}">
+               <!--  <div class="layui-form-item">
+                    <label for="L_email" class="layui-form-label">
+                        <span class="x-red">*</span>appid
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_email" name="appid" placeholder="AppId" value="{$data['appid']}" required="" lay-verify="appid"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                 
+                </div>-->
+                <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>渠道名称
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_username" placeholder="name" name="name" value="{$data['name']}" required="" lay-verify="appname"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_pass" class="layui-form-label">
+                        <span class="x-red">*</span>分配cpid
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_pass" name="cpid" placeholder="cpid" value="{$data['cpid']}"required="" lay-verify="cpid"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                    <!-- <div class="layui-form-mid layui-word-aux">
+                        6到16个字符
+                    </div> -->
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>特殊说明
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_repass"  value="{$data['note']}" placeholder="note" name="note" required="" lay-verify="repass"
+                        autocomplete="off" class="layui-input" width="400px">
+                    </div>
+                </div>
+                 <present name="data['id']">
+                 <div class="layui-form-item">
+                     <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>通信密钥
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_repass"  disabled value="{$data['key']}" placeholder="key" name="key" required="" lay-verify="repass"
+                        autocomplete="off" class="layui-input" width="400px">
+                    </div>
+                    
+                 </div>   
+                    <!-- <div class="layui-form-mid layui-word-aux"style="color:red">
+                        密钥生成不可修改
+                    </div> -->
+                 <else/>
+                 <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>生成密钥
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="checkbox" id="L_repass"  value="" placeholder="note" name="key" required="" lay-verify="repass"
+                        autocomplete="off" class="layui-input" width="400px">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux"style="color:red">
+                        密钥生成不可修改
+                    </div>
+                  
+                </div>
+                  </present>
+                <!-- <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>排重链接
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_repass"  value="{$data['IdfaRepeat_url']}" placeholder="IdfaRepeat_url" name="IdfaRepeat_url" required="" lay-verify="repass"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>上报链接
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_repass"  value="{$data['submit_url']}" placeholder="submit_url" name="submit_url" required="" lay-verify="repass"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div> -->
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                    </label>
+                    <button  class="layui-btn" lay-filter="add" lay-submit="">
+                        提交
+                    </button>
+                </div>
+            </form>
+        </div>
+        <script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+        <script src="__PUBLIC__/x-admin/lib/layui/layui.js" charset="utf-8">
+        </script>
+        <script src="__PUBLIC__/x-admin/js/x-layui.js" charset="utf-8">
+        </script>
+        <script>
+            layui.use(['form','layer'], function(){
+                $ = layui.jquery;
+              var form = layui.form()
+              ,layer = layui.layer;
+            
+              //自定义验证规则
+              form.verify({
+                appid: function(value){
+                  if(value.length <= 0){
+                    return 'appid不能为空';
+                  }
+                }
+                ,appname: function(value){
+                  if(value.length <= 0){
+                    return 'app名称不能为空';
+                  }
+                }
+                ,cpid: function(value){
+                  if(value.length <= 0){
+                    return 'cpid不能为空';
+                  }
+                }
+                // ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+                // ,repass: function(value){
+                //     if($('#L_pass').val()!=$('#L_repass').val()){
+                //         return '两次密码不一致';
+                //     }
+                // }
+              });
+             
+              var url;
+              <present name="data['id']">
+                url = "{:U('Channel/channel_edit')}";
+              <else/>
+                url = "{:U('Channel/channel_add')}";
+              </present>
+
+              //监听提交
+              form.on('submit(add)', function(data){
+               
+                //发异步，把数据提交给php
+                $.post(url,{data:data.field},function(msg){
+                    
+                    layer.alert("增加成功", {icon: 6},function () {
+                        // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //关闭当前frame
+                        parent.layer.close(index);
+                    });
+                      
+                })
+              
+                return false;
+              });
+              
+              
+            });
+        </script>
+        <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+
+</html>

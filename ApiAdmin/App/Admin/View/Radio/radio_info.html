@@ -1,0 +1,431 @@
+	<include file="Common:head"/>
+    <include file="Common:form-css"/>
+	 <include file="Common:ueditor"/>
+	 <script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+	 <link rel="stylesheet" type="text/css" href="__MANAGE__/custom/css/FileButton.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><if condition="$fun_code eq 'goodscate_edit'">编辑分类<else />添加分类</if></h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="javascript:void(0)" onclick="self.location=document.referrer;">返回主分类</a>
+                    </div>
+                    <div class="ibox-content">
+						
+                        <form class="form-horizontal m-t" id="commentForm" role="form" enctype="multipart/form-data" action="{$furl}" method="post" >
+						<input type="hidden" name="radio_id" id="radio_id" value="{$data['radio_id']}">
+						<input type="hidden" name="subjectId" value="{$subject_id}">
+                           <!--  <div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">上级分类名称：</h3></label>
+                                <div class="col-sm-8">
+									<if condition="$classdata.parent eq 0">
+                                    <input type="text" class="form-control" disabled placeholder="此类暂无父类" name="parent_name" value="{$parent_name}" >
+									</if>
+                                </div>
+                            </div> -->
+							<!--<div class="form-group">
+								
+                                <label class="col-sm-3 control-label"><h5 class="m-t-none m-b">一级分类：</h5></label>
+                                <div class="col-sm-2">
+									<select class="form-control select2" name="firstCat_id" id="oneClass">
+										<option value="" selected>--请选择--</option>
+										<option value="0">顶级分类</option>
+										<if condition="$classList neq ''">
+										<volist name="classList" id="l" key="k" offset="0">
+											
+												<option value="{$l['cat_id']}">{$l.cat_name}</option>
+											
+										</volist>
+										<else/>
+                                       <volist name="firstClass" id="l" key="k" offset="0">
+                                        <eq name="l['cat_id']" value="$classdata['fcat_id']">
+										<option value="{$l['cat_id']}" selected="selected" >{$l.cat_name}</option>
+										<else/>
+										<option value="{$l['cat_id']}" >{$l.cat_name}</option>
+										</eq>
+                                      </volist>
+									 </if>
+                                    </select>
+								</div>
+								
+								 <label class="col-sm-1   control-label"><h5 class="m-t-none m-b">二级分类：</h5></label>
+                                <div class="col-sm-2">
+									<if condition="$classdata['status2']==1">
+										 <select class="form-control select2" name="secondCat_id" id="twoClass"disabled >
+									<else/>
+                                    <select class="form-control select2" name="secondCat_id" id="twoClass" >
+									</if>
+										<option value="" selected>--请选择--</option>
+										<volist name="secondClass" id="l" key="k" offset="0">
+                                        <eq name="l['cat_id']" value="$classdata['scat_id']">
+										<option value="{$l['cat_id']}" selected="selected">{$l.cat_name}</option>
+										<else/>
+										<option value="{$l['cat_id']}" >{$l.cat_name}</option>
+										</eq>
+                                      </volist>
+                                    </select>
+                                </div>
+								 <label class="col-sm-1   control-label"><h5 class="m-t-none m-b">三级分类：</h5></label>
+                                <div class="col-sm-2">
+                                    <select class="form-control select2" name="thirdCat_id" id="threeClass">
+										<option value="" selected>--请选择--</option>
+										<volist name="thirdClass" id="l" key="k" offset="0">
+                                        <eq name="l['cat_id']" value="$classdata['tcat_id']">
+										<option value="{$l['cat_id']}" selected="selected">{$l.cat_name}</option>
+										<else/>
+										<option value="{$l['cat_id']}" >{$l.cat_name}</option>
+										</eq>
+                                      </volist>
+                                    </select>
+                                </div>
+								
+								
+							</div>	-->
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">单选题目：</h3></label>
+                                <div class="col-sm-8">
+									
+									<!-- <input type="text" class="form-control" name="radio_topic"maxlength="" value="{$data['radio_topic']}" placeholder="单选标题" autofocus> -->
+									<textarea rows="10" cols="100" name="radio_topic">{$data['radio_topic']}</textarea>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">试题分值：</h3></label>
+                                <div class="col-sm-8" style="width:100px;">									
+									<input type="number" class="form-control" name="score"maxlength="" value="{$data['score']}" placeholder="试题分值" autofocus>
+                                </div>
+                            </div>
+							 <div class="form-group">
+								
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">会计类别：</h3></label>
+                                <div class="col-sm-8">
+									<select class="form-control select2" name="exam_cat_id" id="ExamCat">
+										<option value="" selected>--请选择--</option>
+										
+											<volist name="exam_data" id="l" key="k" offset="0">
+                                        <eq name="l['exam_cat_id']" value="$data['exam_cat_id']">
+										<option value="{$l['exam_cat_id']}" selected="selected" >{$l.exam_cat_name}</option>
+										<else/>
+										<option value="{$l['exam_cat_id']}" >{$l.exam_cat_name}</option>
+										</eq>
+                                      </volist>
+
+										
+                                      
+									
+                                    </select>
+								</div>
+                            </div>
+							<div class="form-group">
+								
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">会计科目：</h3></label>
+                                <div class="col-sm-8">
+									<select class="form-control select2" name="acc_cat_id" id="AccCat">
+										<option value="" selected>--请选择--</option>
+										
+											<volist name="acc_data" id="l" key="k" offset="0">
+                                        <eq name="l['acc_cat_id']" value="$data['acc_cat_id']">
+										<option value="{$l['acc_cat_id']}" selected="selected" >{$l.acc_cat_name}</option>
+										<else/>
+										<option value="{$l['acc_cat_id']}" >{$l.acc_cat_name}</option>
+										</eq>
+                                      </volist>
+
+										
+                                      
+									
+                                    </select>
+								</div>
+                            </div>
+                            <div class="form-group">
+								
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">试题科目：</h3></label>
+                                <div class="col-sm-8">
+									<select class="form-control select2" name="subject_id" id="Subject">
+										<option value="" selected>--请选择--</option>
+										<present name="subject_id">
+											<volist name="subject_data" id="l" key="k" offset="0">
+                                        <eq name="l['subject_id']" value="$subject_id">
+										<option value="{$l['subject_id']}" selected="selected" >{$l.subject_name}</option>
+										<else/>
+										<option value="{$l['subject_id']}" >{$l.subject_name}</option>
+										</eq>
+                                      </volist>
+									  <else/>
+									   <volist name="subject_data" id="l" key="k" offset="0">
+                                        <eq name="l['subject_id']" value="$data['subject_id']">
+										<option value="{$l['subject_id']}" selected="selected" >{$l.subject_name}</option>
+										<else/>
+										<option value="{$l['subject_id']}" >{$l.subject_name}</option>
+										</eq>
+                                      </volist>
+										</present>
+										
+                                      
+									
+                                    </select>
+								</div>
+                            </div>
+                            <div  id="data_5">
+								<div class="form-group"> 
+									<label class="col-sm-3 control-label"><h3>试题选项:</h3>
+									
+									</label>
+									<div class="col-sm-3" style="margin-top:10px;color:red">
+									注:点击右侧加号进行填写
+									</div>
+										<a href="javascript:void(0)" class="col-sm-1" id="addAttr"style="font-size:20px;font-weight:bold;float:right;position:relative;">+</a>
+								</div>
+								<!--<div class="form-group" >
+									<label class="col-sm-3 control-label"><h3><input type="checkbox" name="RightKey" ></h3>
+									</label>
+									<div class="col-sm-8 input-daterange input-group" id="datepicker">
+											
+										
+											
+										<span class="input-group-addon">选项值</span>
+										
+										
+											<input class="form-control" name="radio_option[]" value="{$data['radio_option'][0]}" placeholder="" type="text" >
+										
+									</div>
+										
+										
+									<a href="javascript:void(0)" class="col-sm-1" id="addAttr"style="font-size:20px;font-weight:bold;float:right;position:relative;top:-30px">+</a>
+										
+								
+								</div>-->
+								<present name="data">
+								<volist name="data.radio_option" id="vo" >
+								<div class="form-group" >
+									<eq name="vo" value="$data['radio_answer']">
+									<label class="col-sm-3 control-label"><h3><input type="radio" value="{$data['radio_answer']}" name="radio_answer" class="True" checked id="Right{$key}"></h3></label>
+									<else/>
+									<label class="col-sm-3 control-label"><h3><input type="radio" name="radio_answer" class="True"  id="Right{$key}"></h3></label>
+									</eq>
+									
+									<div class="col-sm-8 input-daterange input-group" id="datepicker">
+											
+										
+											
+										<span class="input-group-addon">选项值</span>
+										
+										
+											<input class="form-control" name="radio_option[]" id="Option"value="{$vo}" placeholder="" type="text" >
+										
+									</div>
+										
+										
+									<a href="javascript:void(0)" class="col-sm-1 shenRm" style="font-size:20px;font-weight:bold;float:right;position:relative;top:-30px">-</a>
+										
+								
+								</div>
+								<script>
+								$(function(){
+									$("#Right{$key}").change(function(){
+									
+									   var RightAnswer=$(this).parent().parent().parent().find("#Option").val();
+										
+										if($(this).val()=='on'){
+											$(this).val(RightAnswer);
+											
+										}else{
+											$(this).val('');
+											
+										}
+										
+									})
+									$(".shenRm").click(function(){
+					$(this).parent().remove();
+				});
+								})	
+								</script>
+								</volist>
+								</present>
+							</div>
+							<!--<div  id="data_6">
+							
+                            <div class="form-group">
+								<label class="col-sm-3 control-label"><h3 class="m-t-none m-b">试题答案:</h3></label>
+								<div class="col-sm-8 input-daterange input-group" id="datepicker">
+										
+									
+										
+									<span class="input-group-addon">选项值</span>
+									
+									
+										<input class="form-control" name="radio_answer" value="{$data['radio_answer']}" placeholder="" type="text" >
+									
+								</div>
+							</div>
+							
+							</div>-->
+                        
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-3">
+                                    <button class="btn btn-primary" type="submit">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a onclick="history.go(-1)"><div class="btn btn-primary">返回</div></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="__MANAGE__/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__MANAGE__/js/content.min.js?v=1.0.0"></script>
+    <script src="__MANAGE__/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="__MANAGE__/js/plugins/jsKnob/jquery.knob.js"></script>
+    <script src="__MANAGE__/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <script src="__MANAGE__/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="__MANAGE__/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+    <script src="__MANAGE__/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+    <script src="__MANAGE__/js/plugins/switchery/switchery.js"></script>
+    <script src="__MANAGE__/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+    <script src="__MANAGE__/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="__MANAGE__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="__MANAGE__/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="__MANAGE__/js/plugins/clockpicker/clockpicker.js"></script>
+    <script src="__MANAGE__/js/plugins/cropper/cropper.min.js"></script>
+	<script>
+		$(function(){
+			$("#ExamCat").change(function(){
+				var exam_cat_id  = $(this).val();
+				$.get("{:U('Radio/get_acc')}",{exam_cat_id:exam_cat_id},function(msg){
+					//var msg=eval(data);  
+					
+					if(msg==null){
+						var str = '<option value="">--暂无数据--</option>';
+						$('#AccCat').html(str);
+						
+						}else{
+							var str = '<option value="">--请选择--</option>';
+							for(var i=0,l=msg.length;i<l;i++){
+							 str+= '<option value="'+msg[i].acc_cat_id+'">'+msg[i].acc_cat_name+'</option>';
+								
+								
+							}
+							$('#AccCat').html(str);
+						}
+						
+					},'json')
+			})
+			$("#AccCat").change(function(){
+				var acc_cat_id  = $(this).val();
+				$.get("{:U('Radio/get_subject')}",{acc_cat_id:acc_cat_id},function(msg){
+					//var msg=eval(data);  
+					var str = '<option value="">--请选择--</option>';
+					if(msg==0){
+						
+						$('#Subject').html('');
+						
+						}else{
+							for(var i=0,l=msg.length;i<l;i++){
+							 str+= '<option value="'+msg[i].subject_id+'">'+msg[i].subject_name+'</option>';
+								
+								
+							}
+							$('#Subject').html(str);
+						}
+						
+					},'json')
+			})
+		})
+	</script>
+	<script>
+		$(function(){
+			<present name="Total">
+				var count={$Total};
+			<else/>	
+				var count=0;
+			</present>
+			$('#addAttr').click(function(){
+				
+				var str= '<div class="form-group" id="option'+count+'">';
+								str +='<label class="col-sm-3 control-label"><h3><input type="radio" name="radio_answer" class="True" id="Right'+count+'"></h3></label>';
+								str +='<div class="col-sm-8 input-daterange input-group" id="datepicker">';
+								
+									
+										
+									str+='<span class="input-group-addon">选项值</span>';
+									
+									
+										str+='<input class="form-control" id="Option" name="radio_option[]" value="" placeholder="" type="text" >';
+									
+								str+='</div>';
+								str+='<a href="javascript:void(0)" class="col-sm-1 shenRm" style="font-size:20px;font-weight:bold;float:right;position:relative;top:-30px">-</a>';
+							str+='</div>';
+							
+				$("#data_5").append(str);
+				$("#Right"+count+"").change(function(){
+				   var RightAnswer=$(this).parent().parent().parent().find("#Option").val();
+					
+					if($(this).val()=='on'){
+						$(this).val(RightAnswer);
+						
+					}else{
+						$(this).val('');
+						
+					}
+					
+				})
+				$(".shenRm").click(function(){
+					$(this).parent().remove();
+				});
+				
+				
+				count++;
+				
+			})
+			
+		})
+	</script>
+    <script>
+		$(function(){
+			//初始化状态为false
+			var infoBoor=false;
+			
+			//提交前判断
+			
+			$('form').submit(function(){
+			
+			//设置ajax为异步
+				$.ajaxSetup({
+					async: false
+				});
+				
+				$.post("{:U('radio/radio_check')}",$("#commentForm").serialize(),function(msg){
+						if(msg==2){
+							parent.layer.alert('单选标题不能为空!');
+							infoBoor=false;
+						}else if(msg==3){
+							parent.layer.alert('请选择科目!');
+							infoBoor=false;
+						}else if(msg==4){
+							parent.layer.alert('选项值不能少于2个!');
+							infoBoor=false;
+						}else if(msg==5){
+							parent.layer.alert('分值必须大于0!');
+							infoBoor=false;
+						}else{
+							infoBoor=true;
+						}
+					})
+					
+				
+				return infoBoor;
+			})
+		})
+	</script>
+	
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_validate.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:16 GMT -->
+</html>

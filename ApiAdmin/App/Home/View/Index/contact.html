@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>One Piece - Responsive Portfolio &amp; Blog Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="css/style.css" type="text/css" rel="stylesheet" media="screen" /> <!-- General style -->
+<link href="css/tipsy.css" type="text/css" rel="stylesheet" media="screen"><!--tooltip-->
+<link href='http://fonts.useso.com/css?family=Open+Sans:400,300,600,700|Arvo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+
+<script type="text/javascript" src="js/css3-mediaqueries.js"></script><!--mediaqueries-->
+<script type="text/javascript" src="js/modernizr-1.7.min.js"></script><!--modernizr-->
+<script type="text/javascript" src="js/ddsmoothmenu.js"> </script> <!--menu-->
+<script type="text/javascript" src="js/jquery.tipsy.js"></script><!--tooltip-->
+<script type="text/javascript" src="js/jquery.quovolver.js"></script><!--blockquote-->
+<script type="text/javascript" src="js/custom.js"></script><!--custom-->
+</head>
+
+<body onLoad="initialize()">
+	<div id="toTop">&uArr;</div>
+	<header>
+    	<div id="header_wrap">
+        	<h1 class="logo"><a href="index.html">One Piece</a></h1>
+            <nav id="smoothmenu1" class="ddsmoothmenu">
+            	<ul>
+                	<li><a href="index.html">Home</a>
+                    	<ul>                        
+                            <li class="no-border"><a href="index2.html">Slice Box</a></li>
+                    	</ul>
+                    </li>
+                    <li><a href="#">Features</a>
+                        <ul>
+                            <li class="no-border"><a href="index.html">Camera Slider</a></li>
+                            <li><a href="index2.html">Slice box Slider</a></li>
+                            <li><a href="typography.html">Typography</a></li>
+                            <li><a href="button.html">Button</a></li>
+                            <li><a href="column.html">Column</a></li>
+                            <li><a href="list.html">Ordered, Unordered List</a></li>
+                            <li><a href="404page.html">404 Error Page</a></li>
+                    	</ul>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html">Work</a>
+                        <ul>
+                            <li class="no-border"><a href="work.html">Work Filterable</a></li>
+                            <li><a href="work2.html">Work 2 Column</a></li>
+                            <li><a href="work3.html">Work 3 Column</a></li>
+                            <li><a href="work4.html">Work 4 Column</a></li>
+                            <li><a href="work-sidebar.html">Work with Sidebar</a></li>
+                        	<li><a href="work-detail.html">Work with Detail</a></li>
+                    	</ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a>
+                        <ul>
+                        	<li class="no-border"><a href="blog1.html">Blog 2</a></li>
+                        	<li><a href="single.html">Single</a></li>
+                    	</ul>
+                    </li>
+                    <li><a href="gallery.html">Gallery</a>
+                        <ul>
+                        	<li class="no-border"><a href="photo-album.html">Photo Album</a></li>
+                    	</ul>
+                    </li>
+                	<li><a href="contact.html" class="current">Contact</a></li>
+            	</ul>
+        	</nav>
+        </div><!--end:header_wrapa-->
+    </header><!--end:header-->
+<div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
+	<div id="page_wrap">
+    	<div class="breadcrumbs">
+        	<h2>Single Blog Post</h2>
+            <p>Curabitur vel lobortis est. Vivamus tristique nisl sed urna commodo.</p>
+            <span><a href="#">Get in touch</a></span>
+        </div><!--end:breadcrumbs-->
+        <div class="container">
+        	<section class="content">
+            	<h3>View Our Map Location</h3>
+                <div id="map_canvas"></div>
+                <p>Ut vitae sapien nec sem lacinia euismod. Mauris quis mauris odio, a ultricies eros pharetra nisi facilisis. Fusce sagittis cursus risus, et hendrerit magna pellentesque vel. Mauris quis mauris odio, a ultricies eros pharetra nisi facilisis. Fusce sagittis cursus risus, et hendrerit magna pellentesque vel. Ut vitae sapien nec sem lacinia euismod. Mauris quis mauris odio, a ultricies eros pharetra nisi facilisis. Fusce sagittis cursus risus, et hendrerit magna pellentesque vel. Mauris quis mauris odio, a ultricies eros pharetra nisi facilisis. Fusce sagittis cursus risus, et hendrerit magna pellentesque vel.</p>
+                <h3>Please use the form below to get in touch with us.</h3>
+                <p>Upper Puerto, Cagayan de Oro CIty, Philippines<br><br>
+                      Tel: 012345678910<br>
+                      Fax: 012345678910<br>
+                      Email: <a href="mailto:info@domainname.com">info@domainname.com</a></p>
+                <form action="javascript:alert('success!');" id="ajax-contact-form" class="contactForm">
+                  <div id="note"></div>
+                  <p>
+                    <input type="text" name="name" value="Your Name" onblur="if (this.value == ''){this.value = 'Your Name'; }" onfocus="if (this.value == 'Your Name') {this.value = '';}" >
+                    &nbsp;
+                    <input type="text" name="email" value="Your Email" onblur="if (this.value == ''){this.value = 'Your Email'; }" onfocus="if (this.value == 'Your Email') {this.value = '';}">
+                    &nbsp;
+                    <input type="text" name="website" value="Your Website" onblur="if (this.value == ''){this.value = 'Your Website'; }" onfocus="if (this.value == 'Your Website') {this.value = '';}">
+                  </p>
+                  <p>
+                    <textarea name="message" rows="10" cols="20" onblur="if (this.value == ''){this.value = 'Your Message'; }" onfocus="if (this.value == 'Your Message') {this.value = '';}">Your Message</textarea>
+                  </p>
+                  <p>
+                    <input type="submit" name="submit" class="submit" value="Send Message">
+                  </p>
+                </form>     
+            </section><!--end:content-->
+            <aside class="sidebar">
+            	<div class="side">
+                	<h3>Categories</h3>
+                    <ul class="cat">
+                    	<li><a href="#">Web Design</a></li>
+                        <li><a href="#">Inspirational</a></li>
+                        <li><a href="#">HTML5</a></li>
+                        <li><a href="#">CSS3</a></li>
+                        <li><a href="#">PSD Tutorial</a></li>
+                        <li><a href="#">Wordpress Tutorial</a></li>
+                        <li><a href="#">Javascript</a></li>
+                        <li><a href="#">Graphic Design</a></li>
+                    </ul>
+                </div>
+                <div class="side">
+                	<h3>Text Widget</h3>
+                    <p>Cras tortor ante, lobortis sed sodales sit amet, suscipit non quam. Pellentesque convallis luctus semper. Etiam fermentum, neque a semper auctor, tortor sapien dictum mi, non congue velit ante sed sem. </p>
+                </div>
+                <div class="side">
+                	<h3>Flickr Photos</h3>
+                    <ul class="flickr">
+                    	<li><a href="#"><img src="images/flickr/flickr-1.jpg" alt="" ></a></li>
+                        <li><a href="#"><img src="images/flickr/flickr-2.jpg" alt="" ></a></li>
+                        <li><a href="#"><img src="images/flickr/flickr-3.jpg" alt=""></a></li>
+                        <li><a href="#"><img src="images/flickr/flickr-4.jpg" alt=""></a></li>
+                        <li><a href="#"><img src="images/flickr/flickr-5.jpg" alt=""></a></li>
+                        <li><a href="#"><img src="images/flickr/flickr-6.jpg" alt=""></a></li>
+                    </ul>
+                </div>
+            </aside><!--sidebar-->
+        </div><!--end:container-->
+        <div class="tweet">
+        	<ul id="tweet">					
+            	<li class="entry-tweet">Check out this great <a href="#">#themeforest</a> item <strong>'Camouflet - Responsive Portfolio &amp; Blog Template'</strong> <a href="http://themeforest.net/item/camouflet-responsive-portfolio-blog-template/3325635">http://themeforest.net/item/camouflet-responsive-portfolio-blog-template/3325635</a></li>
+				<li class="entry-tweet">Hello Buddy! Get the latest template here in <a href="#">html5awesome.com/themeforest/onepiece</a></li>
+            	<li class="entry-tweet">Check out this great <a href="#">#themeforest</a> item <strong>'Casa Fresco - A Responsive Real Estate Template'</strong></li>
+			</ul>
+            <div>
+            	<span>You should follow us on <a href="#">Twitter</a> for our latest updates.</span>
+            </div>
+        </div><!--end:end:tweet-->
+    </div><!--end:page_wrap-->
+    <footer>
+    	<div id="footer_wrap">
+        	<div class="one-third first">
+            	<img src="images/logo-2.png" alt="">
+                <p>Proin vitae mi sed felis suscipit dictum. Nam malesuada elit id metus euismod auctor. Vivamus placerat auctor. <a href="about.html">Read more</a></p>
+            </div>
+            <div class="one-third">
+            	<ul class="siteinfo">
+                	<li class="address">Adress:	<a href="#">9000 Cagayan de Oro City, Philippines</a></li>
+                    <li class="email">Email: <a href="#">contact@sitename.com</a></li>
+                    <li class="phone">Phone: <a href="#">+1 3400 7000 123</a></li>
+                </ul>
+            </div>
+            <div class="one-third">
+            	<ul class="social">
+                    <li class="first"><a href="#" class="tip" title="Twitter"><img src="images/social-twitter.png" alt="Twitter" /></a></li>
+                    <li><a href="#" class="tip" title="Skype"><img src="images/social-skype.png" alt="Skype" /></a></li>
+                    <li><a href="#" class="tip" title="Flickr"><img src="images/social-flickr.png" alt="Flickr" /></a></li>
+                    <li><a href="#" class="tip" title="Facebook"><img src="images/social-facebook.png" alt="Facebook" /></a></li>
+                	<li><a href="#" class="tip" title="RSS feed"><img src="images/social-rss.png" alt="RSS feed" /></a></li>
+                </ul>
+            </div>
+            <div class="copy">
+            	<p>&copy; 2013. All Rights Reserved. HTML5 &amp; CSS3. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+            </div>
+        </div><!--end:footer_wrap-->
+    </footer><!--end:footer-->
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.entry-tweet').quovolver();		
+});
+</script>
+<!--GOOGLE MAP PLUGIN-->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+			function initialize() {
+				var latlng = new google.maps.LatLng(8.48333, 124.65000);
+				var settings = {
+					zoom: 15,
+					center: latlng,
+					mapTypeControl: true,
+					mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+					navigationControl: true,
+					navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+					mapTypeId: google.maps.MapTypeId.ROADMAP};
+				var map = new google.maps.Map(document.getElementById("map_canvas"), settings);
+				
+				var infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+				
+				var companyImage = new google.maps.MarkerImage('images/logo.png',
+					new google.maps.Size(100,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(50,50)
+				);
+
+				var companyShadow = new google.maps.MarkerImage('images/logo_shadow.html',
+					new google.maps.Size(130,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(65, 50));
+
+				var companyPos = new google.maps.LatLng(8.48333, 124.65000);
+
+				var companyMarker = new google.maps.Marker({
+					position: companyPos,
+					map: map,
+					icon: companyImage,
+					shadow: companyShadow,
+					title:"Høgenhaug",
+					zIndex: 3});
+				
+				var trainImage = new google.maps.MarkerImage('images/train.html',
+					new google.maps.Size(50,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(50,50)
+				);
+
+				var trainShadow = new google.maps.MarkerImage('images/train_shadow.html',
+					new google.maps.Size(70,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(60, 50)
+				);
+
+				var trainPos = new google.maps.LatLng(57.0429, 9.9173);
+
+				var trainMarker = new google.maps.Marker({
+					position: trainPos,
+					map: map,
+					icon: trainImage,
+					shadow: trainShadow,
+					title:"Train Station",
+					zIndex: 2
+				});
+
+				var parkingImage = new google.maps.MarkerImage('images/parking.html',
+					new google.maps.Size(50,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(50,50)
+				);
+
+				var parkingShadow = new google.maps.MarkerImage('images/parking_shadow.html',
+					new google.maps.Size(70,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(60, 50)
+				);
+
+				var parkingPos = new google.maps.LatLng(57.0437, 9.9147);
+
+				var parkingMarker = new google.maps.Marker({
+					position: parkingPos,
+					map: map,
+					icon: parkingImage,
+					shadow: parkingShadow,
+					title:"Parking Lot",
+					zIndex: 1
+				});
+				
+				google.maps.event.addListener(companyMarker, 'click', function() {
+					infowindow.open(map,companyMarker);
+				});
+			}
+		</script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("#ajax-contact-form").submit(function(){
+
+var str = $(this).serialize();
+
+   $.ajax({
+   type: "POST",
+   url: "contact.php",
+   data: str,
+   success: function(msg){
+    
+$("#note").ajaxComplete(function(event, request, settings){
+
+if(msg == 'OK') // Message Sent? Show the 'Thank You' message and hide the form
+{
+result = '<div class="notification_ok">Your message has been sent. Thank you!</div>';
+$("#fields").hide();
+}
+else
+{
+result = '<ul class="error">'+msg+'</ul>';
+}
+
+$(this).html(result);
+
+});
+
+}
+
+ });
+
+return false;
+
+});
+
+});
+</script>        
+</body>
+</html>

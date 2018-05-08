@@ -1,0 +1,59 @@
+	<include file="Common:head"/>
+</head>
+
+<body class="gray-bg sidebar-content">
+    <div class="wrapper wrapper-content">
+
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">截止今天</span>
+                        <h5>最新登录时间</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h3 class="no-margins"><?php echo date('Y-m-d H:i:s',session('LoginTime'));?></h3>
+                        <!--div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i>
+                        </div-->
+                       <!--  <small>新会员</small> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-info pull-right">截止今天</span>
+                        <h5>最新一次登录ip</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h3 class="no-margins"><?php echo session('loginIp');?></h3>
+                        <!--div class="stat-percent font-bold text-info">40% <i class="fa fa-level-up"></i>
+                        </div-->
+                        <!-- <small>新订单</small> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-warning pull-right">截止今天</span>
+                        <h5>昨日异常信息</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">正常</h1>
+                        <!--div class="stat-percent font-bold text-warning">16% <i class="fa fa-level-up"></i>
+                        </div-->
+                       <!--  <small>新订单</small> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <include file="Index:js"/>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/index_v4.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:50 GMT -->
+</html>

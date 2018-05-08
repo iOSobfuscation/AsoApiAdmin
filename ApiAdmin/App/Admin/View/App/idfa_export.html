@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <title>
+            X-admin v1.0
+        </title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+
+        <link rel="stylesheet" href="__PUBLIC__/x-admin/css/x-admin.css" media="all">
+         <link type="text/css" href="__PUBLIC__/date/jquery-ui-1.8.16.custom.css"
+  rel="stylesheet" />
+        <style>
+            .layui-form-item .layui-input-inline{width:400px;}
+        </style>
+    </head>
+    
+    <body>
+        <div class="x-body">
+            <form class="layui-form" action="{:U('App/ad_idfa_export')}" method="post">
+                <input type="hidden" name="id" id="check_id" value="{$data['id']}">
+                <div class="layui-form-item">
+                    <label for="L_email" class="layui-form-label">
+                        <span class="x-red">*</span>开始时间
+                    </label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="start_time" value="{$start_time}"placeholder="任务开始时间" id="time">
+                    </div>
+                   <!--  <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>将会成为您唯一的登入名
+                    </div> -->
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>结束时间
+                    </label>
+                    <div class="layui-input-inline">
+                       <input class="layui-input" name="end_time" value="{$end_time}"placeholder="任务结束时间" id="time2">
+                    </div>
+                </div>
+                 <div class="layui-form-item">
+                    <label for="L_pass" class="layui-form-label">
+                        <span class="x-red">*</span>数据类型
+                    </label>
+                    <div class="layui-input-inline">
+                        <select name="type" style="width:400px;height:40px">
+                            <option value="1">激活数据</option>
+                             <option value="2">点击激活数据</option>
+                           <!--  <volist name="channel" id="gcl">
+                               <option value="{$gcl['cpid']}">{$gcl['name']}</option>
+                            </volist> -->
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_pass" class="layui-form-label">
+                        <span class="x-red">*</span>数据来源
+                    </label>
+                    <div class="layui-input-inline">
+                        <select name="source" style="width:400px;height:40px">
+                            <option value="1">不限</option>
+                            <volist name="channel" id="gcl">
+                               <option value="{$gcl['cpid']}">{$gcl['name']}</option>
+                            </volist>
+                        </select>
+                    </div>
+                    
+                </div>
+                <input type="hidden" name="appid" value="{$appid}">
+                <input type="hidden" name="adid"   value="{$adid}">
+               <!--  <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>点击链接
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_repass"  value="{$data['source_url']}" placeholder="source_url" name="source_url" required="" lay-verify="repass"
+                        autocomplete="off" class="layui-input" width="400px">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>排重链接
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_repass"  value="{$data['IdfaRepeat_url']}" placeholder="IdfaRepeat_url" name="IdfaRepeat_url" required="" lay-verify="repass"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>上报链接
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_repass"  value="{$data['submit_url']}" placeholder="submit_url" name="submit_url" required="" lay-verify="repass"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div> -->
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                    </label>
+                    <button  class="layui-btn"  lay-submit="">
+                        导出
+                    </button>
+                </div>
+            </form>
+        </div>
+       
+        <script src="__PUBLIC__/x-admin/lib/layui/layui.js" charset="utf-8">
+        </script>
+        <script src="__PUBLIC__/x-admin/js/x-layui.js" charset="utf-8">
+        </script>
+        <script  language="javascript" type="text/javascript" src="__PUBLIC__/date/jquery-1.4.2.min.js" charset="utf-8"></script>
+        <script  language="javascript" type="text/javascript" src="__PUBLIC__/date/jquery-ui-1.8.16.custom.min.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/date/jquery-ui-timepicker-addon.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/date/jquery.ui.datepicker-zh-CN.js" charset="utf-8"></script>
+        <script>
+            layui.use(['form','layer'], function(){
+                $ = layui.jquery;
+              var form = layui.form()
+              ,layer = layui.layer;
+            
+              //自定义验证规则
+              form.verify({
+                appid: function(value){
+                  if(value.length <= 0){
+                    return 'appid不能为空';
+                  }
+                }
+                ,appname: function(value){
+                  if(value.length <= 0){
+                    return 'app名称不能为空';
+                  }
+                }
+                ,cpid: function(value){
+                    var cvalue   = $("input[ name='ccpid' ] ").val();
+                   
+                  if(value.length <= 0 ){
+                    return 'cpid不能为空';
+                  }
+                
+                }
+               
+                // ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+                // ,repass: function(value){
+                //     if($('#L_pass').val()!=$('#L_repass').val()){
+                //         return '两次密码不一致';
+                //     }
+                // }
+             
+              });
+             // $("input[ name='cpid' ] ").blur(function(){
+             //    var value = $(this).val();
+             //    $.get("{:U('App/check_cpid')}",{cpid:value},function(msg){
+             //            if(msg==1){
+             //                 alert('cpid已被占用');
+             //                 $("input[ name='ccpid' ] ").val(1);
+             //            }else{
+             //                $("input[ name='ccpid' ] ").val(0);
+             //            }
+             //      },'json')
+             // })
+              var url;
+              <present name="data['id']">
+                url = "{:U('App/app_edit')}";
+              <else/>
+                url = "{:U('App/app_add')}";
+              </present>
+
+              //监听提交
+              form.on('submit(add)', function(data){
+               
+                //发异步，把数据提交给php
+                $.post(url,{data:data.field},function(msg){
+                    
+                    layer.alert("增加成功", {icon: 6},function () {
+                        // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //关闭当前frame
+                        parent.layer.close(index);
+                    });
+                      
+                })
+              
+                return false;
+              });
+              
+              
+            });
+
+            $(function(){
+              $("#time").datetimepicker({
+                changeYear : true,
+                changeMonth : true,
+                showSecond : true,
+                timeFormat : 'hh:mm:ss',
+                dateFormat : 'yy-mm-dd',
+                stepHour : 1,
+                stepMinute : 1,
+                stepSecond : 1
+              });
+              });
+            $(function(){
+              $("#time2").datetimepicker({
+                changeYear : true,
+                changeMonth : true,
+                showSecond : true,
+                timeFormat : 'hh:mm:ss',
+                dateFormat : 'yy-mm-dd',
+                stepHour : 1,
+                stepMinute : 1,
+                stepSecond : 1
+              });
+              });
+        </script>
+        <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+
+</html>

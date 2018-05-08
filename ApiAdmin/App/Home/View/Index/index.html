@@ -1,0 +1,408 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{$SiteData['site_name']}</title>
+<meta name="keywords" content="{$SiteData['keywords']}" />
+<meta name="description" content="{$SiteData['description']}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="__PUBLIC__/Home/css/style.css" type="text/css" rel="stylesheet" media="screen" /> <!-- General style -->
+<link href="__PUBLIC__/Home/css/prettyPhoto.css" type="text/css" rel="stylesheet" media="screen"><!-- prettyPhoto -->
+<link href="__PUBLIC__/Home/css/tipsy.css" type="text/css" rel="stylesheet" media="screen"><!--tooltip-->
+<link href="__PUBLIC__/Home/css/camera.css" type="text/css" rel="stylesheet" media="screen"><!--camera-->
+<link href="__PUBLIC__/Home/css/jcarousel.css" type="text/css" rel="stylesheet" media="screen" /> <!-- list_work -->
+<link href="__PUBLIC__/Home/css/theme.css" rel="stylesheet" media="all">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/mosaic.css" type="text/css" media="screen" /><!-- mosaic -->
+<link href="__PUBLIC__/Home/css/xcConfirm.css" type="text/css" rel="Stylesheet"/>
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.8.2.min.js"></script>
+<script src="__PUBLIC__/Home/js/xcConfirm.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/Home/js/css3-mediaqueries.js"></script><!--mediaqueries-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/modernizr-1.7.min.js"></script><!--modernizr-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/ddsmoothmenu.js"> </script> <!--menu-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.prettyPhoto.js"></script><!-- prettyPhoto -->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.tipsy.js"></script><!--tooltip-->
+<script type='text/javascript' src='__PUBLIC__/Home/js/jquery.easing.1.3.js'></script> <!--camera slider-->
+<script type='text/javascript' src='__PUBLIC__/Home/js/camera.min.js'></script> <!--camera slider-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.jcarousel.min.js"> </script> <!-- list_work -->
+<script type="text/javascript" src="__PUBLIC__/Home/js/mosaic.1.0.1.js"></script> <!-- mosaic -->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.quovolver.js"></script><!--blockquote-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/custom.js"></script><!--custom-->
+
+<!--引入登录注册插件css-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/Login/template/ue-content/templates/images/ue_grid.css" />
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/Login/template/ue-content/templates/images/style.css" />
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/Login/template/ue-content/templates/css/style.css" />
+<!--引入登录注册js-->
+<script language="javascript" src="__PUBLIC__/Home/Login/script/jquery.easing.min.js"></script>
+
+<script language="javascript" src="__PUBLIC__/Home/Login/script/custom.js"></script>
+</head>
+
+<body>
+	<div id="toTop">&uArr;</div> 
+	<include file="Index/CommonHead"/>
+	
+	<div id="page_wrap">
+    	
+    	<div id="featured">
+        	<div class="camera_wrap camera_emboss " id="camera_wrap_1">
+			<volist name="BannerData" id="vo">
+			
+            <div data-thumb="{$vo['banner_pic']}"   data-src="{$vo['banner_pic']}">
+                <div class="camera_caption moveFromLeft">
+                	{$vo['banner_title']}
+                </div>
+            </div>
+			
+            </volist>
+            
+           
+            </div><!-- #camera_wrap_1 -->
+        	<div style="clear:both; display:block; height:40px"></div>
+        </div><!--end:featured-->
+        <div class="intro">
+        	<!-- <div class="one-fourth serv  first"> -->
+            	<!-- <div> -->
+            		<!-- <img src="__PUBLIC__/Home/images/serv-1.png" alt=""> -->
+            		<!-- <h4><a href="#">会计从业</a></h4> -->
+                	<!-- <span><small><a href="#">Accounting </a></small>, <small><a href="#">practitioners</a></small></span><br><br> -->
+                	<!-- <p>欲从事会计工作，想取得会计从业资格证书的学员. </p> -->
+                    <!-- <span><a href="services.html" class="more">&gt;</a></span> -->
+                <!-- </div> -->
+            <!-- </div> -->
+			<volist name="ExamData" id="vo">
+            <div class="one-fourth serv "style="width:21.5%">
+            	<div style="height:200px">
+            		<img src="__PUBLIC__/Home/images/serv-2.png" alt="">
+            		<h4><a href="{:U('Index/Acclist')}?id={$vo['exam_cat_id']}">{$vo['exam_cat_name']}</a></h4>
+                	<!-- <span><small><a href="#">primary </a></small>, <small><a href="#">title</a></small></span><br><br> -->
+                    <p>{$vo['desc']}</p>
+                    <span><a href="{:U('Index/Acclist')}?id={$vo['exam_cat_id']}" class="more">&gt;</a></span>
+                </div>
+            </div>
+			</volist>
+            
+            <div class="about">
+            	<h2>天津无纸化考试模拟系统</h2>
+                <p>会计从业，初级职称，中级职称无纸化模拟考试. </p>
+                <span><a href="javascript:void(0)"id="JoinExam" >参加模拟考试</a></span>
+            </div>
+        </div><!--end:intro-->
+		<div class="theme-popover" id="pwd_popover" style="display: none;">
+		 <div class="theme-poptit">
+			  <a href="javascript:;" title="关闭" class="close" id="X2">×</a>
+			  <h3>修改密码</h3>
+		 </div>
+		 <div class="theme-popbod dform">
+			   <form class="theme-signin" name="loginform" id="EditPwd" action="{:U('index/EditPwd')}" method="post">
+					<ol>
+						 <li><h4>经常更换密码可提升账户安全！</h4></li>
+						 <li><strong>原密码：</strong><input class="ipt" name="password" id="password" size="20" type="password"><span id="pwd"></span></li>
+						 <li><strong>新密码：</strong><input class="ipt" name="repassword" size="20" id="repassword" type="password"><span id="rpwd"></span></li>
+						 <li><input class="btn btn-primary" name="submit" id="submit"value=" 修改 " type="button"></li>
+						 <input name="id" value="61" type="hidden">
+					</ol>
+			   </form>
+		 </div>
+	</div>
+	<div class="theme-popover-mask" id="div2_popover"></div>
+        <!--<section class="blog-entry">
+        	<div class="one-third thumb-blog first">
+            	<div class="meta">
+                	<span><strong>07</strong><small>Jan<br>2013</small></span>
+                </div>
+            	<a href="blog.html" class="imgOpa"><img src="__PUBLIC__/Home/images/blog/blog-1.jpg" alt=""></a>
+                <h4><a href="blog.html">20 The Best Minimal Website</a></h4>
+                <span>Posted by: <a href="#">Admin</a></span>
+            </div>
+            <div class="one-third thumb-blog">
+            	<div class="meta">
+                	<span><strong>05</strong><small>Jan<br>2013</small></span>
+                </div>
+            	<a href="blog.html"><img src="__PUBLIC__/Home/images/blog/blog-2.jpg" alt=""></a>
+                <h4><a href="blog.html">2013 New Years Avatar</a></h4>
+                <span>Posted by: <a href="#">Admin</a></span>
+            </div>
+            <div class="one-third thumb-blog">
+            	<div class="meta">
+                	<span><strong>01</strong><small>Jan<br>2013</small></span>
+                </div>
+            	<a href="blog.html"><img src="__PUBLIC__/Home/images/blog/blog-3.jpg" alt=""></a>
+                <h4><a href="blog.html">Early Birds</a></h4>
+                <span>Posted by: <a href="#">Admin</a></span>
+            </div>
+        </section><!--end:blog-entry-->
+		<!--第三方登录插件-->
+			<div id="loginalert">
+
+  <div class="pd20 loginpd">
+
+    <h3><i class="closealert fr"></i>
+
+      <div class="clear"></div>
+
+    </h3>
+
+    <div class="loginwrap">
+
+      <div class="loginh">
+
+        <div class="fl">会员登录</div>
+
+        <div class="fr">还没有账号<a id="sigup_now" href="{:U('Index/register')}" >立即注册</a></div>
+
+        <div class="clear"></div>
+
+      </div>
+
+      <h3><span>邮箱登录</span><span class="login_warning">用户名或密码错误</span>
+
+        <div class="clear"></div>
+
+      </h3>
+
+      <div class="clear"></div>
+
+      <form action="{:U('Index/login')}" method="post" id="login_form">
+
+        <div class="logininput">
+
+          <input type="text" name="username" style="width:200px" placeholder="手机号/用户名" /><span id="UserInfo"></span>
+
+          <!-- <input type="text" style="width:200px"class="loginuserpasswordt" value="密码" /> -->
+
+          <input type="password" style="width:200px"name="password" placeholder="密码" style="" /><span id="UserPassword"></span>
+
+        </div>
+
+        <div class="loginbtn">
+
+          <div class="loginsubmit fl">
+
+            <input type="submit" value="登录" />
+
+            <div class="loginsubmiting">
+
+              <div class="loginsubmiting_inner"></div>
+
+            </div>
+
+          </div>
+
+          <div class="logcheckbox fl">
+
+            <input id="bcdl" type="checkbox" checked="true" />
+
+            保持登录</div>
+
+          <div class="fr"><a href="http://www.jq22.com/">忘记密码?</a></div>
+
+          <div class="clear"></div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+ <!-- <div class="thirdlogin">
+
+    <div class="pd50">
+
+      <h4>用第三方帐号直接登录</h4>
+
+      <ul>
+
+        <li id="sinal"><a href="http://www.jq22.com/">微博账号登录</a></li>
+
+        <li id="qql"><a href="http://www.jq22.com/">QQ账号登录</a></li>
+
+        <div class="clear"></div>
+
+      </ul>
+
+      <div class="clear"></div>
+
+    </div>
+
+  </div>-->
+
+</div>
+		<!--插件结束-->
+		<if condition="$NewsData neq null">
+        <div class="list_work">
+            <h2>考试资讯</h2>
+            <ul id="" class="jcarousel-skin-tango item">
+				<volist name="NewsData" id="gcl">
+                <li class="mosaic-block1 circle"><a href="{$gcl['thumb']}" rel="prettyPhoto[gallery1]" title="Image Title Here" class="mosaic-overlay"></a><img src="{$gcl['thumb']}" alt="" />
+                <span>{$gcl['title']}</li>
+                
+                </volist>
+        	</ul>
+    	</div><!--end:list_work-->
+        </if>
+    </div><!--end:page_wrap-->
+   <include file="Index/CommonBottom"/>
+  
+<!-- <script type="text/javascript"> -->
+<!-- $(document).ready(function() { -->
+	<!-- $('.entry-tweet').quovolver(); -->
+	
+<!-- }); -->
+<!-- </script>     -->
+<script>
+	$(function(){
+		$("#JoinExam").click(function(){
+			$.get("{:U('Index/join_exam')}",function(msg){
+				if(msg==1){
+					var txt= "请先登录!";
+					
+				window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+				
+				}else{
+					window.location.href="{:U('Index/join_exam')}?subject_id=23";
+				}
+			})
+		})
+		
+		
+
+	})
+</script>
+<script>
+		$(function(){
+			//初始化状态为false
+			var infoBoor=false;
+			
+			//提交前判断
+			
+			$("#login_form").submit(function(){
+			
+			//设置ajax为异步
+				$.ajaxSetup({
+					async: false
+				});
+				
+				$.post("{:U('Index/login_check')}",$("#login_form").serialize(),function(msg){
+						if(msg==2){
+							$("#UserInfo").html('用户名不能为空');
+							$("#UserInfo").css('color','red');
+							infoBoor=false;
+						}else if(msg==3){
+							$("#UserPassword").html('密码不能为空');
+							$("#UserPassword").css('color','red');
+							
+							infoBoor=false;
+						}else if(msg==4){
+							$("#UserInfo").html('该账号未注册');
+							$("#UserInfo").css('color','red');
+							infoBoor=false;
+						}else if(msg==5){
+							$("#UserInfo").html('手机号或用户名有误');
+							$("#UserInfo").css('color','red');
+							infoBoor=false;
+							
+						}else if(msg==6){
+							$("#UserPassword").html('密码输入错误');
+							$("#UserPassword").css('color','red');
+							infoBoor=false;
+							
+						}else{
+							infoBoor=true;
+						}
+					})
+					
+				
+				return infoBoor;
+			})
+			
+		})
+	</script>
+    <!--密码修改验证-->
+<script>
+	$(function(){
+		var rpboor=false;
+		var pboor=false;
+		var id={$_SESSION['member']['member_id']};
+		$('#b2').click(function(){
+			$('#div2_popover').fadeIn(100);
+			$('#pwd_popover').slideDown(200);
+
+		})
+		$('#X2').click(function(){
+				$('#div2_popover').fadeOut(100);
+			$('#pwd_popover').slideUp(200);
+		})
+
+		$('#password').focus(function(){
+			$('#pwd').text('请输入原密码').css('color','black');
+		}).blur(function(){
+			var value=$(this).val();
+			var length=$(this).val().length;
+			
+			if(length==0){
+				$('#pwd').text('原密码不能为空').css('color','red');
+				$('#password').css('border','1px solid red');
+				rpboor=false;
+			}
+			$.get("{:U('Index/EditPwd')}",{id:id,password:value},function(msg){
+				if(msg=='no' && length!=0){
+					$('#pwd').text('原密码输入错误').css('color','red');
+					$('#password').css('border','1px solid red');
+					rpboor=false;
+				}else if(msg=='yes' && length!=0){
+					$('#password').css('border','1px solid black');
+					rpboor=true;
+				}
+			})
+		})
+		$('#repassword').focus(function(){
+			$('#rpwd').text('请输入新密码').css('color','black');
+		}).blur(function(){
+			var length=$(this).val().length;
+			
+			if(length<6 || length>12){
+				$('#rpwd').text('新密码必须为6-12位').css('color','red');
+				$('#repassword').css('border','1px solid red');
+				pboor=false;
+			}else{
+				$('#repassword').css('border','1px solid black');
+				pboor=true;
+			}
+		})
+		$('#EditPwd').submit(function(){
+			$('#password').blur();
+			$('#repassword').blur();
+			if(pboor && rpboor){
+				return true;
+			}else{
+				return false;
+			}
+		})
+		$("#submit").click(function(){
+			if(pboor && rpboor){
+				$.post("{:U('Index/EditPwd')}",$("#EditPwd").serialize(),function(msg){
+					if(msg==1){
+						$('#div2_popover').fadeOut(100);
+						$('#pwd_popover').slideUp(200);
+						var txt= "修改成功!";
+				window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+				location.reload();
+					}else{
+						var txt= "修改失败!";
+				window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+				location.reload();
+					}
+				})
+			}
+		})
+		
+	})
+</script>	
+</body>
+</html>

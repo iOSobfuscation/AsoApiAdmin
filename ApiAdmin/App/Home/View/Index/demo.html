@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery和JavaScript404跳转页面5秒倒计时页面跳转</title>
+<meta name="description" content="jQuery和JavaScript两个版本的404跳转页面效果，利用倒计时间控制页面在规定多少秒时间内，页面跳转到指定的页面跳转过程。" />
+<style type="text/css">
+html{background:url(images/paper.jpg)!important;}
+a,fieldset,img{border:0;}
+a{color:#221919;text-decoration:none;outline:none;}
+a:hover{color:#3366cc;text-decoration:underline;}
+body{font-size:24px;color:#B7AEB4;}
+
+#wrapper{text-align:center;margin:100px auto;width:594px;}
+a.link{text-shadow:0px 1px 2px white;font-weight:600;color:#3366cc;opacity:0;}
+h1{text-shadow:0px 1px 2px white;font-size:24px;opacity:0;}
+
+p{text-shadow:0px 1px 2px white;font-weight:normal;font-weight:200;opacity:0;}
+.fade{opacity:1;}
+@media only screen and (min-device-width:320px) and (max-device-width:480px){
+	#wrapper{margin:40px auto;text-align:center;width:280px;}
+}
+</style>
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.8.2.min.js"></script>
+<!--解决 IE6 背景缓存-->
+<!--[if IE 6]><script type="text/javascript">document.execCommand("BackgroundImageCache", false, true);</script><![endif]-->
+<script type="text/javascript">
+$(document).ready(function(){
+	if (!$.browser.msie){
+		$("img").addClass('fade').delay(800).queue(function(next){
+			$("h1, p").addClass("fade");
+			$("a.link").css("opacity", 1);
+			next();
+		});
+	}else{
+		$("img, h1, p").addClass('fade');
+		$('a.link').css('opacity', 1);
+	}
+});
+</script>
+</head>
+
+<body>
+
+
+    <div id="wrapper">
+        <a href="{:U('Index/join_exam')}"><img src="__PUBLIC__/Home/images/9885883_231954847000_2.jpg" style="width:100px;height:100px;"></a>
+        <div>
+             <!-- <h1>唉呀!</h1> -->
+            <p>正在计算得分，请耐心等候！</p>
+            <a class="link" href="/" onclick="history.go(-1)"><span id="sec">5</span> </a>
+			<!-- <br /><br /><br />
+			<a class="link" href="demo1.html">查看JavaScript版本404页面跳转</a> -->
+        </div>
+    </div>
+	
+	<script type="text/javascript">
+	$(function () {            
+	   setTimeout("lazyGo();", 1000);
+	});
+	var  score  = {$total_score};
+	function lazyGo() {
+		var sec = $("#sec").text();
+		$("#sec").text(--sec);
+		if (sec > 0)
+			setTimeout("lazyGo();", 1000);
+		else
+			<present name="subject_id">
+			window.location.href = "{:U('Index/join_exam')}?subject_id={$subject_id}&score="+score+"";
+			<else/>	
+			window.location.href = "{:U('Index/join_exam')}?papers_id={$papers_id}&score="+score+"";
+			</present>
+			
+	}
+	</script>
+
+	
+</body>
+</html>

@@ -1,0 +1,453 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{$SiteData['site_name']}</title>
+	<meta name="keywords" content="{$SiteData['keywords']}" />
+<meta name="description" content="{$SiteData['description']}" />
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/exam.css">
+	<link type="text/css" rel="stylesheet" href="__PUBLIC__/Home/css/datouwang.css" />
+	
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.8.2.min.js"></script>
+	
+</head>
+<body>
+    <div class="wrap-page" style="height:710px">
+        <div class="header" style="height:130px">
+            <div class="header-left">
+                <ul>
+                    <li>姓名：{$_SESSION['member']['member_name']}</li>
+                   
+                     <li><span style="color:black;font-size:18px">总分：</span><span style="color:orange;font-size:20px">{$TotalScore}分</span></li>
+                </ul>
+            </div>
+            <div class="header-center">
+                <h1><present name="papers_name">{$papers_name}<else/>{$subject_name}</present></h1>
+                <p>考试科目：{$acc_cat_name}</p>
+				<present name="score">
+					 <p>您的考试得分为：<span style="color:black;font-size:24px">{$score}分</span></p>
+				</present>
+            </div>
+            <div class="header-right">
+                <p style="float:left;width:190px;margin-top:40px;margin-right:20px">考试剩余时间:<strong id="hour_show"></strong>
+    <strong id="minute_show"></strong>
+    <strong id="second_show"></strong></p>
+                <p style="float:left;width:115px;"><present name="papers_id"><a href="{:U('Index/CountScore')}?papers_id={$papers_id}" style="text-decoration:none">交卷</a><else/><a href="{:U('Index/CountScore')}?subject_id={$subject_id}" style="text-decoration:none">交卷</a></present></p>
+				<p style="float:left;width:115px;margin-top:10px;margin-left:450px"><a href="{:U('Index/offlogin')}" class="offlogin">退出考试</a></p>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content-left">
+                <h1>一、单选题({$radio_score}分)</h1>
+                <ul>
+				<volist name="radio_data" id="v">
+                    <li><a href="javascript:void(0)" onclick="getContent(1,{$v['radio_id']})">{$key+1}<span style="color:red">*</span></a></li>
+					
+				</volist>	
+                </ul>
+            </div>
+			<div class="content-left">
+                <h1>二、多选题({$check_score}分)</h1>
+                <ul>
+				<volist name="check_data" id="v">
+                    <li><a href="javascript:void(0)" onclick="getContent(2,{$v['check_id']})">{$key+1}<span style="color:red">*</span></a></li>
+				</volist>	
+                </ul>
+            </div>
+			<div class="content-left">
+                <h1>三、判断题({$judgment_score}分)</h1>
+                <ul>
+				<volist name="judgment_data" id="v">
+                    <li><a href="javascript:void(0)" onclick="getContent(3,{$v['judgment_id']})">{$key+1}<span style="color:red">*</span></a></li>
+				</volist>	
+                </ul>
+            </div>
+           
+			<div class="content-left">
+                <h1>四、计算分析题({$analysis_score}分)</h1>
+               
+                 <if condition="$analysis_data neq null">
+					<ul>
+						<volist name="analysis_data" id="v">
+		                    <li><a href="javascript:void(0)" onclick="getContent(4,{$v['calculation_analysis_id']})">{$key+1}<span style="color:red">*</span></a></li>
+						</volist>	
+                	</ul>
+                <else/>
+                	暂无分析题		
+                  </if>
+                 
+            </div>
+           
+<div id="calculator" >
+
+	<!-- Screen and clear key -->
+
+	<div class="top">
+
+		<span class="clear">C</span>
+
+		<div class="screen"></div>
+
+	</div>
+
+	<div class="keys">
+
+		<!-- operators and other keys -->
+
+		<span>7</span>
+
+		<span>8</span>
+
+		<span>9</span>
+
+		<span class="operator">+</span>
+
+		<span>4</span>
+
+		<span>5</span>
+
+		<span>6</span>
+
+		<span class="operator">-</span>
+
+		<span>1</span>
+
+		<span>2</span>
+
+		<span>3</span>
+
+		<span class="operator">÷</span>
+
+		<span>0</span>
+
+		<span>.</span>
+
+		<span class="eval">=</span>
+
+		<span class="operator">x</span>
+
+	</div>
+
+</div>
+            <div class="content-right" id="other" style="">
+                <div class="content-right-header" style="">
+                    <span class="spanText">试卷</span>
+                    <span  class="BigSize">放大字体</span>
+                    <span class="SmallSize">缩小字体</span>
+                </div>
+				
+				<div id="ContentInfo" >
+                <div class="content-right-content-top" id="ExamContent">
+						
+                </div>
+                <div class="content-right-content">
+                    <div class="chexboxs">
+                        <ul id="ExamOption">
+							
+                            <!-- <li><input type="radio" value=""  name="j"></li> -->
+						
+                           
+                        </ul>
+                    </div>
+                </div>
+				</div>
+				
+				
+            </div>
+			<div class="content-right" id="analysis" style="display:none">
+            <div class="content-right-header">
+                <span class="spanText">试卷</span>
+                <span class="">放大字体</span>
+                <span class="">缩小字体</span>
+            </div>
+            <div class="content-right-content-top">
+
+            </div>
+            <div class="content-right-content">
+
+                <div class="chexboxs">
+						
+                       <div class="contentS" style="">
+
+                       </div>
+                        <div class="contentInput" style="">
+                            <div class="input1" style="border-bottom: 1px solid #999;padding-bottom: 10px">
+                                <span>1.</span><input type="text">
+                            </div>
+                            <div class="line" style="border-bottom: 1px solid #999;padding-bottom: 10px">
+                                <span>1.</span>
+                                <select name="selectAge">
+                                    <option value="1">18-21</option>
+                                    <option value="2">22-25</option>
+                                    <option value="3">26-29</option>
+                                    <option value="4">30-35</option>
+                                    <option value="5">Over35</option>
+                                </select>
+                                <select name="selectAge" class="selectAge">
+                                    <option value="1">18-2111111111111</option>
+                                    <option value="2">22-25</option>
+                                    <option value="3">26-29</option>
+                                    <option value="4">30-35</option>
+                                    <option value="5">Over35</option>
+                                </select>
+                                <input type="text" class="fenxii">
+                                <span class="Add">增加</span>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+			
+        </div>
+    </div>
+	
+</body>
+<script>
+	/*$(function(){
+		$(".AnswerOption").click(function({
+			
+			alert("aa");
+		}) 
+	})*/
+</script>
+<script>
+	$(function(){
+		
+		var getContent=function(type,examid){
+			var que_type_id   = type;
+			var exam_id       = examid;
+			var str='';
+			$.get("{:U('Index/getContent')}",{q_type:que_type_id,exam_id:exam_id},function(msg){
+				if(que_type_id==1 || que_type_id==2){
+					$("#other").css('display','block');
+					$("#analysis").css('display','none');
+					$.each(msg.option,function(key,val){
+						if(que_type_id == 1){
+							if(msg['session'][que_type_id][exam_id]!=null){
+								if(msg['session'][que_type_id][exam_id]['answer']==val){
+								str+= '<li style="margin-bottom:40px" class="LiA"><label><input type="radio" checked value="'+que_type_id+'|'+exam_id+'|'+val+'"  class="AnswerOption" name="j">'+val+'</label></li>';
+								}else{	
+								str+= '<li style="margin-bottom:40px" class="LiA"><label><input type="radio"  value="'+que_type_id+'|'+exam_id+'|'+val+'"  class="AnswerOption" name="j">'+val+'</label></li>';
+								}
+							}else{
+								str+= '<li style="margin-bottom:40px" class="LiA"><label><input type="radio"  value="'+que_type_id+'|'+exam_id+'|'+val+'"  class="AnswerOption" name="j">'+val+'</label></li>';
+							}	
+							
+						 }else if(que_type_id == 2){
+							if(msg['session'][que_type_id][exam_id]!=null){
+								var isChecked = '';
+								$.each(msg['session'][que_type_id][exam_id]['answer'],function(k,v){									
+									if(v==val){
+										 isChecked = "checked";
+									}
+								})
+								str+= '<li style="margin-bottom:40px"><label><input type="checkbox"  value="'+que_type_id+'|'+exam_id+'|'+val+'|'+key+'" class="AnswerOption" name="j" '+isChecked+'>'+val+'</label></li>';
+							}else{
+									str+= '<li style="margin-bottom:40px"><label><input type="checkbox" value="'+que_type_id+'|'+exam_id+'|'+val+'|'+key+'" class="AnswerOption" name="j">'+val+'</label></li>';
+							}
+						  
+						 }
+					 
+					})
+				}else if(que_type_id==3){
+					$("#other").css('display','block');
+					$("#analysis").css('display','none');
+					if(msg['session'][que_type_id][exam_id]!=null){
+						if(msg['session'][que_type_id][exam_id]['answer']==1){
+							str+= '<li style="margin-bottom:40px"><label><input type="radio" checked value="'+que_type_id+'|'+exam_id+'|'+1+'"  class="AnswerOption" name="j">正确</label></li>';
+					str+= '<li style="margin-bottom:40px"><label><input type="radio" value="'+que_type_id+'|'+exam_id+'|'+0+'"  class="AnswerOption" name="j">错误</label></li>';
+							}else{	
+							str+= '<li style="margin-bottom:40px"><label><input type="radio" value="'+que_type_id+'|'+exam_id+'|'+1+'"  class="AnswerOption" name="j">正确</label></li>';
+					str+= '<li style="margin-bottom:40px"><label><input type="radio" checked value="'+que_type_id+'|'+exam_id+'|'+0+'"  class="AnswerOption" name="j">错误</label></li>';
+							}
+					}else{
+						str+= '<li style="margin-bottom:40px"><label><input type="radio" value="'+que_type_id+'|'+exam_id+'|'+1+'"  class="AnswerOption" name="j">正确</label></li>';
+					   str+= '<li style="margin-bottom:40px"><label><input type="radio" value="'+que_type_id+'|'+exam_id+'|'+0+'"  class="AnswerOption" name="j">错误</label></li>';
+					}
+					
+				}else if(que_type_id==4){
+					$("#other").css('display','none');
+					$("#analysis").css('display','block');
+					$.each(msg.option,function(i,j){
+						if(j.calculation_analysis_type_id==1){
+								 str+='<div class="input1" style="border-bottom: 1px solid #999;padding-bottom: 10px">';
+                                str+='<span>'+j.question_num+'</span><input type="text" class="txsize" value=""><div style="display:none">'+que_type_id+'|'+exam_id+'|'+j.question_num+'|'+j.calculation_analysis_type_id+'</div>('+j.question_content+')('+j.score+'分)';
+                            str+='</div>';
+						}else if(j.calculation_analysis_type_id==2){
+									 str+='<div class="input1" style="border-bottom: 1px solid #999;padding-bottom: 10px">';
+                                str+='<span>'+j.question_num+'</span>'+j.question_content+'<div style="display:none">'+que_type_id+'|'+exam_id+'|'+j.question_num+'|'+j.calculation_analysis_type_id+'</div>('+j.score+'分)';
+                                str+='<div><label for="A">A</label><input type="checkbox" name="checkboxA[]" value="'+que_type_id+'|'+exam_id+'|'+j.question_num+'|'+j.calculation_analysis_type_id+'|A" id="A" class="checkA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                                	str+='<label for="B">B</label><input type="checkbox" name="checkboxA[]" value="'+que_type_id+'|'+exam_id+'|'+j.question_num+'|'+j.calculation_analysis_type_id+'|B"id="B" class="checkA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                                	str+='<label for="C">C</label><input type="checkbox" name="checkboxA[]" value="'+que_type_id+'|'+exam_id+'|'+j.question_num+'|'+j.calculation_analysis_type_id+'|C"id="C" class="checkA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                                	str+='<label for="D">D</label><input type="checkbox" name="checkboxA[]" id="D" value="'+que_type_id+'|'+exam_id+'|'+j.question_num+'|'+j.calculation_analysis_type_id+'|D"class="checkA">';
+                                str+='</div>';
+                                
+                            str+='</div>';
+						}else if(j.calculation_analysis_type_id==3){
+								str+='<div class="line" style="border-bottom: 1px solid #999;padding-bottom: 10px">';
+                                str+='<span>'+j.question_num+'</span>';
+                                str+='<select name="selectAge">';
+									$.each(msg.borrow,function(a,b){
+                                   str+=' <option value="'+b.borrowing_id+'">'+b.borrowing_name+'</option>';
+                                    })
+                                str+='</select>';
+                                str+='<select name="selectAge" class="selectAge">';
+									$.each(msg.borrow_list,function(k,l){
+                                    str+='<option value="'+l.borrowing_type_list_id+'">'+l.borrowing_type_list_name+'</option>';
+										<!-- $.each(l,function(){ -->
+											<!-- str+='<option value="'+l.borrowing_type_list_id+'">'+l.borrowing_type_list_name+'</option>'; -->
+											
+										<!-- }) -->
+									
+                                    })
+                                str+='</select>';
+                                str+='<input type="text" class="fenxii">';
+                                str+='<span class="Add">增加</span><input type="hidden" value="'+que_type_id+'|'+exam_id+'|'+j.question_num+'|'+j.calculation_analysis_type_id+'">('+j.score+'分)';
+                            str+='</div>';
+						}
+						
+					})
+					$('.contentInput').html(str);
+					$('.contentS').html(msg.topic);
+				}
+				$("#ExamContent").html(msg.topic+'('+msg.score+'分'+')');
+				$("#ExamOption").html(str);
+			},'json')
+		
+		}
+		
+		window.getContent = getContent;
+		$(".Add").live("click",function(){
+			var money   = $(this).prev().val();
+			var borrowing_type_name  = $(this).prev().prev().find("option:selected").text();
+			var borrowing_type_id    = $(this).prev().prev().find("option:selected").val();
+			var borrowing_type       = $(this).prev().prev().prev().find("option:selected").text();
+			var attr='<div class="calOption" style="width:300px;margin-left:90px"><input type="hidden" value="'+borrowing_type+'|'+borrowing_type_id+'|'+money+'">'+'['+borrowing_type+']'+'['+borrowing_type_name+']'+'['+money+']'+'<a href="javascript:void(0)" class="DelAnswer"style="text-decoration:none;float:right;color:red" >删除</a></div>';
+			$(this).parent().append(attr);
+		})
+		$('.Add').live("click",function(){
+			var arr={};
+			
+			$.each($(this).parent().find('.calOption'),function(key,gcl){
+				
+				arr[key]=$(this).find('input').val().split('|');
+				
+			})
+			
+			var calAnswer   = $(this).next().val()+'|'+JSON.stringify(arr);
+			
+			$.get("{:U('Index/record_exam')}",{value:calAnswer},function(){
+				
+			})
+		})
+		$('.checkA').live('click',function(){
+			
+			$.get("{:U('Index/record_exam')}",{value:$(this).val()},function(){
+				
+			})
+		})
+		$(".AnswerOption").live("click",function(){
+			var value  = $(this).val();
+			if($(this).is(':checked')){
+				$.get("{:U('Index/record_exam')}",{value:value,status:1},function(msg){
+					
+				})
+			}else{
+				$.get("{:U('Index/record_exam')}",{value:value,status:0},function(msg){
+					
+				})
+			}
+		});
+		
+		$(".txsize").live("blur",function(){
+			var value   = $(this).next().html()+'|'+$(this).val();
+			$.get("{:U('Index/record_exam')}",{value:value},function(){
+				
+			})
+		})
+		$(".DelAnswer").live("click",function(){
+			var info   = $(this).parent().parent().find('.Add').next().val();
+			var _this = $(this);
+			$(this).parent().removeClass("calOption").hide();
+			var data={};
+			var ob = $(this).parent().parent().find('.calOption');
+			
+			$.each($(this).parent().parent().find('.calOption'),function(e,lv){
+				
+				data[e]=$(this).find('input').val().split('|');
+				
+			})
+			
+			var calAnswer   = info+'|'+JSON.stringify(data);
+			
+			$.get("{:U('Index/record_exam')}",{value:calAnswer},function(){
+				
+			})
+			$(this).parent().remove();
+		})
+		
+		$(".BigSize").live("click",function(){
+			$(".AnswerOption").parent().css('font-size','22px');
+
+		
+			$("#ExamContent").css('font-size','22px');
+		})
+		$(".SmallSize").live("click",function(){
+			$(".AnswerOption").parent().css('font-size','16px');
+
+		
+			$("#ExamContent").css('font-size','16px');
+		})
+		<!-- $(".AnswerOption").change(function({ -->
+			<!-- alert($(this).val()); -->
+		<!-- })  -->
+	})
+</script>
+<script type="text/javascript">
+var intDiff = parseInt(7200);//倒计时总秒数量
+function timer(intDiff){
+    window.setInterval(function(){
+    var day=0,
+        hour=0,
+        minute=0,
+        second=0;//时间默认值        
+    if(intDiff > 0){
+        day = Math.floor(intDiff / (60 * 60 * 24));
+        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+    }
+    if (minute <= 9) minute = '0' + minute;
+    if (second <= 9) second = '0' + second;
+
+    if(hour==0 && minute==0 && second==0){
+		<present name="papers_id">
+			window.location.href="{:U('Index/CountScore')}?papers_id={$papers_id}";
+			return;
+		<else/>
+			window.location.href="{:U('Index/CountScore')}?subject_id={$subject_id}";
+			return;
+		</present>
+	}
+    $('#day_show').html(day+"天");
+    $('#hour_show').html('0'+hour+':');
+    $('#minute_show').html(minute+':');
+    $('#second_show').html(second);
+    intDiff--;
+    }, 1000);
+}
+
+$(function(){
+	<notpresent name="score">
+    timer(intDiff);
+    </notpresent>
+
+}); 
+
+
+</script>
+<script src="__PUBLIC__/Home/js/datouwang.js" type="text/javascript"></script>
+</html>

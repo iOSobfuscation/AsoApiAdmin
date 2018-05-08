@@ -1,0 +1,341 @@
+	<include file="Common:head"/>
+    <include file="Common:form-css"/>
+	 <include file="Common:ueditor"/>
+	 <script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+	 <link rel="stylesheet" type="text/css" href="__MANAGE__/custom/css/FileButton.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><if condition="$fun_code eq 'goodscate_edit'">编辑信息<else />添加分类</if></h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="javascript:void(0)" onclick="self.location=document.referrer;">返回主分类</a>
+                    </div>
+                    <div class="ibox-content">
+						
+                        <form class="form-horizontal m-t" id="commentForm" role="form" enctype="multipart/form-data" action="{$furl}" method="post" >
+						<input type="hidden" name="id" id="check_id" value="{$data['id']}">
+						<input type="hidden" name="subjectId" value="{$subject_id}">
+                           <!--  <div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">上级分类名称：</h3></label>
+                                <div class="col-sm-8">
+									<if condition="$classdata.parent eq 0">
+                                    <input type="text" class="form-control" disabled placeholder="此类暂无父类" name="parent_name" value="{$parent_name}" >
+									</if>
+                                </div>
+                            </div> -->
+							<!--<div class="form-group">
+								
+                                <label class="col-sm-3 control-label"><h5 class="m-t-none m-b">一级分类：</h5></label>
+                                <div class="col-sm-2">
+									<select class="form-control select2" name="firstCat_id" id="oneClass">
+										<option value="" selected>--请选择--</option>
+										<option value="0">顶级分类</option>
+										<if condition="$classList neq ''">
+										<volist name="classList" id="l" key="k" offset="0">
+											
+												<option value="{$l['cat_id']}">{$l.cat_name}</option>
+											
+										</volist>
+										<else/>
+                                       <volist name="firstClass" id="l" key="k" offset="0">
+                                        <eq name="l['cat_id']" value="$classdata['fcat_id']">
+										<option value="{$l['cat_id']}" selected="selected" >{$l.cat_name}</option>
+										<else/>
+										<option value="{$l['cat_id']}" >{$l.cat_name}</option>
+										</eq>
+                                      </volist>
+									 </if>
+                                    </select>
+								</div>
+								
+								 <label class="col-sm-1   control-label"><h5 class="m-t-none m-b">二级分类：</h5></label>
+                                <div class="col-sm-2">
+									<if condition="$classdata['status2']==1">
+										 <select class="form-control select2" name="secondCat_id" id="twoClass"disabled >
+									<else/>
+                                    <select class="form-control select2" name="secondCat_id" id="twoClass" >
+									</if>
+										<option value="" selected>--请选择--</option>
+										<volist name="secondClass" id="l" key="k" offset="0">
+                                        <eq name="l['cat_id']" value="$classdata['scat_id']">
+										<option value="{$l['cat_id']}" selected="selected">{$l.cat_name}</option>
+										<else/>
+										<option value="{$l['cat_id']}" >{$l.cat_name}</option>
+										</eq>
+                                      </volist>
+                                    </select>
+                                </div>
+								 <label class="col-sm-1   control-label"><h5 class="m-t-none m-b">三级分类：</h5></label>
+                                <div class="col-sm-2">
+                                    <select class="form-control select2" name="thirdCat_id" id="threeClass">
+										<option value="" selected>--请选择--</option>
+										<volist name="thirdClass" id="l" key="k" offset="0">
+                                        <eq name="l['cat_id']" value="$classdata['tcat_id']">
+										<option value="{$l['cat_id']}" selected="selected">{$l.cat_name}</option>
+										<else/>
+										<option value="{$l['cat_id']}" >{$l.cat_name}</option>
+										</eq>
+                                      </volist>
+                                    </select>
+                                </div>
+								
+								
+							</div>	-->
+                            <if condition="$type eq 'add'">
+                            	<div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">AppId：</h3></label>
+                                <div class="col-sm-8">
+									
+									<input type="text" class="form-control" name="appid"maxlength="" value="{$data['appid']}" placeholder="AppId" autofocus>
+									
+                                </div>
+                            </div>
+                            </if>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">App名称：</h3></label>
+                                <div class="col-sm-8">
+									
+									<input type="text" class="form-control" name="app_name"maxlength="" value="{$data['app_name']}" placeholder="App名称" autofocus>
+									
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">cpid：</h3></label>
+                                <div class="col-sm-8">
+									
+									<input type="text" class="form-control" name="cpid"maxlength="" value="{$data['cpid']}" placeholder="cpid" autofocus>
+									
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">点击链接：</h3></label>
+                                <div class="col-sm-8">
+									
+									<input type="text" class="form-control" name="source_url"maxlength="" value="{$data['source_url']}" placeholder="source_url" autofocus>
+									
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">排重链接：</h3></label>
+                                <div class="col-sm-8">
+									
+									<input type="text" class="form-control" name="idfaRepeat_url"maxlength="" value="{$data['IdfaRepeat_url']}" placeholder="idfaRepeat_url" autofocus>
+									
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">上报链接：</h3></label>
+                                <div class="col-sm-8">
+									
+									<input type="text" class="form-control" name="submit_url"maxlength="" value="{$data['submit_url']}" placeholder="submit_url" autofocus>
+									
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><h3 class="m-t-none m-b">回调链接：</h3></label>
+                                <div class="col-sm-8">
+									
+									<input type="text" class="form-control" name="advert_url"maxlength="" value="{$data['advert_url']}" placeholder="advert_url" autofocus>
+									
+                                </div>
+                            </div>
+							
+							
+                            
+                           
+							<!--<div  id="data_6">
+							
+                            <div class="form-group">
+								<label class="col-sm-3 control-label"><h3 class="m-t-none m-b">试题答案:</h3></label>
+								<div class="col-sm-8 input-daterange input-group" id="datepicker">
+										
+									
+										
+									<span class="input-group-addon">选项值</span>
+									
+									
+										<input class="form-control" name="check_answer[]" value="{$data['check_answer'][0]}" placeholder="" type="text" >
+									
+								</div>
+								<a href="javascript:void(0)" class="col-sm-1" id="addAnswer"style="font-size:20px;font-weight:bold;float:right;position:relative;top:-30px">+</a>
+							</div>
+							
+							<present name="data">
+							<volist name="data.check_answer" id="vo" offset="1">
+							<div class="form-group">
+								<label class="col-sm-3 control-label"><h3 class="m-t-none m-b"></h3></label>
+								<div class="col-sm-8 input-daterange input-group" id="datepicker">
+										
+									
+										
+									<span class="input-group-addon">选项值</span>
+									
+									
+										<input class="form-control" name="check_answer[]" value="{$vo}" placeholder="" type="text" >
+									
+								</div>
+								<a href="javascript:void(0)" class="col-sm-1" id="addAnswer"style="font-size:20px;font-weight:bold;float:right;position:relative;top:-30px">+</a>
+							</div>
+							</volist>
+							</present>
+							</div>-->
+                        
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-3">
+                                    <button class="btn btn-primary" type="submit">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="javascript:void(0)" onclick="history.go(-1)"><div class="btn btn-primary">返回</div></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+		$(function(){
+			$("#ExamCat").change(function(){
+				var exam_cat_id  = $(this).val();
+				$.get("{:U('Check/get_acc')}",{exam_cat_id:exam_cat_id},function(msg){
+					//var msg=eval(data);  
+					
+					if(msg==null){
+						var str = '<option value="">--暂无数据--</option>';
+						$('#AccCat').html(str);
+						
+						}else{
+							var str = '<option value="">--请选择--</option>';
+							for(var i=0,l=msg.length;i<l;i++){
+							 str+= '<option value="'+msg[i].acc_cat_id+'">'+msg[i].acc_cat_name+'</option>';
+								
+								
+							}
+							$('#AccCat').html(str);
+						}
+						
+					},'json')
+			})
+			$("#AccCat").change(function(){
+				var acc_cat_id  = $(this).val();
+				$.get("{:U('Check/get_subject')}",{acc_cat_id:acc_cat_id},function(msg){
+					//var msg=eval(data);  
+					
+					if(msg==null){
+						var str = '<option value="">--暂无数据--</option>';
+						$('#Subject').html(str);
+						
+						
+						}else{
+							var str = '<option value="">--请选择--</option>';
+							for(var i=0,l=msg.length;i<l;i++){
+							 str+= '<option value="'+msg[i].subject_id+'">'+msg[i].subject_name+'</option>';
+								
+								
+							}
+							$('#Subject').html(str);
+						}
+						
+					},'json')
+			})
+		})
+	</script>
+    <script src="__MANAGE__/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__MANAGE__/js/content.min.js?v=1.0.0"></script>
+    <script src="__MANAGE__/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="__MANAGE__/js/plugins/jsKnob/jquery.knob.js"></script>
+    <script src="__MANAGE__/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <script src="__MANAGE__/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="__MANAGE__/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+    <script src="__MANAGE__/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+    <script src="__MANAGE__/js/plugins/switchery/switchery.js"></script>
+    <script src="__MANAGE__/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+    <script src="__MANAGE__/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="__MANAGE__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="__MANAGE__/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="__MANAGE__/js/plugins/clockpicker/clockpicker.js"></script>
+    <script src="__MANAGE__/js/plugins/cropper/cropper.min.js"></script>
+	<script>
+		$(function(){
+			<present name="Total">
+				var count={$Total};
+			<else/>	
+				var count=0;
+			</present>
+			$('#addAttr').click(function(){
+				
+				var str= '<div class="form-group" id="option'+count+'">';
+								str +='<label class="col-sm-3 control-label"><h3><input type="checkbox" name="check_answer[]" class="True" id="Right'+count+'"></h3></label>';
+								str +='<div class="col-sm-8 input-daterange input-group" id="datepicker">';
+								
+									
+										
+									str+='<span class="input-group-addon">选项值</span>';
+									
+									
+										str+='<input class="form-control" id="Option" name="check_option[]" value="" placeholder="" type="text" >';
+									
+								str+='</div>';
+								str+='<a href="javascript:void(0)" class="col-sm-1 shenRm" style="font-size:20px;font-weight:bold;float:right;position:relative;top:-30px">-</a>';
+							str+='</div>';
+							
+				$("#data_5").append(str);
+				$("#Right"+count+"").change(function(){
+				   var RightAnswer=$(this).parent().parent().parent().find("#Option").val();
+					
+					if($(this).val()=='on'){
+						$(this).val(RightAnswer);
+						
+					}else{
+						$(this).val('');
+						
+					}
+					
+				})
+				$(".shenRm").click(function(){
+					$(this).parent().remove();
+				});
+				
+				
+				count++;
+				
+			})
+			
+		})
+	</script>
+    <script>
+		$(function(){
+			//初始化状态为false
+			var infoBoor=false;
+			
+			//提交前判断
+			
+			$('form').submit(function(){
+			
+			//设置ajax为异步
+				$.ajaxSetup({
+					async: false
+				});
+				
+				$.post("{:U('app/check')}",$("#commentForm").serialize(),function(msg){
+						if(msg==2){
+							parent.layer.alert('App名称不能为空!');
+							infoBoor=false;
+						}else{
+							infoBoor=true;
+						}
+					})
+					
+				
+				return infoBoor;
+			})
+		})
+	</script>
+	
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_validate.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:16 GMT -->
+</html>

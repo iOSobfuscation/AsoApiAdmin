@@ -1,0 +1,219 @@
+<!--左侧导航开始-->
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="nav-close"><i class="fa fa-times-circle"></i>
+    </div>
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span><img alt="image" height="64px" width="64px"class="img-circle" src="{$_SESSION['thumb']}" /></span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs"><strong class="font-bold">亲爱的<?php echo session('rolename').':'; ?></strong></span>
+                            <span class="text-muted text-xs block"><strong class="font-bold"><?php echo session('username');?></strong><b class="caret"></b></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a class="J_menuItem" href="/Admin/admin/admin_edit/id/<?php echo session('userid'); ?>">个人资料</a></li>
+                        <!--li><a class="J_menuItem" href="contacts.html">联系我们</a></li>
+                        <li><a class="J_menuItem" href="mailbox.html">信箱</a></li-->
+                        <li class="divider"></li>
+                        <li><a href="/Admin/index/logout">安全退出</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">DM</div>
+            </li>
+				<volist name="menu_list" id="vo">
+               <li>
+                   <a href="{$vo['url']}" class="J_menuItem">
+					
+						 <i class="fa fa-columns"></i> 
+						<span class="nav-label">{$vo.name}</span> 
+						<span class="fa arrow"></span> 
+					</a>
+                        <ul class="nav nav-third-level">
+							<volist name="vo.sub" id="v">
+							<li>
+								<a class="J_menuItem" href="{$v['url']}" data-index="0">{$v.name}</a>
+							</li>
+							</volist>
+                        </ul>
+               </li>
+               </volist>
+               <!-- <li>
+                   <a href="{:U('Radio/radio_list')}" class="J_menuItem">
+                    
+                         <i class="fa fa-columns">导入idfa</i> 
+                        <span class="nav-label"></span> 
+                        <span class="fa arrow"></span> 
+                    </a>
+                        <ul class="nav nav-third-level">
+                            <volist name="vo.sub" id="v">
+                            <li>
+                                <a class="J_menuItem" href="{$v['url']}" data-index="0">idfa</a>
+                            </li>
+                            </volist>
+                        </ul>
+               </li> -->
+				
+				<!-- <li>
+                   <a href="">
+						<i class="fa fa-columns"></i>
+						<span class="nav-label">考试类别</span>
+						<span class="fa arrow"></span>
+					</a>
+                        <ul class="nav nav-third-level">
+							<volist name="ExamData" id="k">
+							<li>
+								<a class="J_menuItem" href="/Admin/Acccat/acccat_list?id={$k['exam_cat_id']}" data-index="0">{$k.exam_cat_name}</a>
+							</li>
+							</volist>
+                        </ul>
+               </li> -->
+            
+            
+			<!--<li>
+                <a href="#">
+                	<i class="fa fa-columns"></i>
+                    <span class="nav-label">产品体验</span>
+                	<span class="fa arrow"></span>
+                </a>
+				<ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="{:U('Case/case_list')}" data-index="0">体验列表</a>
+                    </li>
+					<li>
+                        <a class="J_menuItem" href="{:U('Case/recycle_list')}" data-index="0">回收站</a>
+                    </li>
+                </ul>
+            </li>
+			<li>
+                <a href="#">
+                	<i class="fa fa-columns"></i>
+                    <span class="nav-label">媒体报道</span>
+                	<span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="{:U('Dc/dc_list')}" data-index="0">报道列表</a>
+                    </li>
+					<li>
+						<a class="J_menuItem" href="{:U('DcCat/cat_list')}" data-index="0">数据分类</a>
+					</li>
+					
+                </ul>
+            </li>
+			<li>
+                <a href="#">
+                	<i class="fa fa-columns"></i>
+                    <span class="nav-label">常见问题</span>
+                	<span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="{:U('Plan/plan_list')}" data-index="0">问题列表</a>
+                    </li>
+					<li>
+                        <a class="J_menuItem" href="{:U('Plan/recycle_list')}" data-index="0">回收站</a>
+                    </li>
+                </ul>
+            </li>
+			<li>
+                <a href="#">
+                	<i class="fa fa-columns"></i>
+                    <span class="nav-label">招聘管理</span>
+                	<span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="{:U('Advertise/advertise_list')}" data-index="0">招聘列表</a>
+                    </li>
+					<li>
+                        <a class="J_menuItem" href="{:U('Advertise/recycle_list')}" data-index="0">回收站</a>
+                    </li>
+                </ul>
+            </li>
+			
+			<li>
+                <a href="#">
+                	<i class="fa fa-columns"></i>
+                    <span class="nav-label">友情链接</span>
+                	<span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="{:U('Blogroll/blogroll_list')}" data-index="0">友情链接列表</a>
+                    </li>
+					<li>
+                        <a class="J_menuItem" href="{:U('Blogroll/recycle_list')}" data-index="0">回收站</a>
+                    </li>
+                </ul>
+            </li>
+			
+			<li>
+                <a href="#">
+                    <i class="fa fa fa-bar-chart-o"></i>
+                    <span class="nav-label">站点设置</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="{:U('Set/index')}">网站设置</a>
+                    </li>
+					<li>
+                        <a class="J_menuItem" href="{:U('Contact/index')}">联系我们</a>
+                    </li>
+					<li>
+                        <a class="J_menuItem" href="{:U('About/index')}">关于我们</a>
+                    </li>
+                   
+                </ul>
+            </li>-->
+			<!-- <li> -->
+                <!-- <a href="#"> -->
+                	<!-- <i class="fa fa-columns"></i> -->
+                    <!-- <span class="nav-label">日志管理</span> -->
+                	<!-- <span class="fa arrow"></span> -->
+                <!-- </a> -->
+                <!-- <ul class="nav nav-second-level"> -->
+                    <!-- <li> -->
+                        <!-- <a class="J_menuItem" href="{:U('Loger/loger_list')}" data-index="0">日志列表</a> -->
+                    <!-- </li> -->
+					
+                <!-- </ul> -->
+            <!-- </li> -->
+			 <!--<li>
+                <a href="#">
+                    <i class="fa fa fa-bar-chart-o"></i>
+                    <span class="nav-label">系统设置</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="{:U('Admin/admin_edit')}?id=<?php echo session('userid'); ?>">账户管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('Admin/role_list')}">角色管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('menu/menu_list')}">菜单管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('department/department_list')}">部门管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('Admin/admin_list')}">管理员管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('Loger/loger_list')}">系统日志管理</a>
+                    </li>
+                </ul>
+            </li>-->
+			
+			
+          
+
+        </ul>
+    </div>
+</nav>
+<!--左侧导航结束-->

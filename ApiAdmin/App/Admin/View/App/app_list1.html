@@ -1,0 +1,172 @@
+	<include file="Common:head"/>
+    <link href="__MANAGE__/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+	<script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+	<link rel="stylesheet" type="text/css" href="__MANAGE__/custom/css/FileButton.css">
+</head>
+<style>
+	tr  td{
+			text-align:center;
+			vertical-align:middle;
+			
+		}
+	tr  th{
+		text-align:center;
+		vertical-align:middle;
+		
+	}
+	.btn{
+			padding:2px 4px;
+		}
+</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="padding-bottom:100px;">
+                        <h5>
+                        	app列表&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <small>
+                            	<present name="parent_id">
+                                	<a href="{:U('Check/cat_list')}"><div class="btn btn-primary">一级分类</div></a>&nbsp;&nbsp;&nbsp;&nbsp; 
+									<a href="{:U('Check/class_add_data')}?cat_id={$cat_id}"><div class="btn btn-primary">添加子分类</div></a>
+									
+                                    {$parent_name_list}
+                                    
+                                <else />
+									<present name="id">
+									<a href="{$type_url}"><div class="btn btn-primary">{$type_name}</div></a>
+									<a href="{:U('Radio/radio_list')}?id={$id}" <if condition="$model eq radio">class="btn btn-info"<else/>class="btn btn-primary"</if>>单选题列表</a>
+									<a href="{:U('Check/check_list')}?id={$id}" <if condition="$model eq check">class="btn btn-info"<else/>class="btn btn-primary"</if>>多选题列表</a>
+									<a href="{:U('Judgment/judgment_list')}?id={$id}" <if condition="$model eq judgment">class="btn btn-info"<else/>class="btn btn-primary"</if>>判断题题</a>
+									<a href="{:U('Analysis/analysis_list')}?id={$id}" <if condition="$model eq analysis">class="btn btn-info"<else/>class="btn btn-primary"</if>>计算分析题列表</a>
+									<a href="{:U('Subject/subject_list')}?acc_id={$acc_id}&exam_id={$exam_id}" class="btn btn-primary">上一级</a>
+									<a href="{:U('Acccat/acccat_list')}?id={$exam_id}" class="btn btn-primary">顶级</a>
+									<else/>
+                                	<a href="{:U('App/app_add')}"><div class="btn btn-primary">添加产品App</div></a>
+									
+									<!-- <form action="{:U('Check/check_batch_add')}" method="post" enctype="multipart/form-data"> -->
+									
+										<!-- <input type="file" name="check"> -->
+										<!-- <input type="submit" value="提交"> -->
+									<!-- </form> -->
+									</present>
+                                	
+                                </present>
+                                
+                                
+                            </small>
+							
+                        </h5>
+                    </div>
+                    <div class="ibox-content" style="position: relative;top: -40px">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+									
+                                    <th>AppId</th>
+                                    <th>App名称</th>
+									<th>cpid</th>
+                                   
+									<!-- <th>排重链接</th>
+									<th>点击链接</th>
+									<th>上报链接</th>
+									<th>回调链接</th> -->
+                                    <!-- <th>岗位职责</th> -->
+									
+                                    
+                                            
+                                   <th>操作</th>
+                                </tr>
+                            </thead>
+							 <tbody>
+									<volist name="data" id="gcl" key="k" offset="0">
+                    	
+                                    <tr class="gradeA">
+										
+										<td>{$gcl.appid}</td>
+                                     	<td>{$gcl.app_name}</td>
+										<th>{$gcl.cpid}</th>
+                                        <!-- <th>{$gcl['IdfaRepeat_url']|mb_substr=0,7,'utf-8'}</th>
+										
+                                       <th>{$gcl.source_url|mb_substr=0,7,'utf-8'}</th>
+                                       <th>{$gcl.submit_url|mb_substr=0,7,'utf-8'}</th>
+                                        <th>{$gcl.advert_url|mb_substr=0,7,'utf-8'}</th> -->
+										
+                                        <td>
+											
+											
+											
+											<div><a class="btn btn-warning" href="{:U('App/app_edit')}?id={$gcl['id']}">修改</a></div>
+											<!-- <div><a class="btn btn-danger" href="javascript:void(0)" id="del{$gcl['check_id']}">删除</a></div> -->
+										</td>
+                                    </tr>
+                                    
+                                   
+                                    <script>
+									$(function(){
+										$("#Topic{$gcl['check_id']}").click(function(){
+													var msg=$(this).next().html();
+													parent.layer.prompt({
+													title: '试题描述',
+													value: msg,
+													formType: 2 //prompt风格，支持0-2
+												}, function(msg){
+													parent.layer.closeAll();
+												})
+											})
+										$("#del{$gcl['check_id']}").click(function(){
+												parent.layer.confirm('确定删除吗？', {
+												btn: ['确定','取消'], //按钮
+												shade: false //不显示遮罩
+												}, function(){
+													parent.layer.closeAll('dialog');
+													window.location.href="{:U('Check/check_del')}?check_id={$gcl['check_id']}";
+													
+												}, function(){
+													parent.layer.closeAll('dialog');
+												});
+										
+										
+										
+											
+										
+										})
+									})	
+										
+									</script>
+                                </volist>
+								</tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+   
+    <script src="__MANAGE__/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__MANAGE__/js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="__MANAGE__/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="__MANAGE__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="__MANAGE__/js/content.min.js?v=1.0.0"></script>
+	
+    <script>
+        $(document).ready(function(){
+		$(".dataTables-example").dataTable();
+		var oTable=$("#editable").dataTable();
+		oTable.$("td").editable("",{"callback":function(sValue,y){var aPos=oTable.fnGetPosition(this);oTable.fnUpdate(sValue,aPos[0],aPos[1])},"submitdata":function(value,settings){return{"row_id":this.parentNode.getAttribute("id"),"column":oTable.fnGetPosition(this)[2]}},"width":"90%","height":"100%"})});
+		function fnClickAddRow(){
+			$("#editable").dataTable().fnAddData(["Custom row","New row","New row","New row","New row"])
+		};
+			
+    </script>
+
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_data_tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+</html>

@@ -1,0 +1,69 @@
+<link href="__LIBS__/accordion/css/menu.css" rel="stylesheet" />
+<link href="__LIBS__/accordion/css/accordion.css" rel="stylesheet" />
+<link href="__MANAGE__/css/jquery.treemenu.css" rel="stylesheet" type="text/css">
+ <link href="__LIBS__/accordion/css/font-awesome.min.css" rel="stylesheet" />
+<script src="__STATIC__/js/jquery-2.1.1.min.js"></script>
+<script src="__LIBS__/accordion/js/accordion.js"></script>
+<script src="__MANAGE__/js/jquery.treemenu.js"></script> 
+<div class="left accordion" id="accordion">
+	<div class="left_top">
+    	<div class="left_top_left" >{$model_name}</div>
+        <div class="left_top_right" >
+                <a data-toggle="modal" href="/admin/menu/menu_add/parentid/0" role="button" class="tooltips"><i class="en-plus3"></i> <span>增加<li class="arrow-down"></li></span></a>
+                
+        </div>
+    </div>
+	
+	<div class="tabs" style="width:100%">
+    	<volist name="menu_list" id="dl">
+        <li>
+        	<div class="link">
+            	<i class="fa fa-double-angle-down"></i>
+                	{$dl.name} &nbsp;&nbsp;&nbsp;&nbsp; {$dl.order}
+                
+                <i style="margin-left:180px; margin-top:-10px; ">
+					<a data-toggle="modal" href="/admin/menu/menu_add/parentid/{$dl.id}" role="button" class="tooltips left_top_menu" ><i class="en-plus3"></i> <span>添加</span></a>
+                    <a data-toggle="modal" href="/admin/menu/menu_edit/id/{$dl.id}" role="button" class="tooltips left_top_menu" ><i class="ec-pencil"></i> <span>编辑</span></a>
+                    <a data-toggle="modal" href="/admin/menu/menu_del/id/{$dl.id}" role="button" class="tooltips left_top_menu" ><i class="im-cancel-circle"></i> <span>删除</span></a>
+               </i>
+               <i class="fa fa-chevron-down"></i>
+                
+            </div>
+			<ul class="submenu">
+            	<volist name="dl['sub']" id="s">
+            	<li>
+                    {$s.name}
+                    <a href="/admin/menu/menu_edit/id/{$s.id}">
+                        <div class="ec-pencil" style="margin-left:5px;"></div>
+                    </a>
+                    <a href="/admin/menu/menu_del/id/{$s.id}">
+                        <div class="im-cancel-circle" style="margin-left:5px;"></div>
+                    </a>
+                </li>
+                </volist>
+			</ul>
+		</li>
+        </volist>
+        
+    </div>
+</div>
+<div class="row">
+   
+    <div class="col-lg-12">
+       
+        
+            <div class="panel-body">
+                <form class="form-horizontal group-border hover-stripped" role="form" enctype="multipart/form-data" action="{:U('Menu/menu-release')}" method="post">
+                    <div class="form-group">
+                        <div class="col-lg-offset-2" style="text-align:center;">
+                        	<input type="hidden" name="release" value="0" autofocus>
+                            <button class="btn btn-default ml15" type="submit">发布</button>
+                        </div>
+                    </div>
+                   
+                </form>
+             </div>
+	</div>
+</div>
+                        
+

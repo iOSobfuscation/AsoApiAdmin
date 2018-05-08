@@ -1,0 +1,74 @@
+	<include file="Common:head"/>
+</head>
+<body class="gray-bg">
+        <div class="row wrapper wrapper-content animated fadeInRight">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>部门设置 </h5>
+                        <a href="/admin/admin/menu_add/parent_id/0" class="menu_add" data="0" >增加</a>
+                    </div>
+                    <div class="ibox-content col-sm-12" style="float:left;">
+                        <div class="col-sm-3">
+                            <div id="treeview" class="test"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+		<script src="__MANAGE__/js/bootstrap.min.js?v=3.3.6"></script>
+        <script src="__MANAGE__/js/content.min.js?v=1.0.0"></script>
+        <script src="__MANAGE__/js/plugins/treeview/bootstrap-treeview.js"></script>
+        
+        <script>
+			//传值给自定义菜单
+			$(function(){
+				var e=[
+						<volist name="menu_list" id="dl">
+						{
+							text:"{$dl.name}<div class='menu_acti'><a href='' class='menu_add' data='{$dl.id}'>添加子菜单</a><a href='' class='menu_edit' data='{$dl.id}'>编辑</a><a href='' class='menu_del' data='{$dl.id}'>删除</a></div>",href:"#parent1",tags:["{$dl.id}"],
+							<if condition="$dl.subcat_total gt 0">
+							nodes:[
+								<volist name="dl['sub']" id="s">
+									{
+										text:"{$s.name}<div class='menu_acti'><a href='#' class='menu_edit' data='{$s.id}'>编辑</a><a href='' class='menu_del' data='{$s.id}'>删除</a></div>",href:"#child1",tags:["{$s.id}"]
+									},
+								</volist>
+							]
+							</if>
+						},
+						</volist>
+				];
+				$("#treeview").treeview({data:e}),
+				$("#treeview").treeview({color:"#428bca",data:e})
+				
+				$(".menu_add").click(function(){
+					var parent_id	= $(this).attr("data"); //商品id
+					location.href	= '/admin/admin/menu_add/parent_id/'+parent_id;
+				})
+				
+				$(".menu_edit").click(function(){
+					var menu_id		= $(this).attr("data"); //商品id
+					location.href	= '/admin/admin/menu_edit/id/'+menu_id;
+				})
+				
+				$(".menu_del").click(function(){
+					var menu_id		= $(this).attr("data"); //商品id
+					//alert(1);
+					location.href	= '/admin/admin/menu_del/id/'+menu_id;
+				})
+				
+			});
+
+		</script>
+        
+        
+    
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_validate.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:16 GMT -->
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no,target-densitydpi=device-dpi"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+
+<meta name="full-screen" content="true"/>
+<meta name="screen-orientation" content="portrait"/>
+<meta name="x5-fullscreen" content="true"/>
+<meta name="360-fullscreen" content="true"/>
+<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+<base href="../"/>
+<!--[if IE]><script type="text/javascript">
+// Fix for IE ignoring relative base tags.
+(function () {
+    var baseTag = document.getElementsByTagName('base')[0];
+    baseTag.href = baseTag.href;
+})();
+</script><![endif]-->
+<style>
+html{  height: 100%; }
+body {text-align: center; background: #fff; padding: 0; border: 0; margin: 0; height: 100%; position: relative; font-family: "microsoft yahei"; }
+html { -ms-touch-action: none;  overflow: hidden; }
+canvas { display: block; position: absolute; margin: 0 auto; padding: 0; border: 0; }
+.hide{ display: none; }
+#music {position: absolute;width: 48px;height: 48px;left: 16px;bottom: 16px;z-index: 999; }
+.music { position: absolute; width: 100%;height: 100%;background: url(resource/assets/edit.png) no-repeat center bottom;background-size: 100%  100% ; z-index: 11; }
+#music>span {color: #000;position: absolute;left: -104px;top: 0;line-height: 60px;font-size: 28px;opacity: 0;-webkit-transition: all 0.3s linear;transition: all 0.3s linear;} 
+.switchbox{ width: 43px;height: 0px; position: absolute; background: #75b7d7; border-radius: 40px; left: 2px; bottom: 20px; z-index: 10; overflow: hidden; transition: all .3s ease; -webkit-transition: all .3s ease; box-shadow: 0 0 5px #fff;  }
+.item{ width: 100%; margin:20px auto; text-align: center; }
+.zshow{ height: 150px; }
+.rankingbox {position: absolute;width: 48px;height: 48px;right: 16px;bottom: 16px;z-index: 999;  background: url(resource/assets/topicon.png) no-repeat center bottom;background-size: 100% 100% ;   }
+
+.rankinglist{ position: absolute; left: 0; top:0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+.ranklistmain{ width: 290px; height: 340px; background: url(resource/assets/topbg.png) no-repeat center bottom;background-size: 100% 100% ; margin:25% auto 0;  }
+.posa{ position: absolute; }
+.ranklistmain .listwrap{ width: 85%; margin: 0px auto 0; position: relative; top: 60px;  height: 220px;  overflow-y: scroll;  }
+.topitem{ width: 100%; height: 50px; position: relative; margin-bottom: 5px;  -webkit-filter:grayscale(1); }
+.topitem.on{-webkit-filter:grayscale(0); }
+.itemimg{ position: absolute; top: 0; left: 0; z-index: 11; }
+.numwrap{ width: 30px; height: 30px; line-height: 30px; display: inline-block; vertical-align: middle; background: url(resource/assets/listnumbg.png) no-repeat 0 0; background-size: 100% 100% ; z-index: 12; position: absolute; top:10px; left: 10px; font-size: 14px; font-weight: bolder; -webkit-text-shadow: 0 0 3px #000;  text-shadow: 0 0 3px #000; color: #fff;  }
+.textwrap{ width: 70%; height: 30px; line-height: 30px; display: inline-block; vertical-align: middle;  z-index: 12; position: absolute; top:10px; left: 55px; font-size: 14px; font-weight: bolder; -webkit-text-shadow: 0 0 3px #000;  text-shadow: 0 0 3px #000; color: #fff; text-align: left; }
+</style> 
+</head>
+<body>
+<div style="position:relative;" data-scale-mode="EXACT_FIT" id="gameDiv"></div>
+
+<!--音乐 start-->
+<div id="music">
+    <div class="j_sbox switchbox">
+        <div class="j_item1 item"><img src="resource/assets/music1.png" width="80%" /></div>
+        <div class="j_item2 item"><img src="resource/assets/music2.png" width="80%"  /></div>
+    </div>
+    <div class="music play"></div>
+    <audio src="resource/assets/bg.mp3" loop="loop" id="bgmusic"></audio>
+</div>  
+<!--音乐 end-->
+<!--排名 start-->
+<div id="rankingbox" class="rankingbox"></div>
+<!--排名 end-->
+<!--排名列表 start-->
+<div id="rankinglist" class="rankinglist hide">
+    <div class="ranklistmain">
+        <div class="listwrap">
+            <div  class="topitem">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+            <div  class="topitem">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+            <div  class="topitem on">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+            <div  class="topitem">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+            <div  class="topitem">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+            <div  class="topitem">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--排名列表 start-->
+<script>var document_class = "Main";</script>
+<!--这部分内容在编译时会被替换，要修改文档类，请到工程目录下的egretProperties.json内编辑。-->
+<!--This part will be replaced during compiling, and to modify the document class, please go to the project directory and edit in the file of egretProperties. Jsonr
+<script src="bin-debug/lib/egret_file_list.js"></script>
+<script src="launcher/egret_require.js"></script>
+<script src="launcher/egret_loader.js"></script>
+<script src="bin-debug/src/game_file_list.js"></script>
+-->
+<script>
+/*    var support = [].map && document.createElement("canvas").getContext;
+    if (support) {
+        egret_h5.preloadScript(egret_file_list, "libs/");
+        egret_h5.preloadScript(game_file_list, "bin-debug/src/");
+        egret_h5.startLoading();
+    }else {
+        alert("Egret dose not support your current browser")
+    }*/
+
+//背景音乐开关
+    $(".music").on("tap",function(){
+        if ( $(".j_sbox").hasClass("zshow") ){ 
+            $(".j_sbox").removeClass("zshow"); 
+        }else{ 
+            $(".j_sbox").addClass("zshow"); 
+        }
+    }); 
+    $(".j_item1").on("tap",function(){
+        if ( !$(this).hasClass("play") ){
+            $(this).addClass("play");
+            $(".j_sbox").removeClass("zshow");
+            music.play();
+        }
+    });
+    $(".j_item2").on("tap",function(){
+        if ( $(this).hasClass("play") ){
+            $(this).removeClass("play");
+            $(".j_sbox").addClass("zshow");
+            music.pause();
+        }
+    });
+    var music = document.getElementById("bgmusic");
+    var volume = 0;
+    music.volume = volume;
+    music.play();
+    musicauto = setInterval(function(){
+        if ( music.currentTime != 0 ){
+            clearInterval(musicauto);
+            $("#music").css({"visibility":"visible",opacity:0.8});
+            autoVolume = setInterval(function(){
+                volume += 0.01;
+                if ( volume >= 1 ){
+                    volume = 1;
+                    clearInterval(autoVolume);
+                }
+                music.volume = volume;
+            },300)
+        }
+    },100)
+//排名弹框
+$("#rankingbox").on("tap",function(){ 
+        if ( $("#rankinglist").hasClass("hide") ){ 
+            $("#rankinglist").removeClass("hide"); 
+        }else{ 
+            $("#rankinglist").addClass("hide"); 
+        }
+});
+</script>
+</body>
+</html>

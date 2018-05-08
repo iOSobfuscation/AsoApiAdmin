@@ -1,0 +1,220 @@
+	<include file="Common:head"/>
+    <link href="__MANAGE__/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+	<script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+	<link rel="stylesheet" type="text/css" href="__MANAGE__/custom/css/FileButton.css">
+</head>
+<style>
+	tr  td{
+			text-align:center;
+			vertical-align:middle;
+			
+		}
+	tr  th{
+		text-align:center;
+		vertical-align:middle;
+		
+	}
+	.btn{
+			padding:2px 4px;
+		}
+	.form-group{
+		float:left;
+	}
+</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="padding-bottom:100px;">
+                        <h5>
+                        	
+                            <small>
+                            	
+									
+                                   
+                                    
+                            
+								
+                                	<a href="javascript:void(0)"><div class="btn btn-primary">用户任务进展查询</div></a>
+									<form action="{:U('Task/task_info')}" method="post" style="" enctype="multipart/form-data">		
+										<!-- <div class="form-group">
+	                                        
+			                                <div class="col-sm-8" style="width:200px;">									
+												<input type="number" class="form-control" name="cpid"maxlength="" value="{$data['score']}" placeholder="cpid" autofocus>
+			                                </div>
+                            			</div> -->
+                            			<div class="form-group">
+	                                        
+			                                <div class="col-sm-8" style="width:150px;">									
+												<input type="number" class="form-control" name="appid"maxlength="" value="" placeholder="appid" autofocus>
+			                                </div>
+                            			</div>
+                            			<div class="form-group" id="data_5">
+											
+											<div class="col-sm-3 input-daterange input-group" style="width:400px;"id="datepicker">
+												<if condition="$data['start_time'] neq ''">
+												<input class="form-control" name="start_time" placeholder="点击时间"value="{:date('Y-m-d',$data['start_time'])}" type="text">
+												<else/>
+												<input class="form-control" name="start_time" placeholder="点击时间" type="text">
+												</if>
+												<span class="input-group-addon">到</span>
+												<if condition="$data['end_time'] neq ''">
+												<input class="form-control layer-date" name="end_time"placeholder="点击时间" value="{:date('Y-m-d',$data['end_time'])}" id="end"type="text" >
+												<else/>
+												<input class="form-control" name="end_time"placeholder="点击时间" type="text" >
+												</if>
+											</div>
+							
+										</div>
+                            			
+	                                        
+			                                <div class="col-sm-8" style="width:350px;">									
+												<input type="text" class="form-control" name="idfa"maxlength="" value="" placeholder="idfa" autofocus>
+			                                </div>
+                            			</div>
+                            			
+											
+										<input type="submit" class="btn btn-info"value="查询" style="position:relative;left:930px;top:-65px">
+										<a href="{:U('Task/task_info')}?type=1&appid={$appid}&start_time={$start_time}&end_time={$end_time}"  style="position:relative;left:950px;top:-65px"><div class="btn btn-primary">导出数据</div></a>
+									</form>
+								
+                                
+                                
+                            </small>
+							
+                        </h5>
+                    </div>
+                    <div class="ibox-content" style="position: relative;top: -60px">
+
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+									
+                                    <th>AppId</th>
+                                    <th>App名称</th>
+									<th>idfa</th>
+									<th>点击时间</th>
+									
+                                   
+									
+                                     <th>上报时间</th> 
+                                            
+                                 <!--   <th>操作</th> -->
+                                </tr>
+                            </thead>
+							 <tbody>
+									<volist name="data" id="gcl" key="k" offset="0">
+                    	
+                                    <tr class="gradeA">
+										
+										<td>{$gcl.appid}</td>
+                                        <td style="">{$gcl['app_name']}</td>
+										<th>{$gcl.idfa}</th>
+                                        <th>{$gcl['stime']}</th>
+										
+                                      
+										<td>
+											
+											<a style="" href="javascript:void(0)"><present name="gcl['sutime']">{$gcl['sutime']}<else/>暂未完成</present></a>
+										</td>
+
+                                       <!--  <td>
+										
+											
+											
+											<div><a class="btn btn-warning" href="{:U('Radio/radio_edit')}?id={$gcl['radio_id']}">修改</a></div>
+											<div><a class="btn btn-danger" href="javascript:void(0)" id="del{$gcl['radio_id']}">删除</a></div>
+										</td> -->
+                                    </tr>
+
+                                   
+                                    <script>
+									$(function(){
+										$("#Topic{$gcl['radio_id']}").click(function(){
+													var msg=$(this).next().html();
+													parent.layer.prompt({
+													title: '试题描述',
+													value: msg,
+													formType: 2 //prompt风格，支持0-2
+												}, function(msg){
+													parent.layer.closeAll();
+												})
+											})
+										$("#del{$gcl['radio_id']}").click(function(){
+												parent.layer.confirm('确定删除吗？', {
+												btn: ['确定','取消'], //按钮
+												shade: false //不显示遮罩
+												}, function(){
+													parent.layer.closeAll('dialog');
+													window.location.href="{:U('Radio/radio_del')}?radio_id={$gcl['radio_id']}";
+													
+												}, function(){
+													parent.layer.closeAll('dialog');
+												});
+										
+										
+										
+											
+										
+										})
+									})	
+										
+									</script>
+                                </volist>
+                                 <tr>
+                                    	<td>
+											<a href="{:U('Task/task_info')}?page=1&appid={$appid}&start_time={$start_time}&end_time={$end_time}" class="page" id="{$NowPage}">首页</a>
+										</td>
+										<td>
+											<a href="{:U('Task/task_info')}?page={$NowPage-1}&appid={$appid}&start_time={$start_time}&end_time={$end_time}" class="PrevPage" id="{$NowPage-1}">上一页</a>
+										</td>
+										<td>
+											<a href="{:U('Task/task_info')}?page={$NowPage+1}&appid={$appid}&start_time={$start_time}&end_time={$end_time}" class="NextPage" id="{$NowPage+1}">下一页</a>
+										</td>
+										<td>
+											<a href="{:U('Task/task_info')}?page={$MaxPage}&appid={$appid}&start_time={$start_time}&end_time={$end_time}" class="EndPage" id="{$NowPage}">尾页</a>
+										</td>
+
+										<td>
+											当前第<span>{$NowPage}页</span>，总数据{$count}条
+										</td>
+                                    </tr>
+								</tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+   
+    <script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__MANAGE__/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__MANAGE__/js/content.min.js?v=1.0.0"></script>
+     
+  
+    <script src="__MANAGE__/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="__MANAGE__/js/plugins/jsKnob/jquery.knob.js"></script>
+    <script src="__MANAGE__/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <script src="__MANAGE__/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="__MANAGE__/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+    <script src="__MANAGE__/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+    <script src="__MANAGE__/js/plugins/switchery/switchery.js"></script>
+    <script src="__MANAGE__/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+    <script src="__MANAGE__/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="__MANAGE__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="__MANAGE__/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="__MANAGE__/js/plugins/clockpicker/clockpicker.js"></script>
+    <script src="__MANAGE__/js/plugins/cropper/cropper.min.js"></script>
+
+    <script src="__MANAGE__/js/demo/form-advanced-demo.min.js"></script>
+	
+   
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_data_tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+</html>

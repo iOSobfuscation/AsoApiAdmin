@@ -1,0 +1,112 @@
+{
+	"resources": [{
+		"name": "startbg",
+		"type": "image",
+		"url": "assets/loading.jpg"
+	}, {
+		"name": "startbtn",
+		"type": "image",
+		"url": "assets/nextbtn.png"
+	}, {
+		"name": "pause",
+		"type": "image",
+		"url": "assets/pause.png"
+	}, {
+		"name": "greetingbg",
+		"type": "image",
+		"url": "assets/greating_bg.png"
+	},{
+		"name": "runnumbg",
+		"type": "image",
+		"url": "assets/runnumbg.png"
+	},{
+		"name": "item1",
+		"type": "image",
+		"url": "assets/item1.png"
+	},{
+		"name": "item2",
+		"type": "image",
+		"url": "assets/item2.png"
+	},{
+		"name": "item3",
+		"type": "image",
+		"url": "assets/item3.png"
+	},{
+		"name": "item4",
+		"type": "image",
+		"url": "assets/item4.png"
+	},{
+		"name": "item5",
+		"type": "image",
+		"url": "assets/item5.png"
+	},{
+		"name": "button_disabled_png",
+		"scale9grid": "3,4,14,13",
+		"type": "image",
+		"url": "assets/simple/NormalButton/button_disabled.png"
+	}, {
+		"name": "button_down_png",
+		"scale9grid": "4,3,13,14",
+		"type": "image",
+		"url": "assets/simple/NormalButton/button_down.png"
+	}, {
+		"name": "button_normal_png",
+		"scale9grid": "4,3,13,15",
+		"type": "image",
+		"url": "assets/simple/NormalButton/button_normal.png"
+	}, {
+		"name": "progressbar_fill_png",
+		"type": "image",
+		"url": "assets/progress_fill.png"
+	}, {
+		"name": "progressbar_track_png",
+		"scale9grid": "1,1,28,8",
+		"type": "image",
+		"url": "assets/progressbg.png"
+	}, {
+		"name": "textbox_png",
+		"scale9grid": "1,1,143,21",
+		"type": "image",
+		"url": "assets/simple/TextInput/textbox.png"
+	}, {
+		"name": "magic_json",
+		"subkeys": "fire_01,fire_02,fire_03,fire_04,fire_05,fire_06,fire_07,fire_08,fire_09,fire_10,ice_01,ice_02,ice_03,ice_04,ice_05,ice_06,ice_07,ice_08,ice_09,ice_10",
+		"type": "sheet",
+		"url": "assets/magic.json"
+	}, {
+		"name": "db_png",
+		"type": "image",
+		"url": "assets/db.png"
+	}, {
+		"name": "blood_png",
+		"type": "image",
+		"url": "assets/bloodbg.png"
+	}, {
+		"name": "dbback_01_png",
+		"type": "image",
+		"url": "assets/dbback_01.jpg"
+	}, {
+		"name": "dbback_02_png",
+		"type": "image",
+		"url": "assets/dbback_02.jpg"
+	}, {
+		"name": "dbback_03_png",
+		"type": "image",
+		"url": "assets/dbback_03.jpg"
+	}, {
+		"name": "hp_json",
+		"subkeys": "HP,dis_01,dis_02,dis_03,dis_04,dis_05,dis_06,dis_07,dis_08,dis_09,dis_10,flow_01,flow_02,flow_03,flow_04,flow_05,flow_06,flow_07,flow_08,flow_09,flow_10",
+		"type": "sheet",
+		"url": "assets/hp.json"
+	}],
+	"groups": [{
+		"name": "preload",
+		"keys": "startbg,startbtn,pause, greetingbg,item1,item2,item3,item4,item5,runnumbg, progressbar_fill_png,progressbar_track_png"
+	}, {
+		"name": "myload",
+		"keys": "textbox_png,button_disabled_png,button_down_png,button_normal_png"
+	},{
+		"name": "magicload",
+		"keys": "magic_json,db_png,blood_png,dbback_01_png,dbback_02_png,dbback_03_png,hp_json"
+	}]
+}

@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+<title>漂流游戏</title>
+<meta name="viewport"
+content="width=device-width,height=device-height,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no,target-densitydpi=device-dpi"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+
+<meta name="full-screen" content="true"/>
+<meta name="screen-orientation" content="portrait"/>
+<meta name="x5-fullscreen" content="true"/>
+<meta name="360-fullscreen" content="true"/>
+<script type="text/javascript" src="launcher/jquery-2.1.1.min.js"></script>
+<style>
+html{  height: 100%; }
+body {text-align: center;   padding: 0; border: 0; margin: 0;  position: relative; font-family: "microsoft yahei"; }
+.bgimg{ position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+html { -ms-touch-action: none;  overflow: hidden; }
+canvas { display: block; position: absolute; margin: 0 auto; padding: 0; border: 0; }
+.hide{ display: none; }
+#music {position: absolute;width: 48px;height: 48px;left: 16px;top: 80%;z-index: 999; }
+.music { position: absolute; width: 100%;height: 100%;background: url(resource/assets/edit.png) no-repeat center bottom;background-size: 100%  100% ; z-index: 11; }
+#music>span {color: #000;position: absolute;left: -104px;top: 0;line-height: 60px;font-size: 28px;opacity: 0;-webkit-transition: all 0.3s linear;transition: all 0.3s linear;} 
+.switchbox{ width: 43px;height: 0px; position: absolute; background: #75b7d7; border-radius: 40px; left: 2px; bottom: 20px; z-index: 10; overflow: hidden; transition: all .3s ease; -webkit-transition: all .3s ease; box-shadow: 0 0 5px #fff;  }
+.item{ width: 100%; margin:20px auto; text-align: center; }
+.zshow{ height: 150px; }
+.rankingbox {position: absolute;width: 48px;height: 48px;right: 16px;top: 80%; z-index: 999;  background: url(resource/assets/topicon.png) no-repeat center bottom;background-size: 100% 100% ;   }
+
+.rankinglist{ position: absolute; left: 0; top:0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+.ranklistmain{ width: 290px; height: 340px; background: url(resource/assets/topbg.png) no-repeat center bottom;background-size: 100% 100% ; margin:25% auto 0;  }
+.posa{ position: absolute; }
+.ranklistmain .listwrap{ width: 85%; margin: 0px auto 0; position: relative; top: 60px;  height: 220px;  overflow-y: scroll;  }
+.topitem{ width: 100%; height: 50px; position: relative; margin-bottom: 5px;  -webkit-filter:grayscale(1); }
+.topitem.on{-webkit-filter:grayscale(0); }
+.itemimg{ position: absolute; top: 0; left: 0; z-index: 11; }
+.numwrap{ width: 30px; height: 30px; line-height: 30px; display: inline-block; vertical-align: middle; background: url(resource/assets/listnumbg.png) no-repeat 0 0; background-size: 100% 100% ; z-index: 12; position: absolute; top:10px; left: 10px; font-size: 14px; font-weight: bolder; -webkit-text-shadow: 0 0 3px #000;  text-shadow: 0 0 3px #000; color: #fff;  }
+.textwrap{ width: 70%; height: 30px; line-height: 30px; display: inline-block; vertical-align: middle;  z-index: 12; position: absolute; top:10px; left: 55px; font-size: 14px; font-weight: bolder; -webkit-text-shadow: 0 0 3px #000;  text-shadow: 0 0 3px #000; color: #fff; text-align: left; }
+.greetingbox{ position: absolute; width: 100%; top:0; left: 0;  }
+.coinitem{ width: 50px; height: 50px; position: absolute;}
+.coinitem1{left: 10px; top:-100px; }
+.coinitem2{left:30px; top:-50px;}
+.coinitem3{left:230px; top:-90px; }
+.coinitem4{left:300px; top:-70px;}
+.coinitem5{left:130px; top:-120px; }
+.coinitem6{left:180px; top:-60px;  }
+.greetingbox.on  .coinitem1{ animation: next 2s ease-in 1; -webkit-animation: next 2s ease-in 1; }
+.greetingbox.on  .coinitem2{ animation: next2 2s ease-in 1; -webkit-animation: next2 2s ease-in 1; }
+.greetingbox.on  .coinitem3{ animation: next3 2s ease-in 1; -webkit-animation: next3 2s ease-in 1; }
+.greetingbox.on  .coinitem4{ animation: next4 2s ease-in 1; -webkit-animation: next4 2s ease-in 1; }
+.greetingbox.on  .coinitem5{ animation: next5 2s ease-in 1; -webkit-animation: next5 2s ease-in 1; }
+.greetingbox.on  .coinitem6{ animation: next6 2s ease-in 1; -webkit-animation: next6 2s ease-in 1; }
+.gcion1{ 
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; 
+}
+.gcion2{ 
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: rotate3d(1,0,0,-180deg);
+    -webkit-transform: rotate3d(1,0,0,-180deg);  
+}
+@keyframes next{
+    0%{transform:  scale(1.6,1.6); top:-100px; opacity: 1; }
+    100%{transform:  scale(0.5,0.5); top:300px; opacity: 0;}
+}
+@-webkit-keyframes next{
+    0%{-webkit-transform:  scale(1.6,1.6); top:-100px; opacity: 1; }
+    100%{-webkit-transform:   scale(0.5,0.5); top:300px; opacity: 0;}
+}
+
+@keyframes next2{
+    0%{transform:  scale(1,1); top:-50px; opacity: 1; }
+    100%{transform:  scale(0.1,0.1); top:450px; opacity: 0.2;}
+}
+@-webkit-keyframes next2{
+    0%{-webkit-transform:  scale(1,1); top:-50px; opacity: 1; }
+    100%{-webkit-transform:   scale(0.1,0.1); top:450px; opacity: 0.2;}
+}
+@keyframes next3{
+    0%{transform:  scale(1,1); top:-90px; opacity: 1; }
+    100%{transform:  scale(0.3,0.3); top:400px; opacity: 0.2;}
+}
+@-webkit-keyframes next3{
+    0%{-webkit-transform:  scale(1,1); top:-90px; opacity: 1; }
+    100%{-webkit-transform:   scale(0.3,0.3); top:400px; opacity: 0.2;}
+}
+@keyframes next4{
+    0%{transform:   scale(1,1); top:-70px; opacity: 1; }
+    100%{transform:   scale(0.2,0.2); top:440px; opacity: 0.2;}
+}
+@-webkit-keyframes next4{
+    0%{-webkit-transform:   scale(1,1); top:-70px; opacity: 1; }
+    100%{-webkit-transform:   scale(0.2,0.2); top:440px; opacity: 0.2;}
+}
+@keyframes next5{
+    0%{transform:  scale(1,1); top:-120px; opacity: 1; }
+    100%{transform:   scale(0.3,0.3); top:500px; opacity: 0.2;}
+}
+@-webkit-keyframes next5{
+    0%{-webkit-transform:  scale(1,1); top:-120px; opacity: 1; }
+    100%{-webkit-transform:   scale(0.3,0.3); top:500px; opacity: 0.2;}
+}
+@keyframes next6{
+    0%{transform:   scale(1,1); top:-60px; opacity: 1; }
+    100%{transform:  scale(0.2,0.2); top:300px; opacity: 0.2;}
+}
+@-webkit-keyframes next6{
+    0%{-webkit-transform:  scale(1,1); top:-60px; opacity: 1; }
+    100%{-webkit-transform:   scale(0.2,0.2); top:300px; opacity: 0.2;}
+}
+</style> 
+</head>
+<body>
+<img src="resource/assets/listnumbg.png" style="display:none;" />
+<img src="resource/assets/loading.jpg" id="bgimg" class="bgimg" width="100%" >
+<div style="position:relative;" id="gameDiv"></div>
+<!--金币 start-->
+<div id="greetingbox" class="greetingbox" style="left:1000px ">
+    <div class="coinitem coinitem1">
+        <img class="j_gcion1 gcion1" src="resource/assets/gcoin.png" width="100%">
+        <img class="j_gcion2 gcion2" src="resource/assets/gcoin.png" width="100%">
+    </div>
+    <div class="coinitem coinitem2">
+        <img class="j_gcion1 gcion1" src="resource/assets/gcoin.png" width="100%">
+        <img class="j_gcion2 gcion2" src="resource/assets/gcoin.png" width="100%">
+    </div>
+    <div class="coinitem coinitem3">
+        <img class="j_gcion1 gcion1" src="resource/assets/gcoin.png" width="100%">
+        <img class="j_gcion2 gcion2" src="resource/assets/gcoin.png" width="100%">
+    </div>
+    <div class="coinitem coinitem4">
+        <img class="j_gcion1 gcion1" src="resource/assets/gcoin.png" width="100%">
+        <img class="j_gcion2 gcion2" src="resource/assets/gcoin.png" width="100%">
+    </div>
+    <div class="coinitem coinitem5">
+        <img class="j_gcion1 gcion1" src="resource/assets/gcoin.png" width="100%">
+        <img class="j_gcion2 gcion2" src="resource/assets/gcoin.png" width="100%">
+    </div>
+    <div class="coinitem coinitem6">
+        <img class="j_gcion1 gcion1" src="resource/assets/gcoin.png" width="100%">
+        <img class="j_gcion2 gcion2" src="resource/assets/gcoin.png" width="100%">
+    </div>
+</div>
+<!--金币 end-->
+<!--音乐 start-->
+<div id="music">
+    <div class="j_sbox switchbox">
+        <div class="j_item1 item"><img src="resource/assets/music1.png" width="80%" /></div>
+        <div class="j_item2 item"><img src="resource/assets/music2.png" width="80%"  /></div>
+    </div>
+    <div class="music play"></div>
+    <audio src="resource/assets/bg.mp3" loop="loop" id="bgmusic"></audio>
+</div>  
+<!--音乐 end-->
+<!--排名 start-->
+<div id="rankingbox" class="rankingbox"></div>
+<!--排名 end-->
+<!--排名列表 start-->
+<div id="rankinglist" class="rankinglist hide">
+    <div class="ranklistmain">
+        <div class="listwrap">
+            <div  class="topitem">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+            <div  class="topitem">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+            <div  class="topitem on">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+            <div  class="topitem">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+            <div  class="topitem">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+            <div  class="topitem">
+                <img src="resource/assets/listbg.png" class="itemimg" width="100%"  height="100%" />
+                <div class="numwrap">1</div>
+                <div class="textwrap">竹签人 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--排名列表 start-->
+<script>var document_class = "Main";
+window.stageOne = {
+    DBhp :30,
+    DBhpmax : 30, 
+    TimeDuring : 700, 
+    scoreratio : 8,  
+    item1hurt : 0.1,
+    item2hurt : 0.2,
+    item3hurt :  0.3,
+    speed1 : 1,
+    speed2 : 2,
+    speed3 : 3
+}
+window.stageTwo = {
+    DBhp :40,
+    DBhpmax : 40, 
+    TimeDuring : 800, 
+    scoreratio : 9, 
+    item4hurt : 0.4, 
+    item3hurt :  0.3,
+    item2hurt : 0.2,
+    item1hurt : 0.1,
+    speed1 : 1,
+    speed2 : 2,
+    speed3 : 3,
+    speed4 : 4
+}
+window.stageThree = {
+    DBhp :50,
+    DBhpmax : 50, 
+    TimeDuring : 900, 
+    scoreratio : 7, 
+    item5hurt : 0.5, 
+    item4hurt : 0.4, 
+    item3hurt :  0.3,
+    item2hurt : 0.2,
+    item1hurt : 0.1,
+    speed1 : 1,
+    speed2 : 1.5,
+    speed3 : 2.5,
+    speed4 : 0.4,
+    speed5 : 0.5
+}
+//this.DBhp = this.DBhpmax = stageTwo.DBhp, this.TimeDuring = stageTwo.TimeDuring, this.scoreratio = stageTwo.scoreratio, this.item4hurt = this.item3hurt = this.item2hurt = this.item1hurt = stageTwo.item1hurt
+//this.DBhp = this.DBhpmax = stageThree.DBhp, this.TimeDuring = stageThree.TimeDuring, this.scoreratio = stageThree.scoreratio, this.item4hurt = this.item3hurt = this.item2hurt = this.item1hurt = stageThree.item1hurt
+</script><!--这部分内容在编译时会被替换，要修改文档类，请到工程目录下的egretProperties.json内编辑。-->
+<!--This part will be replaced during compiling, and to modify the document class, please go to the project directory and edit in the file of egretProperties. Jsonr-->
+<script src="launcher/egret_require.js"></script>
+<script src="launcher/egret_loader.js"></script>
+<script src="launcher/game-min.js"></script>
+<script>
+    var support = [].map && document.createElement("canvas").getContext;
+    if (support) {
+        egret_h5.startGame();
+    }
+    else {
+        alert("Egret 不支持您当前的浏览器")
+    }
+
+//音乐控制
+    var music = document.getElementById("bgmusic");
+    var volume = 0;
+    music.volume = volume;
+    music.play();
+    musicauto = setInterval(function(){
+        if ( music.currentTime != 0 ){
+            clearInterval(musicauto);
+            $("#music").css({"visibility":"visible",opacity:0.8});
+            autoVolume = setInterval(function(){
+                volume += 0.01;
+                if ( volume >= 1 ){
+                    volume = 1;
+                    clearInterval(autoVolume);
+                }
+                music.volume = volume;
+            },300)
+        }
+    },100)
+//背景音乐开关
+    $(".music").on("tap",function(){
+        if ( $(".j_sbox").hasClass("zshow") ){ 
+            $(".j_sbox").removeClass("zshow"); 
+        }else{ 
+            $(".j_sbox").addClass("zshow"); 
+        }
+    }); 
+    $(".j_item1").on("tap",function(){
+        if ( !$(".music").hasClass("play") ){
+            $(".music").addClass("play");
+            $(".j_sbox").removeClass("zshow");
+            music.play();
+        }
+    });
+    $(".j_item2").on("tap",function(){
+        if ( $(".music").hasClass("play") ){
+            $(".music").removeClass("play");
+            $(".j_sbox").removeClass("zshow");
+            music.pause();
+        }
+    });
+//排名弹框
+$("#rankingbox").on("tap",function(){ 
+        if ( $("#rankinglist").hasClass("hide") ){ 
+            $("#rankinglist").removeClass("hide"); 
+        }else{ 
+            $("#rankinglist").addClass("hide"); 
+        }
+});
+</script>
+</body>
+</html>

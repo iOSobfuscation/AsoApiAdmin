@@ -1,0 +1,984 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{$SiteData['site_name']}</title>
+<meta name="keywords" content="{$SiteData['keywords']}" />
+<meta name="description" content="{$SiteData['description']}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="__PUBLIC__/Home/css/style.css" type="text/css" rel="stylesheet" media="screen" /> <!-- General style -->
+<link href="__PUBLIC__/Home/css/prettyPhoto.css" type="text/css" rel="stylesheet" media="screen"><!-- prettyPhoto -->
+<link href="__PUBLIC__/Home/css/tipsy.css" type="text/css" rel="stylesheet" media="screen"><!--tooltip-->
+<link href="__PUBLIC__/Home/css/camera.css" type="text/css" rel="stylesheet" media="screen"><!--camera-->
+<link href="__PUBLIC__/Home/css/jcarousel.css" type="text/css" rel="stylesheet" media="screen" /> <!-- list_work -->
+<link rel="stylesheet" href="__PUBLIC__/Home/css/mosaic.css" type="text/css" media="screen" /><!-- mosaic -->
+<link href="__PUBLIC__/Home/css/theme.css" rel="stylesheet" media="all">
+<link href="__PUBLIC__/Home/css/xcConfirm.css" type="text/css" rel="Stylesheet"/>
+<style>
+	.table thead th{
+		text-align:center;
+	}
+	.table{
+		margin-left:10%;
+	}
+	.tpage a{
+		margin-right:10px;
+	}
+	.tpage span{
+		margin-right:10px;
+	}
+</style>
+<!--引入js-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/css3-mediaqueries.js"></script><!--mediaqueries-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/modernizr-1.7.min.js"></script><!--modernizr-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/ddsmoothmenu.js"> </script> <!--menu-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.prettyPhoto.js"></script><!-- prettyPhoto -->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.tipsy.js"></script><!--tooltip-->
+<script type='text/javascript' src='__PUBLIC__/Home/js/jquery.easing.1.3.js'></script> <!--camera slider-->
+<script type='text/javascript' src='__PUBLIC__/Home/js/camera.min.js'></script> <!--camera slider-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.jcarousel.min.js"> </script> <!-- list_work -->
+<script type="text/javascript" src="__PUBLIC__/Home/js/mosaic.1.0.1.js"></script> <!-- mosaic -->
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.quovolver.js"></script><!--blockquote-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/custom.js"></script><!--custom-->
+<!--个人中心css-->
+<link href="__PUBLIC__/Home/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="__PUBLIC__/Home/css/font-awesome.min.css" rel="stylesheet" media="screen">
+<link href="__PUBLIC__/Home/css/my.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/pifu.css">
+<!--引入登录注册插件css-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/Login/template/ue-content/templates/images/ue_grid.css" />
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/Login/template/ue-content/templates/images/style.css" />
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/Login/template/ue-content/templates/css/style.css" />
+<!--引入登录注册js-->
+<script language="javascript" src="__PUBLIC__/Home/Login/script/jquery.easing.min.js"></script>
+
+<script language="javascript" src="__PUBLIC__/Home/Login/script/custom.js"></script>
+<!--弹窗-->
+<script src="__PUBLIC__/Home/js/xcConfirm.js"></script>
+</head>
+
+<body>
+	<div id="toTop">&uArr;</div> 
+	<include file="Index/CommonHead"/>
+	<div id="page_wrap">
+    	<div class="container m0 bod top70" id="zt" style="position:relative;right:220px">
+        <div class="row">
+            <div class="col-md-6 t0b0 ">
+                <ol class="breadcrumb t0b0">
+                    <li><a href="{:U('Index/index')}">首页</a></li>
+                    <li class="active">个人中心</li>
+                </ol>
+            </div>
+            <div class="col-md-6 t0b0 txtr">
+            </div>
+        </div>
+
+        <div class="row top10 mym">
+            <!--左-->
+            
+<div class="col-md-4 myleft">
+    <div class="myleft-n">
+        <h6>PROMULGATOR</h6>
+         <a href="#" data-toggle="modal" data-target="#exampleModal2">
+            <img id="tou" src="{$_SESSION['member']['member_thumb']}" style="width:100px;height:100px"class="f imgr20">
+         </a>   
+        <div class="f imgf20">
+            <h4> {$_SESSION['member']['member_name']}</h4>
+           
+        </div>
+
+        <div class="df"></div>
+    </div>
+    <div class="df"></div>
+    <div class="myleft-n">
+
+        <ul class="list-group">
+            <li class="list-group-item">
+
+                <i class=""></i>&nbsp;第 {$_SESSION['member']['member_id']} 位会员
+            </li>
+            <li class="list-group-item">
+                
+                <i class=""></i>&nbsp;您在&nbsp;&nbsp;{:date('Y-m-d',$_SESSION['member']['registration_time'])}&nbsp;&nbsp;成为我们的会员
+            </li>
+            <li class="list-group-item">
+               
+                <i class=""></i>&nbsp;您绑定手机号为:{$_SESSION['member']['phone']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="PhoneEdit">修改</a>
+            </li>
+        </ul>
+
+
+        <a class="btn btn-success" href="{:U('Index/join_exam')}"  style="width: 100%;color:white">参加模拟考试</a>
+        <a class="btn btn-info top10" href="javascript:void(0)" style="width: 100%">发布资源获得jQ币</a>
+
+        <!--<div class="alert alert-warning top20" role="alert" style="background-color:#fefcee;padding-top:7px;padding-bottom:7px;font-size:13px;line-height: 24px;">
+	<i class="fa fa-lightbulb-o"></i> 插件增加版本更新！<br>
+	<i class="fa fa-lightbulb-o"></i> 修改收藏排序!<br>
+	<i class="fa fa-lightbulb-o"></i> 修复连续签到移动端显示错误问题！<br>
+	<i class="fa fa-lightbulb-o"></i> 签到功能完成，可以签到获得jq币！<br>
+	<i class="fa fa-lightbulb-o"></i> 现在可以通过点击↑上方头像来修改头像了！<br>
+</div>-->
+
+    </div>
+    <div class="df"></div>
+</div>
+
+            <!--end 左-->
+            <!--右-->
+            <div class="col-md-8 myright">
+                <div class="myright-n">
+                    <div class="myNav row">
+                         <a href="{:U('Index/order_list')}?type=1&pay=1" id="subject1"  <if condition="$model eq 'AccNopay'">style="color:blue"</if>class="mybut on"><i class=""></i> 待付款科目订单</a>
+                        <a href="{:U('Index/order_list')}?type=0&pay=1" id="papers1"  <if condition="$model eq 'PapersNopay'">style="color:blue"</if>class="mybut"><i class=""></i> 待付款试卷订单</a>
+                         <a href="{:U('Index/order_list')}?type=1&pay=0" id="subject0" <if condition="$model eq 'AccPay'">style="color:blue"</if> class="mybut"><i class=""></i> 已购买科目</a>
+                        <a href="{:U('Index/order_list')}?type=0&pay=0" id="papers0" <if condition="$model eq 'papersPay'"> style="color:blue"</if>class="mybut"><i class="" aria-hidden="true"></i> 已购买试卷</a>
+                       
+                    </div>
+                    <div class="row topx myMinh">                      
+  	                    <!-- <iframe src="myhome-chajian.aspx" id="ifrm" scrolling="no" marginheight="0" marginwidth="0" onload="setIframeHeight(this.id)" style="visibility: visible; height: 113px;" frameborder="0" width="100%"></iframe> -->
+						<table class="table table-hover" style="display:block" id="OrderList">
+							<if condition="$data eq ''">
+							<thead>
+								<tr>
+									<th>订单号</th>
+									<th>科目名称</th>
+									<th>总价格</th>
+									<th>创建时间</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="5">没有查询到订单信息</td>
+								</tr>
+							</tbody>
+							<else/>
+							<if condition="$model eq 'AccNopay'">
+							<thead>
+								<tr>
+									<th>订单号</th>
+									<th>科目名称</th>
+									<th>总价格</th>
+									<th>创建时间</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="data" id="vo">
+								<tr>
+									<td>{$vo['order_id']}</td>
+									<td>{$vo['goods_name']}</td>
+									<td>{$vo['total']}</td>
+									<td>{$vo['create_time']}</td>
+									<td><a href="javascript:void(0)" class="GoPay">去付款</a></td>
+								</tr>
+								</volist>
+								<tr>
+									<td colspan="5">{$page}</td>
+								</tr>
+							</tbody>
+							<elseif condition="$model eq 'AccPay'"/>
+							<thead>
+								<tr>
+									<th>订单号</th>
+									<th>科目名称</th>
+									<th>总价格</th>
+									<th>支付时间</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="data" id="vo">
+								<tr>
+									<td>{$vo['order_id']}</td>
+									<td>{$vo['goods_name']}</td>
+									<td>{$vo['total']}</td>
+									<td>{$vo['pay_time']}</td>
+									<!-- <td><a href="javascript:void(0)">去付款</a></td> -->
+								</tr>
+								</volist>
+								<tr>
+									<td colspan="5">{$page}</td>
+								</tr>
+							</tbody>
+							<elseif condition="$model eq 'PapersNopay'"/>
+							<thead>
+								<tr>
+									<th>订单号</th>
+									<th>试卷名称</th>
+									<th>总价格</th>
+									<th>创建时间</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="data" id="vo">
+								<tr>
+									<td>{$vo['order_id']}</td>
+									<td>{$vo['goods_name']}</td>
+									<td>{$vo['total']}</td>
+									<td>{$vo['create_time']}</td>
+									 <td><a href="javascript:void(0)"  class="GoPay">去付款</a></td>
+								</tr>
+								</volist>
+								<tr>
+									<td colspan="5">{$page}</td>
+								</tr>
+							</tbody>
+							<else/>
+							<thead>
+								<tr>
+									<th>订单号</th>
+									<th>试卷名称</th>
+									<th>总价格</th>
+									<th>支付时间</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="data" id="vo">
+								<tr>
+									<td>{$vo['order_id']}</td>
+									<td>{$vo['goods_name']}</td>
+									<td>{$vo['total']}</td>
+									<td>{$vo['pay_time']}</td>
+									 <td><a href="{:U('Index/join_exam')}?papers_id={$vo['papers_id']}">去考试</a></td>
+								</tr>
+								</volist>
+								<tr>
+									<td colspan="5">{$page}</td>
+								</tr>
+							</tbody>
+							</if>
+							</if>
+						</table>
+                        <script>
+                            $(function(){
+								$("#subject1").click(function(){
+								
+									$.get("{:U('Index/order_list')}",{type:1,pay:1},function(msg){
+										var str='<thead>';
+											str+='<tr>';
+											str+='<th>订单号</th><th>科目名称</th><th>总价格</th><th>创建时间</th><th></th>';
+											
+											str+='</tr>';
+											
+											str+='</thead>';
+											str+='<tbody>';
+												$.each(msg.data,function(k,val){
+													
+													str+='<tr><td>'+val.order_id+'</td><td>'+val.goods_name+'</td><td>'+val.total+'</td><td>'+val.create_time+'</td><td><a href="javascript:void(0)">去支付</a></td></tr>';
+											
+												})
+												str+='<tr><td>'+msg.page+'</td></tr>';
+											str+='</tbody>';
+										$("#OrderList").html(str);
+										$("#OrderList").css('display','block');
+									},'json')
+								})
+								$("#papers1").click(function(){
+								
+									$.get("{:U('Index/order_list')}",{type:0,pay:1},function(msg){
+										var str='<thead>';
+											str+='<tr>';
+											str+='<th>订单号</th><th>试卷名称</th><th>总价格</th><th>创建时间</th><th></th>';
+											
+											str+='</tr>';
+											
+											str+='</thead>';
+											str+='<tbody>';
+												$.each(msg.data,function(k,val){
+													
+													str+='<tr><td>'+val.order_id+'</td><td>'+val.goods_name+'</td><td>'+val.total+'</td><td>'+val.create_time+'</td><td><a href="javascript:void(0)">去付款</a></td></tr>';
+											
+												})
+												str+='<tr><td>'+msg.page+'</td></tr>';
+											str+='</tbody>';
+										$("#OrderList").html(str);
+										$("#OrderList").css('display','block');
+									},'json')
+								})
+								
+								$("#papers0").click(function(){
+								
+									$.get("{:U('Index/order_list')}",{type:0,pay:0},function(msg){
+										var str='<thead>';
+											str+='<tr>';
+											str+='<th>订单号</th><th>试卷名称</th><th>总价格</th><th>支付时间</th><th></th>';
+											
+											str+='</tr>';
+											
+											str+='</thead>';
+											str+='<tbody>';
+												$.each(msg.data,function(k,val){
+													
+													str+='<tr><td>'+val.order_id+'</td><td>'+val.goods_name+'</td><td>'+val.total+'</td><td>'+val.pay_time+'</td><td><a href="/Index/join_exam?papers_id='+val.papers_id+'">去考试</a></td></tr>';
+											
+												})
+												str+='<tr><td>'+msg.page+'</td></tr>';
+											str+='</tbody>';
+										$("#OrderList").html(str);
+										$("#OrderList").css('display','block');
+									},'json')
+								})
+								$("#subject0").click(function(){
+								
+									$.get("{:U('Index/order_list')}",{type:1,pay:0},function(msg){
+										var str='<thead>';
+											str+='<tr>';
+											str+='<th>订单号</th><th>科目名称</th><th>总价格</th><th>支付时间</th><th></th>';
+											
+											str+='</tr>';
+											
+											str+='</thead>';
+											str+='<tbody>';
+												$.each(msg.data,function(k,val){
+													
+													str+='<tr><td>'+val.order_id+'</td><td>'+val.goods_name+'</td><td>'+val.total+'</td><td>'+val.pay_time+'</td><td><a href="javascript:void(0)">去听课</tr>';
+											
+												})
+												str+='<tr><td>'+msg.page+'</td></tr>';
+											str+='</tbody>';
+											
+										$("#OrderList").html(str);
+										$("#OrderList").css('display','block');
+									},'json')
+								})
+								$(".GoPay").click(function(){
+									if(confirm("订单价格为:"+$(this).parent().prev().prev().html()+",确定支付吗?")){
+										var order_id  = $(this).parent().prev().prev().prev().prev().html();
+										$.get("{:U('Index/order_pay')}",{order_id:order_id},function(msg){
+											if(msg==1){
+												alert('支付成功');
+											}
+										})
+									}
+								})
+							})
+                        </script>
+
+
+                    </div>
+                </div>
+            </div>
+            <!--end 右-->
+        </div>
+
+
+        <!--end主体-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil-square-o"></i>签到</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="signIn.aspx" height="100%" frameborder="0" width="100%"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end主体-->
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel2"><i class="fa fa-picture-o"></i>设置头像</h4>
+                    </div>
+                    <div class="modal-body" style="height: 550px">
+                        <iframe name="myFrame" src="myPhoto.aspx" height="100%" frameborder="0" width="100%"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="tx()" data-dismiss="modal">保存头像</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+      
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?b3a3fc356d0af38b811a0ef8d50716b8";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+        <!--end底部-->
+
+        <script type="text/javascript">
+            function tx() {
+                $.ajax({
+                    type: "POST", url: "myPhotoSave.aspx", data: "tx=" + myFrame.window.tx, success: function (msg) {
+                        if (msg != "n") {
+                            $("#tou").attr('src', "tx/" + msg + ".png");
+                        }
+                    }
+                });
+
+            }
+            function clockms(id) {
+                var yz = $.ajax({
+                    type: 'post',
+                    url: 'mess.aspx',
+                    data: { id: id },
+                    cache: false,
+                    dataType: 'text',
+                    success: function (data) {
+
+                    },
+                    error: function () { }
+                });
+            }
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return (r[2]); return null;
+            }
+            if (GetQueryString("jqb") == "ok") {
+                $(".red").addClass("jqbdh");
+            }
+
+        </script>
+<div id="pfk"><div class="pfys"><i class="fa fa-cog " aria-hidden="true"></i><a class="pfysA pfy1" name="#222222"></a><a class="pfysA pfy2" name="#f4f4f4"></a></div></div>
+<script src="/js/pifu.js?v=1"></script>
+
+
+
+</div>
+        
+<div class="theme-popover" id="pwd_popover" style="display: none;">
+ <div class="theme-poptit">
+	  <a href="javascript:;" title="关闭" class="close" id="X2">×</a>
+	  <h3>修改密码</h3>
+ </div>
+ <div class="theme-popbod dform">
+	   <form class="theme-signin" name="loginform" id="EditPwd" action="{:U('index/EditPwd')}" method="post">
+			<ol>
+				 <li><h4>经常更换密码可提升账户安全！</h4></li>
+				 <li><strong>原密码：</strong><input class="ipt" name="password" id="password" size="20" type="password"><span id="pwd"></span></li>
+				 <li><strong>新密码：</strong><input class="ipt" name="repassword" size="20" id="repassword" type="password"><span id="rpwd"></span></li>
+				 <li><input class="btn btn-primary" name="submit" id="submit"value=" 修改 " type="button"></li>
+				 <input name="id" value="61" type="hidden">
+			</ol>
+	   </form>
+ </div>
+</div>
+<div class="theme-popover-mask" id="div2_popover"></div>
+
+<!--手机号修改-->
+<div class="theme-popover" id="phone_popover" style="display: none;">
+ <div class="theme-poptit">
+	  <a href="javascript:;" title="关闭" class="close" id="X3">×</a>
+	  <h3>修改绑定手机号</h3>
+ </div>
+ <div class="theme-popbod dform">
+	   <form class="theme-signin" name="loginform" id="EditPhone" action="{:U('index/EditPhone')}" method="post">
+			<ol>
+				 <li><h4>经常更换手机号可提升账户安全！</h4></li>
+				 <li><strong>原密码：</strong><input class="ipt" name="password" id="PhonePassword" size="20" type="password"><span id="PhonePwd" style="display:none"></span></li>
+				 <li><strong>新手机：</strong><input class="ipt" name="phone" size="20" id="phone" type="text"><a href="javascript:void(0)" style="position:relative;left:80px;"id="getCode">获取验证码</a><span id="rphone" style="display:none"></span></li>
+				 <li><strong>验证码：</strong><input class="ipt" name="code" size="20" id="code" type="text"><span id="rcode" style="display:none"></span></li>
+				 <li><input class="btn btn-primary" name="submit" id="psubmit"value=" 修改 " type="button"></li>
+				 <input name="id" value="61" type="hidden">
+			</ol>
+	   </form>
+ </div>
+</div>
+<div class="theme-popover-mask" id="div3_popover"></div>
+        <!--<section class="blog-entry">
+        	<div class="one-third thumb-blog first">
+            	<div class="meta">
+                	<span><strong>07</strong><small>Jan<br>2013</small></span>
+                </div>
+            	<a href="blog.html" class="imgOpa"><img src="__PUBLIC__/Home/images/blog/blog-1.jpg" alt=""></a>
+                <h4><a href="blog.html">20 The Best Minimal Website</a></h4>
+                <span>Posted by: <a href="#">Admin</a></span>
+            </div>
+            <div class="one-third thumb-blog">
+            	<div class="meta">
+                	<span><strong>05</strong><small>Jan<br>2013</small></span>
+                </div>
+            	<a href="blog.html"><img src="__PUBLIC__/Home/images/blog/blog-2.jpg" alt=""></a>
+                <h4><a href="blog.html">2013 New Years Avatar</a></h4>
+                <span>Posted by: <a href="#">Admin</a></span>
+            </div>
+            <div class="one-third thumb-blog">
+            	<div class="meta">
+                	<span><strong>01</strong><small>Jan<br>2013</small></span>
+                </div>
+            	<a href="blog.html"><img src="__PUBLIC__/Home/images/blog/blog-3.jpg" alt=""></a>
+                <h4><a href="blog.html">Early Birds</a></h4>
+                <span>Posted by: <a href="#">Admin</a></span>
+            </div>
+        </section><!--end:blog-entry-->
+			<div id="loginalert">
+
+  <div class="pd20 loginpd">
+
+    <h3><i class="closealert fr"></i>
+
+      <div class="clear"></div>
+
+    </h3>
+
+    <div class="loginwrap">
+
+      <div class="loginh">
+
+        <div class="fl">会员登录</div>
+
+        <div class="fr">还没有账号<a id="sigup_now" href="{:U('Index/register')}" >立即注册</a></div>
+
+        <div class="clear"></div>
+
+      </div>
+
+      <h3><span>邮箱登录</span><span class="login_warning">用户名或密码错误</span>
+
+        <div class="clear"></div>
+
+      </h3>
+
+      <div class="clear"></div>
+
+      <form action="{:U('Index/login')}" method="post" id="login_form">
+
+        <div class="logininput">
+
+          <input type="text" name="username" style="width:200px" placeholder="手机号/用户名" /><span id="UserInfo"></span>
+
+          <!-- <input type="text" style="width:200px"class="loginuserpasswordt" value="密码" /> -->
+
+          <input type="password" style="width:200px"name="password" placeholder="密码" style="" /><span id="UserPassword"></span>
+
+        </div>
+
+        <div class="loginbtn">
+
+          <div class="loginsubmit fl">
+
+            <input type="submit" value="登录" />
+
+            <div class="loginsubmiting">
+
+              <div class="loginsubmiting_inner"></div>
+
+            </div>
+
+          </div>
+
+          <div class="logcheckbox fl">
+
+            <input id="bcdl" type="checkbox" checked="true" />
+
+            保持登录</div>
+
+          <div class="fr"><a href="http://www.jq22.com/">忘记密码?</a></div>
+
+          <div class="clear"></div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+ <!-- <div class="thirdlogin">
+
+    <div class="pd50">
+
+      <h4>用第三方帐号直接登录</h4>
+
+      <ul>
+
+        <li id="sinal"><a href="http://www.jq22.com/">微博账号登录</a></li>
+
+        <li id="qql"><a href="http://www.jq22.com/">QQ账号登录</a></li>
+
+        <div class="clear"></div>
+
+      </ul>
+
+      <div class="clear"></div>
+
+    </div>
+
+  </div>-->
+
+</div>
+       
+        
+ </div><!--end:page_wrap-->
+    <footer>
+    	<div id="footer_wrap">
+        	<div class="one-third first">
+            	<img src="__PUBLIC__/Home/images/logo-2.png" alt="">
+                <p>{$SiteData['desc']}<a href="about.html">Read more</a></p>
+            </div>
+            <div class="one-third">
+            	<ul class="siteinfo">
+                	<li class="address">地址:	<a >{$SiteData['address']}</a></li>
+                    <li class="email">Email: <a >{$SiteData['email']}</a></li>
+                    <li class="phone">资讯电话: <a >{$SiteData['phone']}</a></li>
+                </ul>
+            </div>
+            
+            <div class="copy">
+            	<!--<p>&copy; 2013. All Rights Reserved. HTML5 &amp; CSS3. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">津备ICP：0001001-10</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">志恒会计</a></p>-->
+				<p>{$SiteData['site_ICP_desc']}</p>
+            </div>
+        </div><!--end:footer_wrap-->
+    </footer><!--end:footer-->
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.entry-tweet').quovolver();	
+    $(".text_box").click(function(){
+		var val=0;
+		$("[class='text_box']:checked").each(function(){
+
+        val+=parseInt($(this).next().next().html());
+
+        //alert(val);
+
+          })
+
+          $("#TotalPrice").html(val);
+	})
+	$("#Buy").click(function(){
+		var TotalPrice=$("#TotalPrice").html();
+		var price='';
+		var goods='';
+		var info = $(this).html();
+		if(info=='购买课程'){
+			var type = 1;
+		}else{
+			var type =0;
+		}
+		$.each($("#goods:checked"),function(k,val){
+			 goods += $(this).val()+',';
+			 price += $(this).next().next().html()+',';
+		})
+		goods=goods.substring(0,goods.length-1);
+		price=price.substring(0,price.length-1);
+		
+		$.get("{:U('Index/buy_check')}",{price:TotalPrice},function(msg){
+			if(msg==1){
+				var txt= "请先登录!";
+				window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+			}else if(msg==2){
+				var txt= "请先选择课程!";
+				window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+			}else{
+				if(confirm('订单总价格为:'+TotalPrice+',确定支付吗?')){
+					if(type==1){
+						$.get("{:U('Index/acc_nopay_order')}",{acc_ids:goods,price:price,type:0},function(){
+							
+						})
+					}else{
+						$.get("{:U('Index/papers_nopay_order')}",{papers_ids:goods,price:price,type:0},function(){
+							
+						})
+					}
+				}else{
+					if(type==1){
+						$.get("{:U('Index/acc_nopay_order')}",{acc_ids:goods,price:price,type:1},function(){
+							
+						})
+					}else{
+						$.get("{:U('Index/papers_nopay_order')}",{papers_ids:goods,price:price,type:1},function(){
+							
+						})
+					}
+				}
+			}
+		})
+	})
+});
+</script>
+<script>
+	$(function(){
+		$("#JoinExam").click(function(){
+			$.get("{:U('Index/join_exam')}",function(msg){
+				if(msg==1){
+					var txt= "请先登录!";
+				window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+				}else{
+					window.location.href="{:U('Index/join_exam')}";
+				}
+			})
+		})
+	})
+</script>
+<script>
+		$(function(){
+			//初始化状态为false
+			var infoBoor=false;
+			
+			//提交前判断
+			
+			$("#login_form").submit(function(){
+			var infoBoor=false;
+			//设置ajax为异步
+				$.ajaxSetup({
+					async: false
+				});
+				
+				$.post("{:U('Index/login_check')}",$("#login_form").serialize(),function(msg){
+						if(msg==2){
+							$("#UserInfo").html('用户名不能为空');
+							$("#UserInfo").css('color','red');
+							infoBoor=false;
+						}else if(msg==3){
+							$("#UserPassword").html('密码不能为空');
+							$("#UserPassword").css('color','red');
+							
+							infoBoor=false;
+						}else if(msg==4){
+							$("#UserInfo").html('该账号未注册');
+							$("#UserInfo").css('color','red');
+							infoBoor=false;
+						}else if(msg==5){
+							$("#UserInfo").html('手机号或用户名有误');
+							$("#UserInfo").css('color','red');
+							infoBoor=false;
+							
+						}else if(msg==6){
+							$("#UserPassword").html('密码输入错误');
+							$("#UserPassword").css('color','red');
+							infoBoor=false;
+							
+						}else{
+							infoBoor=true;
+						}
+					})
+					
+				
+				return infoBoor;
+			})
+		})
+	</script>
+	
+		<!--手机号修改-->
+	<script>
+	$(function(){
+		var rpboor=false;
+		var pboor=false;
+		var cboor=false;
+		var id={$_SESSION['member']['member_id']};
+		$('#PhoneEdit').click(function(){
+			$('#div3_popover').fadeIn(100);
+			$('#phone_popover').slideDown(200);
+
+		})
+		$('#X3').click(function(){
+				$('#div3_popover').fadeOut(100);
+			$('#phone_popover').slideUp(200);
+		})
+
+		$('#PhonePassword').focus(function(){
+			$('#PhonePwd').text('请输入原密码').css('color','black');
+			$('#PhonePwd').css('display','block');
+		}).blur(function(){
+			var value=$(this).val();
+			var length=$(this).val().length;
+			
+			if(length==0){
+				$('#PhonePwd').text('原密码不能为空').css('color','red');
+				$('#PhonePassword').css('border','1px solid red');
+				rpboor=false;
+			}
+			$.get("{:U('Index/EditPwd')}",{id:id,password:value},function(msg){
+				if(msg=='no' && length!=0){
+					$('#PhonePwd').text('原密码输入错误').css('color','red');
+					$('#PhonePassword').css('border','1px solid red');
+					rpboor=false;
+				}else if(msg=='yes' && length!=0){
+					$('#PhonePassword').css('border','1px solid black');
+					$('#PhonePwd').css('display','none');
+					rpboor=true;
+				}
+			})
+		})
+		$('#getCode').click(function(){
+			      var reg = /^[0-9]+$/;
+				$.get("{:U('Index/PhoneCheck')}?phone="+$("#phone").val(),function(msg){
+							if(msg==3){
+							$("#rphone").css('display','block');
+							$("#rphone").html('该手机号已注册').css('color','red');
+							$("#phone").css('border','1px solid red')
+						    pboor=false;
+							}else if($("#phone").val().length!=11 || !reg.exec($("#phone").val())){
+								$("#rphone").css('display','block');
+								$("#rphone").html('手机号格式错误').css('color','red');
+								$("#phone").css('border','1px solid red');
+						
+						     pboor=false;
+							}else{
+							pboor=true;
+							$("#rphone").css('display','none');
+							$("#phone").css('border','1px solid black');
+							$.post("{:U('Index/demo2')}",{phone:$('#phone').val()},function(msg){
+								if(msg.status==0){
+									$("#rphone").html("验证码获取成功！请耐心等待");
+									$("#rphone").css('color','blue');
+									$("#rphone").css('display','block');
+								}else{
+									$("#rphone").html("验证码获取失败");
+									$("#rphone").css('display','block');
+									
+								}
+							},'json')
+							}
+							
+						})
+		
+			
+			
+		})
+		$("#code").blur(function(){
+				
+			$.get("{:U('Index/PhoneCheck')}?code="+$('#code').val(),function(msg){
+						
+						if(msg==5){
+							$("#rcode").css('display','block');
+							 $("#rcode").html("验证码输入错误").css('color','red');;
+							 $("#code").css('border','1px solid red');
+							cboor=false;
+						}else if(msg==4){
+							 $("#rcode").html("验证码已过期").css('color','red');;
+							$("#rcode").css('display','block');
+							$("#code").css('border','1px solid red');
+							cboor=false;
+						}else{
+						$("#code").css('border','1px solid black');
+						$("#rcode").css('display','none');
+						cboor=true;
+						}
+						
+					})
+		})
+		
+		$("#psubmit").click(function(){
+			if(pboor && rpboor && cboor){
+				$.post("{:U('Index/EditPhone')}",$("#EditPhone").serialize(),function(msg){
+					if(msg==1){
+						$('#div3_popover').fadeOut(100);
+						$('#phone_popover').slideUp(200);
+						var txt= "修改成功!";
+				window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+				location.reload();
+				
+					}else{
+						var txt= "修改失败!";
+				window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+				location.reload();
+					}
+				})
+			}
+		})
+		
+	})
+</script>
+<!--密码修改验证-->
+<script>
+	$(function(){
+		var rpboor=false;
+		var pboor=false;
+		var id={$_SESSION['member']['member_id']};
+		$('#b2').click(function(){
+			$('#div2_popover').fadeIn(100);
+			$('#pwd_popover').slideDown(200);
+
+		})
+		$('#X2').click(function(){
+				$('#div2_popover').fadeOut(100);
+			$('#pwd_popover').slideUp(200);
+		})
+
+		$('#password').focus(function(){
+			$('#pwd').text('请输入原密码').css('color','black');
+		}).blur(function(){
+			var value=$(this).val();
+			var length=$(this).val().length;
+			
+			if(length==0){
+				$('#pwd').text('原密码不能为空').css('color','red');
+				$('#password').css('border','1px solid red');
+				rpboor=false;
+			}
+			$.get("{:U('Index/EditPwd')}",{id:id,password:value},function(msg){
+				if(msg=='no' && length!=0){
+					$('#pwd').text('原密码输入错误').css('color','red');
+					$('#password').css('border','1px solid red');
+					rpboor=false;
+				}else if(msg=='yes' && length!=0){
+					$('#password').css('border','1px solid black');
+					rpboor=true;
+				}
+			})
+		})
+		$('#repassword').focus(function(){
+			$('#rpwd').text('请输入新密码').css('color','black');
+		}).blur(function(){
+			var length=$(this).val().length;
+			
+			if(length<6 || length>12){
+				$('#rpwd').text('新密码必须为6-12位').css('color','red');
+				$('#repassword').css('border','1px solid red');
+				pboor=false;
+			}else{
+				$('#repassword').css('border','1px solid black');
+				pboor=true;
+			}
+		})
+		$('#EditPwd').submit(function(){
+			$('#password').blur();
+			$('#repassword').blur();
+			if(pboor && rpboor){
+				return true;
+			}else{
+				return false;
+			}
+		})
+		$("#submit").click(function(){
+			if(pboor && rpboor){
+				$.post("{:U('Index/EditPwd')}",$("#EditPwd").serialize(),function(msg){
+					if(msg==1){
+						$('#div2_popover').fadeOut(100);
+						$('#pwd_popover').slideUp(200);
+						var txt= "修改成功!";
+				window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+				location.reload();
+					}else{
+						var txt= "修改失败!";
+				window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+				location.reload();
+					}
+				})
+			}
+		})
+		
+	})
+</script>
+
+  
+	
+</body>
+</html>

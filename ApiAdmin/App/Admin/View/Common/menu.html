@@ -1,0 +1,178 @@
+<div id="sidebar">
+    <!-- Start .sidebar-inner -->
+    <div class="sidebar-inner">
+        <!-- Start #sideNav -->
+        <ul id="sideNav" class="nav nav-pills nav-stacked">
+            <li class="top-search">
+                <form>
+                    <input type="text" name="search" placeholder="Search ...">
+                    <button type="submit"><i class="ec-search s20"></i>
+                    </button>
+                </form>
+            </li>
+            
+            <!--volist name="user_menu_list" id="uml">
+            <li>
+            	<if condition="$uml.sub_total GT 0">
+                <a href="#"> {$uml.name} <i class="im-joomla"></i></a>
+                <ul class="nav sub">
+                	<volist name="uml['sub']" id="umls">
+                    <li>                    
+                    	<a href="{$umls.url}"><i class="im-android"></i> {$umls.name}<br></a>
+                    </li>
+                    </volist>
+                    
+                </ul>
+                <else />
+                <a href="{$uml.url}"> {$uml.name} <i class="im-joomla"></i></a>
+                </if>
+            </li>
+            </volist-->
+            
+            
+           <li>
+                <a href="#"> 微信设置 <i class="im-joomla"></i></a>
+                
+                <ul class="nav sub">
+                    <li>                    
+                    	<a href="{:U('Wxset/index')}" ><i class="im-android"></i> 接口设置</a>
+                    </li>
+                    <li>                    
+                    	<a href="{:U('Menu/menu_list')}" ><i class="im-android"></i> 自定义菜单</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/Material/material_list" ><i class="im-android"></i> 素材管理</a>
+                    </li>
+                </ul>
+                
+            </li>
+            
+            <li>
+                <a href="#"> 商品管理 <i class="im-joomla"></i></a>
+                <ul class="nav sub">
+                    <li>                    
+                    	<a href="/Admin/Goodscate/goodscate_list" ><i class="im-android"></i> 商品分类管理</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/Goods/goods_list" ><i class="im-android"></i> 商品管理</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/Goodsbrand/goodsbrand_list" ><i class="im-android"></i> 品牌管理</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#"> 订单管理 <i class="im-joomla"></i></a>
+                <ul class="nav sub">
+                	<li>                    
+                    	<a href="/Admin/Order/order_list/type/1" ><i class="im-android"></i> 未付款订单</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/Order/order_list/type/2" ><i class="im-android"></i> 未收货订单</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/Order/order_list/type/4" ><i class="im-android"></i> 已完成订单</a>
+                    </li>
+                    <!--li>                    
+                    	<a href="/Admin/Order/index/type/4" ><i class="im-android"></i> 已完成订单</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/Order/index/type/5" ><i class="im-android"></i> 退单管理</a>
+                    </li-->
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#"> 会员管理 <i class="im-joomla"></i></a>
+                <ul class="nav sub">
+                    <li>                    
+                    	<a href="/Admin/Member/member_list" ><i class="im-android"></i> 会员列表</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/Member/member_dellist" ><i class="im-android"></i> 已删除会员</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#"> 活动管理 <i class="im-joomla"></i></a>
+                <ul class="nav sub">
+                    <li>                    
+                    	<a href="/Admin/Coupon/coupon_list/type/1" ><i class="im-android"></i> 打折券管理</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/Coupon/coupon_list/type/2" ><i class="im-android"></i> 现金券管理</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/Activite/activite_list" ><i class="im-android"></i> 打折降价管理</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#"> 信息管理 <i class="im-joomla"></i></a>
+                <ul class="nav sub">
+                    <li>                    
+                    	<a href="/Admin/News/news_list/" ><i class="im-android"></i> </a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/News/cat_list" ><i class="im-android"></i> 分类管理</a>
+                    </li>
+                    
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#"> 广告管理 <i class="im-joomla"></i></a>
+                <ul class="nav sub">
+                    <li>
+                    	<a href="/Admin/carousel/carousel_list/cat_id/1" ><i class="im-android"></i> 首页头部滚动图片设置</a>
+                    </li>
+                    
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#"> 站点设置 <i class="im-joomla"></i></a>
+                <ul class="nav sub">
+                    <li>                    
+                    	<a href="/Admin/Set/index" ><i class="im-android"></i> 网站设置</a>
+                    </li>
+                    
+                    <li>
+                    	<a href="/Admin/area/area_list" ><i class="im-android"></i> 地区管理</a>
+                    </li>
+                    
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#"> 系统设置 <i class="im-joomla"></i></a>
+                <ul class="nav sub">
+                    <li>                    
+                    	<a href="/Admin/admin/admin_edit/id/<?php echo session('userid'); ?>" ><i class="im-android"></i> 账户管理</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/admin/role_list" ><i class="im-android"></i> 角色管理</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/admin/menu_list" ><i class="im-android"></i> 菜单管理</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/department/department_list" ><i class="im-android"></i> 部门管理</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/admin/admin_list" ><i class="im-android"></i> 管理员管理</a>
+                    </li>
+                    <li>                    
+                    	<a href="/Admin/Loger/loger_list" ><i class="im-android"></i> 系统日志管理</a>
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- End #sideNav -->
+        
+    </div>
+    <!-- End .sidebar-inner -->
+</div>

@@ -1,0 +1,185 @@
+	<include file="Common:head"/>
+    <link href="__MANAGE__/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+	<script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+	<link rel="stylesheet" type="text/css" href="__MANAGE__/custom/css/FileButton.css">
+</head>
+<style>
+	tr  td{
+			text-align:center;
+			vertical-align:middle;
+			
+		}
+	tr  th{
+		text-align:center;
+		vertical-align:middle;
+		
+	}
+	.btn{
+			padding:2px 4px;
+		}
+	.form-group{
+		float:left;
+	}
+</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="padding-bottom:100px;">
+                        <h5>
+                        	
+                            <small>
+                            	
+									
+                                   
+                                    
+                            
+								
+                                	<a href="javascript:void(0)"><div class="btn btn-primary">导入idfa</div></a>
+									<form action="{:U('Radio/radio')}" method="post" style="" enctype="multipart/form-data">		
+										<div class="form-group">
+	                                        
+			                                <div class="col-sm-8" style="width:200px;">									
+												<input type="number" class="form-control" name="cpid"maxlength="" value="{$data['score']}" placeholder="cpid" autofocus>
+			                                </div>
+                            			</div>
+                            			<div class="form-group">
+	                                        
+			                                <div class="col-sm-8" style="width:200px;">									
+												<input type="number" class="form-control" name="appid"maxlength="" value="" placeholder="appid" autofocus>
+			                                </div>
+                            			</div>
+                            			<div class="form-group">
+	                                        
+			                                <div class="col-sm-8" style="width:200px;">									
+												<input type="number" class="form-control" name="timesamp"maxlength="" value="" placeholder="timesamp" autofocus>
+			                                </div>
+                            			</div>
+                            			
+	                                        
+			                                <div class="col-sm-8" style="width:200px;">									
+												<input type="text" class="form-control" name="type"maxlength="" value="" placeholder="type" autofocus>
+			                                </div>
+                            			</div>
+                            			
+											
+										
+										<input type="submit" class="btn btn-info"value="提交" style="position:relative;left:1000px;top:-65px">
+									</form>
+								
+                                
+                                
+                            </small>
+							
+                        </h5>
+                    </div>
+                    <!--<div class="ibox-content" style="position: relative;top: -40px">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+									
+                                    <th>编号</th>
+                                    <th>题目</th>
+									<th>章节</th>
+									<th>分值</th>
+									
+                                   
+									
+                                     <th>创建时间</th> 
+                                            
+                                   <th>操作</th>
+                                </tr>
+                            </thead>
+							 <tbody>
+									<volist name="data" id="gcl" key="k" offset="0">
+                    	
+                                    <tr class="gradeA">
+										
+										<td>{$gcl.radio_id}</td>
+                                        <td style=""><a href="javascript:void(0)" id="Topic{$gcl['radio_id']}">{$gcl['radio_topic']|mb_substr=0,15,'utf-8'}......</a><div style="display:none">{$gcl['radio_topic']}</div></td>
+										<th>{$gcl.subject_name}</th>
+                                        <th>{$gcl.score}</th>
+										
+                                      
+										<td>
+											
+											<a style="" href="javascript:void(0)">{:date('Y-m-d H:i:s',$gcl['create_time'])}</a>
+										</td>
+                                        <td>
+											
+											
+											
+											<div><a class="btn btn-warning" href="{:U('Radio/radio_edit')}?id={$gcl['radio_id']}">修改</a></div>
+											<div><a class="btn btn-danger" href="javascript:void(0)" id="del{$gcl['radio_id']}">删除</a></div>
+										</td>
+                                    </tr>
+                                    
+                                   
+                                    <script>
+									$(function(){
+										$("#Topic{$gcl['radio_id']}").click(function(){
+													var msg=$(this).next().html();
+													parent.layer.prompt({
+													title: '试题描述',
+													value: msg,
+													formType: 2 //prompt风格，支持0-2
+												}, function(msg){
+													parent.layer.closeAll();
+												})
+											})
+										$("#del{$gcl['radio_id']}").click(function(){
+												parent.layer.confirm('确定删除吗？', {
+												btn: ['确定','取消'], //按钮
+												shade: false //不显示遮罩
+												}, function(){
+													parent.layer.closeAll('dialog');
+													window.location.href="{:U('Radio/radio_del')}?radio_id={$gcl['radio_id']}";
+													
+												}, function(){
+													parent.layer.closeAll('dialog');
+												});
+										
+										
+										
+											
+										
+										})
+									})	
+										
+									</script>
+                                </volist>
+								</tbody>
+
+                        </table>
+
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        
+    </div>
+   
+    <script src="__MANAGE__/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__MANAGE__/js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="__MANAGE__/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="__MANAGE__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="__MANAGE__/js/content.min.js?v=1.0.0"></script>
+	
+    <script>
+        $(document).ready(function(){
+		$(".dataTables-example").dataTable();
+		var oTable=$("#editable").dataTable();
+		oTable.$("td").editable("",{"callback":function(sValue,y){var aPos=oTable.fnGetPosition(this);oTable.fnUpdate(sValue,aPos[0],aPos[1])},"submitdata":function(value,settings){return{"row_id":this.parentNode.getAttribute("id"),"column":oTable.fnGetPosition(this)[2]}},"width":"90%","height":"100%"})});
+		function fnClickAddRow(){
+			$("#editable").dataTable().fnAddData(["Custom row","New row","New row","New row","New row"])
+		};
+			
+    </script>
+
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_data_tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+</html>

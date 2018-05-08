@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{:C('SYSTEM_NAME')}</title>
+        <!-- Mobile specific metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!-- Force IE9 to render in normal mode -->
+        <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+        <meta name="author" content="SuggeElson" />
+        <meta name="description" content="sprFlat admin template - new premium responsive admin template. This template is designed to help you build the site administration without losing valuable time.Template contains all the important functions which must have one backend system.Build on great twitter boostrap framework"
+        />
+        <meta name="keywords" content="admin, admin template, admin theme, responsive, responsive admin, responsive admin template, responsive theme, themeforest, 960 grid system, grid, grid theme, liquid, jquery, administration, administration template, administration theme, mobile, touch , responsive layout, boostrap, twitter boostrap"
+        />
+        <meta name="application-name" content="sprFlat admin template" />
+        <include file="Admin:style"/>
+        <meta name="msapplication-TileColor" content="#3399cc" />
+    </head>
+    <body>
+        <!-- Start #header -->
+        <include file="Common:heade"/>
+        <!-- End #header -->
+        <!-- Start #sidebar -->
+        <include file="Common:menu"/>
+        <!-- End #sidebar -->
+        <!-- Start #right-sidebar -->
+        <include file="Common:friends"/>
+        <!-- End #right-sidebar -->
+        <!-- Start #content -->
+        <div id="content">
+            <!-- Start .content-wrapper -->
+            <div class="content-wrapper">
+            	<!-- Start .here -->
+                <include file="Common:here"/>
+                <!-- End .here -->
+                <!-- Start .outlet -->
+                <div class="outlet">
+                	<if condition="$fun_code eq 'menu_list'">
+                    	<include file="Admin:menu_list"/>
+                    <elseif condition="$fun_code eq 'menu_info'" />
+                    	<include file="Admin:menu_info"/>
+                    <elseif condition="$fun_code eq 'role_list'" />
+                    	<include file="Admin:role_list"/>
+                    <elseif condition="$fun_code eq 'role_info'" />
+                    	<include file="Admin:role_info"/>
+                    <elseif condition="$fun_code eq 'role_grant'" />
+                    	<include file="Admin:role_grant"/>
+                    <elseif condition="$fun_code eq 'admin_list'" />
+                    	<include file="Admin:admin_list"/>
+                    <elseif condition="$fun_code eq 'admin_info'" />
+                    	<include file="Admin:admin_info"/>
+                    <elseif condition="$fun_code eq 'admin_editpasswd'" />
+                    	<include file="Admin:admin_editpasswd"/>
+                    </if>
+                </div>
+                <!-- End .outlet -->
+            </div>
+            <!-- End .content-wrapper -->
+            <div class="clearfix"></div>
+        </div>
+        <!-- End #content -->
+        <!-- Javascripts -->
+        <include file="Admin:js"/>
+        <if condition = "$fun_code eq 'menu_list' ">
+        	<include file="Common:tablejs"/>
+        </if>
+    </body>
+</html>

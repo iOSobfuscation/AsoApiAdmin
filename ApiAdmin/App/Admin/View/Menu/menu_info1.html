@@ -1,0 +1,195 @@
+<!-- Page start here ( usual with .row ) -->
+<style>
+
+.wrap{margin:0 auto 0 auto;}
+.tabs{height:40px;}
+.tabs a{display:block;float:left;width:33.33%;color:#333;text-align:center;background:#eee;line-height:40px;font-size:16px;text-decoration:none;}
+.tabs a.active{color:#fff;background:#75B9E6;border-radius:5px 5px 0px 0px;}
+.swiper-container{background:#75B9E6;border-radius:0 0 5px 5px;width:100%;border-top:0;}
+.swiper-slide{width:100%;background:none;color:#fff;}
+.content-slide{padding:10px;}
+.content-slide p{text-indent:2em;line-height:1.9;}
+.swiper-container {margin:0 auto;position:relative;overflow:hidden;-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;-o-backface-visibility:hidden;backface-visibility:hidden;/* Fix of Webkit flickering */	z-index:1;}
+.swiper-wrapper {position:relative;width:100%;
+	-webkit-transition-property:-webkit-transform, left, top;
+	-webkit-transition-duration:0s;
+	-webkit-transform:translate3d(0px,0,0);
+	-webkit-transition-timing-function:ease;
+	
+	-moz-transition-property:-moz-transform, left, top;
+	-moz-transition-duration:0s;
+	-moz-transform:translate3d(0px,0,0);
+	-moz-transition-timing-function:ease;
+	
+	-o-transition-property:-o-transform, left, top;
+	-o-transition-duration:0s;
+	-o-transform:translate3d(0px,0,0);
+	-o-transition-timing-function:ease;
+	-o-transform:translate(0px,0px);
+	
+	-ms-transition-property:-ms-transform, left, top;
+	-ms-transition-duration:0s;
+	-ms-transform:translate3d(0px,0,0);
+	-ms-transition-timing-function:ease;
+	
+	transition-property:transform, left, top;
+	transition-duration:0s;
+	transform:translate3d(0px,0,0);
+	transition-timing-function:ease;
+
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+.swiper-free-mode > .swiper-wrapper {
+	-webkit-transition-timing-function: ease-out;
+	-moz-transition-timing-function: ease-out;
+	-ms-transition-timing-function: ease-out;
+	-o-transition-timing-function: ease-out;
+	transition-timing-function: ease-out;
+	margin: 0 auto;
+}
+.swiper-slide {
+	float: left;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+</style>
+
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script> 
+<div class="row">
+    <!-- Start .row -->
+    <div class="col-lg-12">
+        <!-- Start col-lg-12 -->
+        <div class="panel panel-default toggle">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h3 class="panel-title"><a href="/Admin/menu/menu_list">{$model_name}列表</a></h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal group-border hover-stripped" role="form" enctype="multipart/form-data" action="{$seturl}" method="post">
+                
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-12 control-label">上级菜单</label>
+                    <div class="col-lg-3 col-md-3">
+                        {$parent_name}
+                        <input type="hidden" name="parentid" value="{$parentid}" autofocus>
+                    </div>
+                </div>
+                <!-- End .form-group  -->
+                
+                <div class="form-group">
+                    
+                    <label class="col-lg-2 col-md-2 col-sm-12 control-label">{$model_name}名称</label>
+                    
+                    <div class="col-lg-4 col-md-4">
+                    	<input type="text" class="form-control" name="name" value="{$info.name}" placeholder="{$model_name}名称" autofocus>
+                    </div>
+                    <span><if condition="$parentid eq 0">一级菜单名称不能超过四个中文或者8个英文字符<else /> 二菜单名称不能超过八个个中文或者16个英文字符</if></span>
+                </div>
+                <!-- End .form-group  -->
+                
+                
+                
+                <div class="form-group">
+                    
+                    <label class="col-lg-2 col-md-2 col-sm-12 control-label">{$model_name}内容</label>
+                    
+                    <div class="col-lg-8 col-md-8">
+                    	<div class="wrap">
+                            <div class="tabs">
+                                <a href="#" hidefocus="true" class="active"><div class="setVal" data-value="view">链接</div></a>
+                                <a href="#" hidefocus="true"><div class="setVal" data-value="count">图文信息</div></a>
+                            </div>
+                            
+                            <input type="hidden" name="type" value="view" />
+                            <script>
+								$(function(){
+									/* 以下是按添加值 */
+									$(".setVal").click(function(){
+										var dataVal = $(this).attr("data-value");
+										$("input[name=type]").val(dataVal);
+									});
+									
+								});
+							</script>
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="content-slide">
+                                        <input type="text" class="form-control" name="url" value="{$info.url}" placeholder="链接地址" autofocus>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="content-slide">
+                                            <volist name="material_list" id="nl">
+                                                <div class="" style="border-radius:5px; width:30%; padding:5px; float:left; margin-left:2.5%; border:2px solid #D4D4D4">
+                                                    <div style="width:100%; float:left; padding:3%; text-align:center;">
+                                                    <label class="checkbox-inline" >
+                                                        <input type="radio" value="{$nl.id}" name="view_id" onClick="show()" >{$nl.title}
+                                                    </label>
+                                                    </div>
+                                                    <div style="width:100%; float:left;"><img src="{$nl.thumb}" width="100%"></div>
+                                                    <div style="width:100%; float:left; padding:3%;">{$nl.desc}</div>
+                                                </div>
+                                            </volist>    
+                                        </div>
+                                    </div> 
+                                  
+                                  
+                              </div>
+                           </div>
+                        </div>
+                        <script src="__STATIC__/js/wifi/idangerous.swiper.min.js"></script> 
+                        <script>
+							var tabsSwiper = new Swiper('.swiper-container',{
+								speed:500,
+								onSlideChangeStart: function(){
+									$(".tabs .active").removeClass('active');
+									$(".tabs a").eq(tabsSwiper.activeIndex).addClass('active');
+								}
+							});
+							
+							$(".tabs a").on('touchstart mousedown',function(e){
+								e.preventDefault()
+								$(".tabs .active").removeClass('active');
+								$(this).addClass('active');
+								tabsSwiper.swipeTo($(this).index());
+							});
+							
+							$(".tabs a").click(function(e){
+								e.preventDefault();
+							});
+                        </script>
+                    </div>
+                </div>    	
+                <!-- End .form-group  -->
+                
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-12 control-label">排序</label>
+                    <div class="col-lg-2 col-md-2">
+                        <input type="number" class="form-control" name="order" value="{$info.order}" placeholder="">
+                        <span class="help-block">数字越大排名越靠前</span>
+                    </div>
+                </div>
+                <!-- End .form-group  -->
+                 
+                 <div class="form-group">
+                      <div class="col-lg-offset-2" style="text-align:center;">
+                          <button class="btn btn-default ml15" type="submit">确定</button>
+                      </div>
+                  </div>
+                  <!-- End .form-group  -->
+                </form>
+            </div>
+        </div>
+        <!-- End .panel -->
+    </div>
+    <!-- End col-lg-12 -->
+</div>
+<!-- End .row -->
+
+<!-- Page End here -->
+
+<div class="clearfix"></div>

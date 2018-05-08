@@ -1,0 +1,119 @@
+	<include file="Common:head"/>
+    <include file="Common:form-css"/>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>管理员设置</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal group-border hover-stripped" role="form" enctype="multipart/form-data" action="{$fun_url}" method="post">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><h3 class="m-t-none m-b">{$fun_name}登录名：</h3></label>
+                                <div class="col-sm-3" style="line-height:40px;">
+                                    <input type="text" class="form-control" name="username" value="{$info.username}" placeholder="{$fun_name}登录名" autofocus>
+                                </div>
+                                
+                                <label class="col-sm-1 control-label">邮箱</label>
+                                <div class="col-sm-2">
+                                    <input type="email" class="form-control" name="email" value="{$info.email}" placeholder="邮箱" autofocus>
+                                </div>
+                                <label class="col-sm-1 control-label">密码</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="password" value="" placeholder="密码" autofocus>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><h3 class="m-t-none m-b">{$fun_name}姓名：</h3></label>
+                                
+                                <div class="col-sm-3">
+                                	<input type="text" class="form-control" name="realname" value="{$info.realname}" placeholder="{$fun_name}姓名" autofocus>
+                                </div>
+                                
+                                <label class="col-sm-1 control-label">电话</label>
+                                <div class="col-sm-3">
+                                    <input type="tel" class="form-control" name="tel" value="{$info.tel}" placeholder="电话" autofocus>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><h3 class="m-t-none m-b">{$fun_name}部门：</h3></label>
+                                
+                                <div class="col-sm-3">
+                                	<select class="form-control select2" name="department_id">
+                                        <if condition = "$info.department_id neq ''">
+                                            <option value="{$info.department_id}" selected="selected">{$department_name}</option>	
+                                        </if>	
+                                        <volist name="department_list" id="dl" key="k" offset="0">
+                                            <if condition = "$dl.subcat_total gt 0">
+                                            <!--optgroup label="{$dl.name} "-->
+                                              <option value="{$dl.id}">{$dl.name}</option>
+                                                <volist name="dl['sub']" id="dls" key="k" offset="0">
+                                                <option value="{$dls.id}">--{$dls.name}</option>
+                                                </volist>
+                                            </optgroup>
+                                            <else />
+                                                <option value="{$dl.id}">{$dl.name}</option>
+                                            </if>
+                                        </volist>
+                                    </select>
+                                </div>
+                                
+                                <label class="col-sm-1 control-label">{$model_name}角色</label>
+                                
+                                <div class="col-lg-3 col-md-3">
+                                    <select class="form-control select2" name="role_id">
+                                        <if condition = "$info.roleid neq ''">
+                                        
+                                            <option value="{$info.roleid}" selected="selected">{$role_name}</option>	
+                                        </if>	
+                                        <volist name="role_list" id="rl" key="k" offset="0">
+                                            
+                                        <option value="{$rl.id}">{$rl.rolename}</option>
+                                            
+                                        </volist>
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-3">
+                                    <button class="btn btn-primary" type="submit">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="/Admin/admin/admin_list"><div class="btn btn-primary" >返回</div></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="__MANAGE__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__MANAGE__/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__MANAGE__/js/content.min.js?v=1.0.0"></script>
+    <script src="__MANAGE__/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="__MANAGE__/js/plugins/jsKnob/jquery.knob.js"></script>
+    <script src="__MANAGE__/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <script src="__MANAGE__/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="__MANAGE__/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+    <script src="__MANAGE__/js/plugins/nouslider/jquery.nouislider.min.js"></script>
+    <script src="__MANAGE__/js/plugins/switchery/switchery.js"></script>
+    <script src="__MANAGE__/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+    <script src="__MANAGE__/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="__MANAGE__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="__MANAGE__/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="__MANAGE__/js/plugins/clockpicker/clockpicker.js"></script>
+    <script src="__MANAGE__/js/plugins/cropper/cropper.min.js"></script>
+    <script src="__MANAGE__/js/demo/form-advanced-demo.min.js"></script>
+    
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_validate.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:16 GMT -->
+</html>
